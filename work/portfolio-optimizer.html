@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=629cca55">
+  <link rel="stylesheet" href="../assets/site.css?v=1e05a4df">
   <script>
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
@@ -69,18 +69,18 @@
       <div class="wl-groups">
         <h3 class="wl-group" id="wl-markets">Markets</h3>
         <ul class="wl-items" aria-labelledby="wl-markets">
-          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="portfolio-optimizer.html" aria-current="page">Portfolio Construction Workbench</a></li>
-          <li><a class="wl-item" href="options-pricing.html">Options Pricing &amp; Greeks Workbench</a></li>
-          <li><a class="wl-item" href="papertrade-sim.html">Paper-Trading Portfolio Simulator</a></li>
+          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="portfolio-optimizer.html" aria-current="page"><span class="wl-name">Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
+          <li><a class="wl-item" href="options-pricing.html"><span class="wl-name">Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
+          <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Java Paper-Trading Simulator</span><span class="wl-sub">Portfolios on real daily prices</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-research">Research</h3>
         <ul class="wl-items" aria-labelledby="wl-research">
-          <li><a class="wl-item" href="marine-seismic.html">Marine Seismic Deep Learning</a></li>
+          <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-tools">Tools</h3>
         <ul class="wl-items" aria-labelledby="wl-tools">
-          <li><a class="wl-item" href="dsa-cli.html">dsa-cli</a></li>
-          <li><a class="wl-item" href="surfpy-api.html">SurfPy API</a></li>
+          <li><a class="wl-item" href="dsa-cli.html"><span class="wl-name">dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span></a></li>
+          <li><a class="wl-item" href="surfpy-api.html"><span class="wl-name">SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
         </ul>
       </div>
     </aside>
@@ -154,6 +154,49 @@
             <img src="../img/portfolio/06-backtest.webp" alt="The Backtest tab: walk-forward settings, and the out-of-sample equity curves of five allocators net of costs" width="1600" height="1000" loading="lazy">
             <figcaption>A strict walk-forward backtest: three years out of sample, 36 rebalances, and costs charged on turnover, so the optimizers that chase noise pay for their trading.</figcaption>
           </figure>
+          <h2>References</h2>
+          <h3>Mean-variance and estimation error</h3>
+          <ol class="refs">
+            <li>Markowitz, H. (1952). Portfolio selection. <em>The Journal of Finance</em>, 7(1), 77–91. <a href="https://doi.org/10.1111/j.1540-6261.1952.tb01525.x" target="_blank" rel="noopener">doi.org/10.1111/j.1540-6261.1952.tb01525.x</a></li>
+            <li>Markowitz, H. (1956). The optimization of a quadratic function subject to linear constraints. <em>Naval Research Logistics Quarterly</em>, 3(1–2), 111–133. <a href="https://doi.org/10.1002/nav.3800030110" target="_blank" rel="noopener">doi.org/10.1002/nav.3800030110</a></li>
+            <li>Michaud, R. O. (1989). The Markowitz optimization enigma: is “optimized” optimal? <em>Financial Analysts Journal</em>, 45(1), 31–42. <a href="https://doi.org/10.2469/faj.v45.n1.31" target="_blank" rel="noopener">doi.org/10.2469/faj.v45.n1.31</a></li>
+            <li>James, W. &amp; Stein, C. (1961). Estimation with quadratic loss. <em>Proceedings of the Fourth Berkeley Symposium on Mathematical Statistics and Probability</em>, 1, 361–379.</li>
+            <li>Jorion, P. (1986). Bayes-Stein estimation for portfolio analysis. <em>Journal of Financial and Quantitative Analysis</em>, 21(3), 279–292. <a href="https://doi.org/10.2307/2331042" target="_blank" rel="noopener">doi.org/10.2307/2331042</a></li>
+            <li>DeMiguel, V., Garlappi, L. &amp; Uppal, R. (2009). Optimal versus naive diversification: how inefficient is the 1/N portfolio strategy? <em>The Review of Financial Studies</em>, 22(5), 1915–1953. <a href="https://doi.org/10.1093/rfs/hhm075" target="_blank" rel="noopener">doi.org/10.1093/rfs/hhm075</a></li>
+          </ol>
+          <h3>Optimization</h3>
+          <ol class="refs" start="7">
+            <li>Beck, A. &amp; Teboulle, M. (2009). A fast iterative shrinkage-thresholding algorithm for linear inverse problems. <em>SIAM Journal on Imaging Sciences</em>, 2(1), 183–202. <a href="https://doi.org/10.1137/080716542" target="_blank" rel="noopener">doi.org/10.1137/080716542</a></li>
+            <li>Duchi, J., Shalev-Shwartz, S., Singer, Y. &amp; Chandra, T. (2008). Efficient projections onto the ℓ<sub>1</sub>-ball for learning in high dimensions. <em>Proceedings of the 25th International Conference on Machine Learning</em>, 272–279. <a href="https://doi.org/10.1145/1390156.1390191" target="_blank" rel="noopener">doi.org/10.1145/1390156.1390191</a></li>
+          </ol>
+          <h3>Allocators</h3>
+          <ol class="refs" start="9">
+            <li>Maillard, S., Roncalli, T. &amp; Teïletche, J. (2010). The properties of equally weighted risk contribution portfolios. <em>The Journal of Portfolio Management</em>, 36(4), 60–70. <a href="https://doi.org/10.3905/jpm.2010.36.4.060" target="_blank" rel="noopener">doi.org/10.3905/jpm.2010.36.4.060</a></li>
+            <li>Spinu, F. (2013). An algorithm for computing risk parity weights. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.2297383" target="_blank" rel="noopener">doi.org/10.2139/ssrn.2297383</a></li>
+            <li>Griveau-Billion, T., Richard, J.-C. &amp; Roncalli, T. (2013). A fast algorithm for computing high-dimensional risk parity portfolios. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.2325255" target="_blank" rel="noopener">doi.org/10.2139/ssrn.2325255</a></li>
+            <li>Choueifaty, Y. &amp; Coignard, Y. (2008). Toward maximum diversification. <em>The Journal of Portfolio Management</em>, 35(1), 40–51. <a href="https://doi.org/10.3905/JPM.2008.35.1.40" target="_blank" rel="noopener">doi.org/10.3905/JPM.2008.35.1.40</a></li>
+            <li>López de Prado, M. (2016). Building diversified portfolios that outperform out of sample. <em>The Journal of Portfolio Management</em>, 42(4), 59–69. <a href="https://doi.org/10.3905/jpm.2016.42.4.059" target="_blank" rel="noopener">doi.org/10.3905/jpm.2016.42.4.059</a></li>
+            <li>Lance, G. N. &amp; Williams, W. T. (1967). A general theory of classificatory sorting strategies: 1. Hierarchical systems. <em>The Computer Journal</em>, 9(4), 373–380. <a href="https://doi.org/10.1093/comjnl/9.4.373" target="_blank" rel="noopener">doi.org/10.1093/comjnl/9.4.373</a></li>
+          </ol>
+          <h3>Covariance</h3>
+          <ol class="refs" start="15">
+            <li>Ledoit, O. &amp; Wolf, M. (2004). Honey, I shrunk the sample covariance matrix. <em>The Journal of Portfolio Management</em>, 30(4), 110–119. <a href="https://doi.org/10.3905/jpm.2004.110" target="_blank" rel="noopener">doi.org/10.3905/jpm.2004.110</a></li>
+            <li>Chen, Y., Wiesel, A., Eldar, Y. C. &amp; Hero, A. O. (2010). Shrinkage algorithms for MMSE covariance estimation. <em>IEEE Transactions on Signal Processing</em>, 58(10), 5016–5029. <a href="https://doi.org/10.1109/TSP.2010.2053029" target="_blank" rel="noopener">doi.org/10.1109/TSP.2010.2053029</a></li>
+            <li>J.P. Morgan/Reuters (1996). <em>RiskMetrics: Technical Document</em>. 4th ed.</li>
+            <li>Sharpe, W. F. (1963). A simplified model for portfolio analysis. <em>Management Science</em>, 9(2), 277–293. <a href="https://doi.org/10.1287/mnsc.9.2.277" target="_blank" rel="noopener">doi.org/10.1287/mnsc.9.2.277</a></li>
+            <li>Marčenko, V. A. &amp; Pastur, L. A. (1967). Distribution of eigenvalues for some sets of random matrices. <em>Mathematics of the USSR-Sbornik</em>, 1(4), 457–483. <a href="https://doi.org/10.1070/SM1967v001n04ABEH001994" target="_blank" rel="noopener">doi.org/10.1070/SM1967v001n04ABEH001994</a></li>
+            <li>Laloux, L., Cizeau, P., Bouchaud, J.-P. &amp; Potters, M. (1999). Noise dressing of financial correlation matrices. <em>Physical Review Letters</em>, 83(7), 1467–1470. <a href="https://doi.org/10.1103/PhysRevLett.83.1467" target="_blank" rel="noopener">doi.org/10.1103/PhysRevLett.83.1467</a></li>
+          </ol>
+          <h3>Black-Litterman</h3>
+          <ol class="refs" start="21">
+            <li>Black, F. &amp; Litterman, R. (1992). Global portfolio optimization. <em>Financial Analysts Journal</em>, 48(5), 28–43. <a href="https://doi.org/10.2469/faj.v48.n5.28" target="_blank" rel="noopener">doi.org/10.2469/faj.v48.n5.28</a></li>
+            <li>He, G. &amp; Litterman, R. (1999). The intuition behind Black-Litterman model portfolios. <em>Goldman Sachs Investment Management Research</em>. <a href="https://doi.org/10.2139/ssrn.334304" target="_blank" rel="noopener">doi.org/10.2139/ssrn.334304</a></li>
+          </ol>
+          <h3>Data</h3>
+          <ol class="refs" start="23">
+            <li>Stooq. <em>Historical daily prices (CSV).</em> <a href="https://stooq.com/" target="_blank" rel="noopener">stooq.com</a></li>
+            <li>Yahoo Finance. <em>Chart API, as a fallback.</em> <a href="https://finance.yahoo.com/" target="_blank" rel="noopener">finance.yahoo.com</a></li>
+          </ol>
           </div>
           <div class="article-links">
             <a class="btn btn-secondary" href="https://github.com/rpgr18/portfolio-optimizer" target="_blank" rel="noopener">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -163,7 +206,7 @@
           <h2 class="wl-title" id="more-heading">Up next</h2>
           <ul class="wl-items">
             <li><a class="wl-item" href="options-pricing.html"><span class="wl-name">Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
-            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Java Paper-Trading Simulator</span><span class="wl-sub">Portfolios on real daily prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="dsa-cli.html"><span class="wl-name">dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="surfpy-api.html"><span class="wl-name">SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
@@ -181,6 +224,6 @@
     </div>
   </div>
 
-  <script src="../assets/site.js?v=629cca55"></script>
+  <script src="../assets/site.js?v=1e05a4df"></script>
 </body>
 </html>

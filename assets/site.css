@@ -341,9 +341,9 @@ img.avatar { object-fit: cover; }
 }
 .card:hover { border-color: var(--line-2); background: var(--card-2); color: var(--text); }
 .card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-.tile { display: grid; place-items: center; width: 24px; height: 24px; flex: none; border-radius: 7px; background: var(--c); color: #fff; }
-.tile svg { width: 14px; height: 14px; }
-.card-meta { margin-left: auto; font: 400 var(--fs-xs) var(--mono); color: var(--muted); }
+.card-head .card-go { margin-left: auto; }
+.card-head { min-height: 22px; }   /* the same with or without a stars badge, so titles line up across a row */
+.card-meta { font: 400 var(--fs-xs) var(--mono); color: var(--muted); }
 .card-go { width: 14px; height: 14px; flex: none; color: var(--muted); rotate: -45deg; transition: color 0.2s var(--ease), translate 0.2s var(--ease); }
 .card:hover .card-go { color: var(--strong); translate: 2px -2px; }
 .card-title { font: 500 var(--fs)/1.4 var(--font); }
@@ -370,6 +370,15 @@ img.visual { display: block; width: 100%; height: auto; object-fit: cover; }
     radial-gradient(80% 80% at 0% 100%, #5a2a1a 0%, transparent 60%),
     #160f0b;
 }
+.art--papertrade {
+  background:
+    radial-gradient(100% 90% at 90% 0%, #6a3fa6 0%, transparent 55%),
+    radial-gradient(80% 80% at 0% 100%, #2c1d5e 0%, transparent 60%),
+    #110d1a;
+}
+.art--papertrade .term-win { inset: 20px 22px -12px; line-height: 1.4; }
+@media (max-width: 32rem) { .cover--tall.cover--plot { aspect-ratio: 6 / 5; } }   /* phones: room for every row, spike included */
+.sheet .cover--plot { aspect-ratio: 524 / 260; }   /* wide in the sheet: the usual cover shape fits it all */
 .term-win {
   position: absolute; inset: 22px 26px -12px;
   padding: 12px 14px; border: 1px solid #2e2e2e; border-radius: 10px;
@@ -566,9 +575,18 @@ html:not(.js) .demo { display: none; }
   font: 600 var(--fs)/1.2 var(--font); letter-spacing: -0.01em; color: var(--strong);
 }
 .wl-items { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; isolation: isolate; }
-/* Section headers inside the list (Markets, Research, Tools), small and quiet like a Mac sidebar's */
-.wl-group { margin: 14px 12px 6px; font: 600 var(--fs-xs)/1.2 var(--font); letter-spacing: 0.01em; color: var(--muted); }
-.wl-groups > .wl-group:first-child { margin-top: 8px; }
+/* Section labels inside the list (Markets, Research, Tools): small spaced capitals with a hairline,
+   like the home page's section labels, so they never read as another project */
+.wl-group {
+  display: flex; align-items: center; gap: 10px; margin: 18px 12px 6px;
+  font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+}
+.wl-group::after { content: ""; flex: 1; height: 1px; background: var(--glass-line); }
+.wl-groups > .wl-group:first-child { margin-top: 10px; }
+/* Each project: its name, and a few words under it */
+.work-list .wl-item { display: grid; gap: 1px; color: var(--text); }
+.work-list .wl-sub { font-size: var(--fs-xs); line-height: 1.4; color: var(--muted); transition: color 0.2s var(--ease); }
+.work-list .wl-item[aria-current] .wl-sub { color: color-mix(in srgb, var(--on-strong) 62%, transparent); }
 .wl-items li { position: relative; }
 .wl-item {
   display: block; padding: 10px 12px; border-radius: calc(var(--r) - var(--pad));

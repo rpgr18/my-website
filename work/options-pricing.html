@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=629cca55">
+  <link rel="stylesheet" href="../assets/site.css?v=1e05a4df">
   <script>
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
@@ -69,18 +69,18 @@
       <div class="wl-groups">
         <h3 class="wl-group" id="wl-markets">Markets</h3>
         <ul class="wl-items" aria-labelledby="wl-markets">
-          <li><a class="wl-item" href="portfolio-optimizer.html">Portfolio Construction Workbench</a></li>
-          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="options-pricing.html" aria-current="page">Options Pricing &amp; Greeks Workbench</a></li>
-          <li><a class="wl-item" href="papertrade-sim.html">Paper-Trading Portfolio Simulator</a></li>
+          <li><a class="wl-item" href="portfolio-optimizer.html"><span class="wl-name">Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
+          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="options-pricing.html" aria-current="page"><span class="wl-name">Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
+          <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Java Paper-Trading Simulator</span><span class="wl-sub">Portfolios on real daily prices</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-research">Research</h3>
         <ul class="wl-items" aria-labelledby="wl-research">
-          <li><a class="wl-item" href="marine-seismic.html">Marine Seismic Deep Learning</a></li>
+          <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-tools">Tools</h3>
         <ul class="wl-items" aria-labelledby="wl-tools">
-          <li><a class="wl-item" href="dsa-cli.html">dsa-cli</a></li>
-          <li><a class="wl-item" href="surfpy-api.html">SurfPy API</a></li>
+          <li><a class="wl-item" href="dsa-cli.html"><span class="wl-name">dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span></a></li>
+          <li><a class="wl-item" href="surfpy-api.html"><span class="wl-name">SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
         </ul>
       </div>
     </aside>
@@ -151,6 +151,47 @@
             <img src="../img/options/06-strategy.webp" alt="The Strategy tab: an iron condor with puts at 90 and 95 and calls at 105 and 110, its maximum profit, maximum loss, breakevens, Greeks and a profit-and-loss chart" width="1600" height="1000" loading="lazy">
             <figcaption>An iron condor, broken down: $3.66 maximum profit, $1.34 maximum loss, breakevens at 91.34 and 108.66, plus the position’s Greeks and its profit and loss at expiry and before.</figcaption>
           </figure>
+          <h2>References</h2>
+          <h3>Pricing models</h3>
+          <ol class="refs">
+            <li>Black, F. &amp; Scholes, M. (1973). The pricing of options and corporate liabilities. <em>Journal of Political Economy</em>, 81(3), 637–654. <a href="https://doi.org/10.1086/260062" target="_blank" rel="noopener">doi.org/10.1086/260062</a></li>
+            <li>Merton, R. C. (1973). Theory of rational option pricing. <em>The Bell Journal of Economics and Management Science</em>, 4(1), 141–183. <a href="https://doi.org/10.2307/3003143" target="_blank" rel="noopener">doi.org/10.2307/3003143</a></li>
+            <li>Black, F. (1976). The pricing of commodity contracts. <em>Journal of Financial Economics</em>, 3(1–2), 167–179. <a href="https://doi.org/10.1016/0304-405X(76)90024-6" target="_blank" rel="noopener">doi.org/10.1016/0304-405X(76)90024-6</a></li>
+            <li>Garman, M. B. &amp; Kohlhagen, S. W. (1983). Foreign currency option values. <em>Journal of International Money and Finance</em>, 2(3), 231–237. <a href="https://doi.org/10.1016/S0261-5606(83)80001-1" target="_blank" rel="noopener">doi.org/10.1016/S0261-5606(83)80001-1</a></li>
+            <li>Hart, J. F. et al. (1968). <em>Computer Approximations</em>. Wiley (the normal CDF).</li>
+          </ol>
+          <h3>Lattices</h3>
+          <ol class="refs" start="6">
+            <li>Cox, J. C., Ross, S. A. &amp; Rubinstein, M. (1979). Option pricing: a simplified approach. <em>Journal of Financial Economics</em>, 7(3), 229–263. <a href="https://doi.org/10.1016/0304-405X(79)90015-1" target="_blank" rel="noopener">doi.org/10.1016/0304-405X(79)90015-1</a></li>
+            <li>Jarrow, R. &amp; Rudd, A. (1983). <em>Option Pricing</em>. Irwin.</li>
+            <li>Tian, Y. (1993). A modified lattice approach to option pricing. <em>Journal of Futures Markets</em>, 13(5), 563–577. <a href="https://doi.org/10.1002/fut.3990130509" target="_blank" rel="noopener">doi.org/10.1002/fut.3990130509</a></li>
+            <li>Leisen, D. P. J. &amp; Reimer, M. (1996). Binomial models for option valuation: examining and improving convergence. <em>Applied Mathematical Finance</em>, 3(4), 319–346. <a href="https://doi.org/10.1080/13504869600000015" target="_blank" rel="noopener">doi.org/10.1080/13504869600000015</a></li>
+            <li>Peizer, D. B. &amp; Pratt, J. W. (1968). A normal approximation for binomial, F, beta, and other common, related tail probabilities, I. <em>Journal of the American Statistical Association</em>, 63(324), 1416–1456. <a href="https://doi.org/10.1080/01621459.1968.10480938" target="_blank" rel="noopener">doi.org/10.1080/01621459.1968.10480938</a></li>
+            <li>Boyle, P. P. (1986). Option valuation using a three-jump process. <em>International Options Journal</em>, 3, 7–12.</li>
+            <li>Broadie, M. &amp; Detemple, J. (1996). American option valuation: new bounds, approximations, and a comparison of existing methods. <em>The Review of Financial Studies</em>, 9(4), 1211–1250. <a href="https://doi.org/10.1093/rfs/9.4.1211" target="_blank" rel="noopener">doi.org/10.1093/rfs/9.4.1211</a></li>
+          </ol>
+          <h3>Monte Carlo</h3>
+          <ol class="refs" start="13">
+            <li>Boyle, P. P. (1977). Options: a Monte Carlo approach. <em>Journal of Financial Economics</em>, 4(3), 323–338. <a href="https://doi.org/10.1016/0304-405X(77)90005-8" target="_blank" rel="noopener">doi.org/10.1016/0304-405X(77)90005-8</a></li>
+            <li>Glasserman, P. (2003). <em>Monte Carlo Methods in Financial Engineering</em>. Springer. <a href="https://doi.org/10.1007/978-0-387-21617-1" target="_blank" rel="noopener">doi.org/10.1007/978-0-387-21617-1</a></li>
+            <li>Broadie, M. &amp; Glasserman, P. (1996). Estimating security price derivatives using simulation. <em>Management Science</em>, 42(2), 269–285. <a href="https://doi.org/10.1287/mnsc.42.2.269" target="_blank" rel="noopener">doi.org/10.1287/mnsc.42.2.269</a></li>
+            <li>Halton, J. H. (1960). On the efficiency of certain quasi-random sequences of points in evaluating multi-dimensional integrals. <em>Numerische Mathematik</em>, 2(1), 84–90. <a href="https://doi.org/10.1007/BF01386213" target="_blank" rel="noopener">doi.org/10.1007/BF01386213</a></li>
+            <li>Cranley, R. &amp; Patterson, T. N. L. (1976). Randomization of number theoretic methods for multiple integration. <em>SIAM Journal on Numerical Analysis</em>, 13(6), 904–914. <a href="https://doi.org/10.1137/0713071" target="_blank" rel="noopener">doi.org/10.1137/0713071</a></li>
+            <li>Longstaff, F. A. &amp; Schwartz, E. S. (2001). Valuing American options by simulation: a simple least-squares approach. <em>The Review of Financial Studies</em>, 14(1), 113–147. <a href="https://doi.org/10.1093/rfs/14.1.113" target="_blank" rel="noopener">doi.org/10.1093/rfs/14.1.113</a></li>
+          </ol>
+          <h3>Implied volatility and surfaces</h3>
+          <ol class="refs" start="19">
+            <li>Corrado, C. J. &amp; Miller, T. W. (1996). A note on a simple, accurate formula to compute implied standard deviations. <em>Journal of Banking &amp; Finance</em>, 20(3), 595–603. <a href="https://doi.org/10.1016/0378-4266(95)00014-3" target="_blank" rel="noopener">doi.org/10.1016/0378-4266(95)00014-3</a></li>
+            <li>Gatheral, J. (2006). <em>The Volatility Surface: A Practitioner’s Guide</em>. Wiley. <a href="https://doi.org/10.1002/9781119202073" target="_blank" rel="noopener">doi.org/10.1002/9781119202073</a></li>
+            <li>De Marco, S. &amp; Martini, C. (2009). Quasi-explicit calibration of Gatheral’s SVI model. <em>Zeliade Systems white paper</em>.</li>
+            <li>Gatheral, J. &amp; Jacquier, A. (2014). Arbitrage-free SVI volatility surfaces. <em>Quantitative Finance</em>, 14(1), 59–71. <a href="https://doi.org/10.1080/14697688.2013.819986" target="_blank" rel="noopener">doi.org/10.1080/14697688.2013.819986</a></li>
+            <li>Durrleman, V. (2010). From implied to spot volatilities. <em>Finance and Stochastics</em>, 14(2), 157–177. <a href="https://doi.org/10.1007/s00780-009-0112-1" target="_blank" rel="noopener">doi.org/10.1007/s00780-009-0112-1</a></li>
+            <li>Breeden, D. T. &amp; Litzenberger, R. H. (1978). Prices of state-contingent claims implicit in option prices. <em>The Journal of Business</em>, 51(4), 621–651. <a href="https://doi.org/10.1086/296025" target="_blank" rel="noopener">doi.org/10.1086/296025</a></li>
+          </ol>
+          <h3>Data</h3>
+          <ol class="refs" start="25">
+            <li>Yahoo Finance. <em>Delayed option-chain quotes.</em> <a href="https://finance.yahoo.com/" target="_blank" rel="noopener">finance.yahoo.com</a></li>
+          </ol>
           </div>
           <div class="article-links">
             <a class="btn btn-secondary" href="https://github.com/rpgr18/options-pricing" target="_blank" rel="noopener">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -160,7 +201,7 @@
         <nav class="more" aria-labelledby="more-heading">
           <h2 class="wl-title" id="more-heading">Up next</h2>
           <ul class="wl-items">
-            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Java Paper-Trading Simulator</span><span class="wl-sub">Portfolios on real daily prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="dsa-cli.html"><span class="wl-name">dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="surfpy-api.html"><span class="wl-name">SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
@@ -179,6 +220,6 @@
     </div>
   </div>
 
-  <script src="../assets/site.js?v=629cca55"></script>
+  <script src="../assets/site.js?v=1e05a4df"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=629cca55">
+  <link rel="stylesheet" href="../assets/site.css?v=1e05a4df">
   <script>
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
@@ -69,18 +69,18 @@
       <div class="wl-groups">
         <h3 class="wl-group" id="wl-markets">Markets</h3>
         <ul class="wl-items" aria-labelledby="wl-markets">
-          <li><a class="wl-item" href="portfolio-optimizer.html">Portfolio Construction Workbench</a></li>
-          <li><a class="wl-item" href="options-pricing.html">Options Pricing &amp; Greeks Workbench</a></li>
-          <li><a class="wl-item" href="papertrade-sim.html">Paper-Trading Portfolio Simulator</a></li>
+          <li><a class="wl-item" href="portfolio-optimizer.html"><span class="wl-name">Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
+          <li><a class="wl-item" href="options-pricing.html"><span class="wl-name">Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
+          <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Java Paper-Trading Simulator</span><span class="wl-sub">Portfolios on real daily prices</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-research">Research</h3>
         <ul class="wl-items" aria-labelledby="wl-research">
-          <li><a class="wl-item" href="marine-seismic.html">Marine Seismic Deep Learning</a></li>
+          <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-tools">Tools</h3>
         <ul class="wl-items" aria-labelledby="wl-tools">
-          <li><a class="wl-item" href="dsa-cli.html">dsa-cli</a></li>
-          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="surfpy-api.html" aria-current="page">SurfPy API</a></li>
+          <li><a class="wl-item" href="dsa-cli.html"><span class="wl-name">dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span></a></li>
+          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="surfpy-api.html" aria-current="page"><span class="wl-name">SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
         </ul>
       </div>
     </aside>
@@ -136,6 +136,21 @@
 
           <h2>Caching and errors</h2>
           <p>Buoy lookups are memoized with an in-process LRU cache, so repeat requests for the same station don’t go back to NOAA. Coordinates and query parameters are validated up front, and failures come back as structured JSON, with the valid ranges when the input was the problem, rather than as a stack trace.</p>
+          <h2>References</h2>
+          <h3>Data sources</h3>
+          <ol class="refs">
+            <li>NOAA National Centers for Environmental Prediction. <em>Global Forecast System (GFS).</em> <a href="https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast" target="_blank" rel="noopener">ncei.noaa.gov</a></li>
+            <li>The WAVEWATCH III Development Group (2019). User manual and system documentation of WAVEWATCH III version 6.07. <em>Technical Note 333, NOAA/NWS/NCEP/MMAB</em>. <a href="https://github.com/NOAA-EMC/WW3" target="_blank" rel="noopener">github.com/NOAA-EMC/WW3</a></li>
+            <li>NOAA National Centers for Environmental Prediction. <em>NOMADS operational model data (GRIB).</em> <a href="https://nomads.ncep.noaa.gov/" target="_blank" rel="noopener">nomads.ncep.noaa.gov</a></li>
+            <li>NOAA National Data Buoy Center. <em>Station data and measurement descriptions.</em> <a href="https://www.ndbc.noaa.gov/" target="_blank" rel="noopener">ndbc.noaa.gov</a> · <a href="https://www.ndbc.noaa.gov/faq/measdes.shtml" target="_blank" rel="noopener">measurement descriptions</a></li>
+            <li>NOAA Center for Operational Oceanographic Products and Services. <em>Tides &amp; Currents data API.</em> <a href="https://api.tidesandcurrents.noaa.gov/api/prod/" target="_blank" rel="noopener">api.tidesandcurrents.noaa.gov</a></li>
+            <li>NOAA Center for Operational Oceanographic Products and Services. <em>Tidal datums (MLLW, MSL, MTL).</em> <a href="https://tidesandcurrents.noaa.gov/datum_options.html" target="_blank" rel="noopener">tidesandcurrents.noaa.gov</a></li>
+          </ol>
+          <h3>Libraries</h3>
+          <ol class="refs" start="7">
+            <li>Iannucci, M. <em>surfpy: a surfing math library for Python.</em> <a href="https://github.com/mpiannucci/surfpy" target="_blank" rel="noopener">github.com/mpiannucci/surfpy</a></li>
+            <li>Pallets. <em>Flask.</em> <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener">flask.palletsprojects.com</a></li>
+          </ol>
           </div>
           <div class="article-links">
             <a class="btn btn-secondary" href="https://github.com/rpgr18/surfpy-api" target="_blank" rel="noopener">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -146,7 +161,7 @@
           <ul class="wl-items">
             <li><a class="wl-item" href="portfolio-optimizer.html"><span class="wl-name">Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="options-pricing.html"><span class="wl-name">Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
-            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Java Paper-Trading Simulator</span><span class="wl-sub">Portfolios on real daily prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="dsa-cli.html"><span class="wl-name">dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
           </ul>
@@ -163,6 +178,6 @@
     </div>
   </div>
 
-  <script src="../assets/site.js?v=629cca55"></script>
+  <script src="../assets/site.js?v=1e05a4df"></script>
 </body>
 </html>

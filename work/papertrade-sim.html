@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paper-Trading Portfolio Simulator — Ryan Greene</title>
+  <title>Java Paper-Trading Simulator — Ryan Greene</title>
   <meta name="description" content="A Java paper-trading simulator: portfolios on real daily prices, with rebalancing, performance plots, a text menu and a Swing GUI.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#ffffff">
@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500&display=swap">
-  <link rel="stylesheet" href="../assets/site.css?v=629cca55">
+  <link rel="stylesheet" href="../assets/site.css?v=1e05a4df">
   <script>
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
@@ -69,18 +69,18 @@
       <div class="wl-groups">
         <h3 class="wl-group" id="wl-markets">Markets</h3>
         <ul class="wl-items" aria-labelledby="wl-markets">
-          <li><a class="wl-item" href="portfolio-optimizer.html">Portfolio Construction Workbench</a></li>
-          <li><a class="wl-item" href="options-pricing.html">Options Pricing &amp; Greeks Workbench</a></li>
-          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="papertrade-sim.html" aria-current="page">Paper-Trading Portfolio Simulator</a></li>
+          <li><a class="wl-item" href="portfolio-optimizer.html"><span class="wl-name">Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
+          <li><a class="wl-item" href="options-pricing.html"><span class="wl-name">Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
+          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="papertrade-sim.html" aria-current="page"><span class="wl-name">Java Paper-Trading Simulator</span><span class="wl-sub">Portfolios on real daily prices</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-research">Research</h3>
         <ul class="wl-items" aria-labelledby="wl-research">
-          <li><a class="wl-item" href="marine-seismic.html">Marine Seismic Deep Learning</a></li>
+          <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span></a></li>
         </ul>
         <h3 class="wl-group" id="wl-tools">Tools</h3>
         <ul class="wl-items" aria-labelledby="wl-tools">
-          <li><a class="wl-item" href="dsa-cli.html">dsa-cli</a></li>
-          <li><a class="wl-item" href="surfpy-api.html">SurfPy API</a></li>
+          <li><a class="wl-item" href="dsa-cli.html"><span class="wl-name">dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span></a></li>
+          <li><a class="wl-item" href="surfpy-api.html"><span class="wl-name">SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
         </ul>
       </div>
     </aside>
@@ -89,8 +89,29 @@
       <main class="article" id="main" tabindex="-1">
         <a class="back" href="../index.html#projects"><svg aria-hidden="true"><use href="#i-arrow"/></svg>Projects</a>
         <article>
-          <img class="visual cover cover--tall" src="../img/papertrade-plot.webp" alt="Terminal output of the plot command: a portfolio’s value month by month from June 2023 to June 2024, drawn as rows of asterisks" width="1318" height="879">
-          <h1>Paper-Trading Portfolio Simulator</h1>
+          <div class="visual cover cover--tall cover--plot" role="img" aria-label="Terminal output of the plot command: a portfolio’s value month by month from June 2023 to June 2024, drawn as rows of asterisks">
+              <div class="art art--papertrade">
+                <div class="term-win" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div>Performance of portfolio from 2023-06-14 to 2024-06-14
+
+Jun 14, 2023   <span class="dim">:</span> <span class="pass">**********</span>
+Jul 14, 2023   <span class="dim">:</span> <span class="pass">**********</span>
+Aug 13, 2023   <span class="dim">:</span> <span class="pass">**********</span>
+Sep 12, 2023   <span class="dim">:</span> <span class="pass">**********</span>
+Oct 12, 2023   <span class="dim">:</span> <span class="pass">**********</span>
+Nov 11, 2023   <span class="dim">:</span> <span class="pass">*********</span>
+Dec 11, 2023   <span class="dim">:</span> <span class="pass">*********</span>
+Jan 10, 2024   <span class="dim">:</span> <span class="pass">*********</span>
+Feb 9, 2024    <span class="dim">:</span> <span class="pass">**********</span>
+Mar 10, 2024   <span class="dim">:</span> <span class="pass">*********</span>
+Apr 9, 2024    <span class="dim">:</span> <span class="pass">**********</span>
+May 9, 2024    <span class="dim">:</span> <span class="pass">************************</span>
+Jun 8, 2024    <span class="dim">:</span> <span class="pass">*****************************</span>
+Jun 14, 2024   <span class="dim">:</span> <span class="pass">*************</span>
+
+<span class="dim">Scale: * = $130.0</span></div>
+              </div>
+            </div>
+          <h1>Java Paper-Trading Simulator</h1>
           <dl class="facts">
             <div><dt>Type</dt><dd>Java application, MIT</dd></div>
             <div><dt>Timeline</dt><dd>2024</dd></div>
@@ -152,6 +173,6 @@
     </div>
   </div>
 
-  <script src="../assets/site.js?v=629cca55"></script>
+  <script src="../assets/site.js?v=1e05a4df"></script>
 </body>
 </html>
