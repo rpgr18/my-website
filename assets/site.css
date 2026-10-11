@@ -237,7 +237,7 @@ button.nav-link { padding: 0; border: 0; background: none; cursor: pointer; }
 .mkt-readout.is-swapping { opacity: 0; }
 
 .avatar {
-  display: grid; place-items: center; width: 120px; height: 120px; border-radius: 50%;
+  display: grid; place-items: center; width: 144px; height: 144px; border-radius: 50%;
   border: 1px solid var(--line-2);
   background: var(--avatar-bg);
   font: 500 1.375rem/1 var(--font); letter-spacing: 0.02em; color: var(--text);
@@ -245,7 +245,7 @@ button.nav-link { padding: 0; border: 0; background: none; cursor: pointer; }
 img.avatar { object-fit: cover; }
 
 /* Activity rings around the photo */
-.avatar-wrap { position: relative; display: grid; place-items: center; width: 180px; height: 180px; margin: -12px 0; }
+.avatar-wrap { position: relative; display: grid; place-items: center; width: 216px; height: 216px; margin: -14px 0; }
 .rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .ring-track { fill: none; stroke: var(--ring-track); stroke-width: 3.5; }
 .ring-arc {
@@ -267,7 +267,6 @@ img.avatar { object-fit: cover; }
 }
 .hero-title { display: grid; gap: 8px; }
 .hero h1 { font: 400 var(--fs-xl)/1.2 var(--font); color: var(--strong); }
-.role { font-size: var(--fs-lg); line-height: 1.2; color: var(--text-2); }
 /* Availability as a status pill, with the live dot */
 .avail {
   display: inline-flex; align-items: center; gap: 6px;
@@ -626,7 +625,6 @@ html:not(.js) .demo { display: none; }
 
   /* Stagger, from the template's appear timings */
   .hero-title > h1 { --delay: 0.1s; }
-  .hero-title > .role { --delay: 0.2s; }
   .hero .avail { --delay: 0.3s; }
   .hero .status { --delay: 0.4s; }
   .hero .coords { --delay: 0.5s; }
