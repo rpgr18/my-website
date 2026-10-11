@@ -617,10 +617,145 @@ function blackScholes(S, K, T, sigma, r) {
     }));
   }
 
+  // ---------- Projects as a sheet over the home page (wide screens) ----------
+  // A project link opens a large <dialog> over the blurred page instead of navigating. Its content
+  // comes from the project's own page (fetched once, then cached), so work/*.html stays the single
+  // source. The address becomes #work/NAME: shareable, reload-safe, and Back closes the sheet.
+  // Moving between projects inside it uses a view transition, so the chip slides and the article
+  // cross-fades just as it does between the standalone pages.
+  const sheet = $('sheet');
+  const wide = matchMedia('(min-width: 75rem)');
+  if (sheet && typeof sheet.showModal === 'function') {
+    const scroller = sheet.querySelector('.sheet-main');
+    const homeTitle = document.title;
+    const pageUrl = (slug) => new URL(`work/${slug}.html`, document.baseURI);
+    const slugOf = (href) => {
+      const url = new URL(href, document.baseURI);
+      return url.origin === location.origin ? url.pathname.match(/\/work\/([\w-]+?)(?:\.html)?$/)?.[1] || null : null;
+    };
+    const hashSlug = () => location.hash.match(/^#work\/([\w-]+)$/)?.[1] || null;
+    const cache = new Map();
+    const load = (slug) => {
+      if (!cache.has(slug)) {
+        cache.set(slug, fetch(pageUrl(slug)).then((res) => {
+          if (!res.ok) throw new Error(`${res.status}`);
+          return res.text();
+        }).then((html) => {
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const article = doc.querySelector('main.article article');
+          const list = doc.querySelector('.work-list');
+          if (!article || !list) throw new Error('not a project page');
+          // Relative links and images were written for work/; make them absolute before moving them here
+          for (const node of doc.querySelectorAll('[src], [href]')) {
+            for (const attr of ['src', 'href']) {
+              const value = node.getAttribute(attr);
+              if (value && !value.startsWith('#') && !/^[a-z][\w+.-]*:/i.test(value)) node.setAttribute(attr, new URL(value, pageUrl(slug)).href);
+            }
+          }
+          return { title: doc.title, article, list };
+        }).catch((err) => { cache.delete(slug); throw err; }));
+      }
+      return cache.get(slug);
+    };
+
+    let current = null;
+    const select = (slug) => {
+      // The list is the same on every project page, so only the chip and aria-current move
+      const list = sheet.querySelector('.work-list');
+      const shade = list.querySelector('.wl-shade');
+      for (const link of list.querySelectorAll('.wl-item')) {
+        const on = slugOf(link.href) === slug;
+        link.toggleAttribute('aria-current', on);
+        if (on) { link.setAttribute('aria-current', 'page'); link.before(shade); }
+      }
+    };
+    const show = async (slug) => {
+      if (sheet.open && slug === current) return;
+      let page;
+      try { page = await load(slug); } catch { location.href = `${pageUrl(slug)}?page`; return; }
+      const apply = () => {
+        if (!sheet.querySelector('.wl-items')) sheet.querySelector('.work-list').replaceWith(document.importNode(page.list, true));
+        select(slug);
+        const article = document.importNode(page.article, true);
+        article.querySelector('h1')?.setAttribute('id', 'sheet-title');
+        sheet.querySelector('article').replaceWith(article);
+        scroller.scrollTop = 0;
+        document.title = page.title;
+        current = slug;
+      };
+      if (!sheet.open) {
+        apply();
+        sheet.classList.remove('is-closing');
+        sheet.showModal();
+      } else if (document.startViewTransition && !reduceMotion) {
+        document.startViewTransition(apply);
+      } else apply();
+    };
+    // Close with an animation; the history entry, if we pushed one, is popped first
+    const finish = () => {
+      if (!sheet.open || sheet.classList.contains('is-closing')) return;
+      const done = () => {
+        sheet.classList.remove('is-closing');
+        sheet.close();
+        document.title = homeTitle;
+        current = null;
+      };
+      if (reduceMotion) { done(); return; }
+      sheet.classList.add('is-closing');
+      const onEnd = (e) => {
+        if (e.target !== sheet) return;
+        sheet.removeEventListener('animationend', onEnd);
+        done();
+      };
+      sheet.addEventListener('animationend', onEnd);
+    };
+    const close = () => {
+      if (history.state?.sheet) { history.back(); return; }   // popstate finishes the close
+      history.replaceState(null, '', location.pathname + location.search);
+      finish();
+    };
+    sheet.addEventListener('cancel', (e) => { e.preventDefault(); close(); });   // Esc
+    sheet.addEventListener('click', (e) => {
+      if (e.target === sheet || e.target.closest('.sheet-close')) close();
+    });
+    addEventListener('popstate', () => {
+      const slug = hashSlug();
+      if (slug) show(slug);
+      else finish();
+    });
+
+    // Any plain click on a project link, on the page or inside the sheet
+    document.addEventListener('click', (e) => {
+      if (!wide.matches || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const link = e.target instanceof Element && e.target.closest('a[href]');
+      if (!link || link.target === '_blank') return;
+      const slug = slugOf(link.href);
+      if (!slug) return;
+      e.preventDefault();
+      if (sheet.open) history.replaceState(history.state, '', `#work/${slug}`);
+      else history.pushState({ sheet: true }, '', `#work/${slug}`);
+      show(slug);
+    });
+    // Fetch on hover, so the sheet usually opens with its content already in hand
+    document.addEventListener('pointerover', (e) => {
+      const link = wide.matches && e.target instanceof Element && e.target.closest('a[href]');
+      const slug = link && slugOf(link.href);
+      if (slug) load(slug).catch(() => {});
+    });
+
+    // Arriving at #work/NAME: open it here on wide screens, or go to the project's page otherwise
+    const initial = hashSlug();
+    if (initial) {
+      if (wide.matches) show(initial);
+      else location.replace(pageUrl(initial));
+    }
+  }
+
   addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
     if (e.target instanceof Element && e.target.closest('input, textarea, select, [contenteditable]')) return;
     if (e.key === 't' || e.key === 'T') { e.preventDefault(); toggleTheme(); return; }
+    if (document.querySelector('dialog[open]')) return;   // section shortcuts wait until a popup is closed
     const link = links.find((a) => a.dataset.key === e.key);
     if (!link) return;
     e.preventDefault();

@@ -670,6 +670,50 @@ html:not(.js) .demo { display: none; }
   .work-main .article { width: min(100% - 96px, var(--article)); padding-top: 48px; }
 }
 
+/* ---------- Project sheet (wide screens: site.js opens projects here from the home page) ----------
+   Nearly the whole window, over the blurred page: the project list as an inset glass sidebar on
+   the left, the article scrolling on the right, and a glass close button like the pill. */
+.sheet {
+  width: min(100vw - 64px, 1320px); height: calc(100vh - 64px); height: calc(100dvh - 64px);
+  max-width: none; max-height: none; margin: auto; padding: 0; overflow: hidden;
+  border: 1px solid var(--glass-line); border-radius: 28px; background: var(--bg); color: var(--text);
+  box-shadow: 0 40px 120px -30px rgb(0 0 0 / 0.45);
+}
+.sheet::backdrop { background: rgb(20 20 20 / 0.14); -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%); }
+:root[data-theme="dark"] .sheet::backdrop { background: rgb(0 0 0 / 0.4); }
+html:has(.sheet[open]) { overflow: hidden; }
+.sheet-body { display: grid; grid-template-columns: var(--list) minmax(0, 1fr); height: 100%; }
+.sheet .work-list { display: block; position: relative; top: auto; max-height: none; margin: 10px; overflow-y: auto; }
+.sheet-main { overflow-y: auto; overscroll-behavior: contain; outline: none; }
+.sheet .article { width: min(100% - 112px, 46rem); padding: 56px 0 72px; }
+.sheet-close {
+  position: absolute; top: 14px; right: 14px; z-index: 2; display: grid; place-items: center; width: 36px; height: 36px; padding: 0;
+  border: 1px solid var(--glass-line); border-radius: 50%; color: var(--text-2); cursor: pointer;
+  background: linear-gradient(120deg, rgb(var(--green-rgb) / 0.1), rgb(99 102 241 / 0.1)), var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 8px 20px -10px rgb(0 0 0 / 0.35), inset 0 1px 0 var(--glass-hi);
+  transition: color 0.2s var(--ease), scale 0.2s var(--ease);
+}
+.sheet-close:hover { color: var(--strong); }
+.sheet-close:active { scale: 0.94; }
+.sheet-close svg { width: 18px; height: 18px; }
+/* If the window narrows while it's open: the article alone, full width */
+@media (max-width: 74.99rem) {
+  .sheet { width: calc(100vw - 32px); height: calc(100vh - 32px); height: calc(100dvh - 32px); border-radius: 22px; }
+  .sheet-body { grid-template-columns: minmax(0, 1fr); }
+  .sheet .work-list { display: none; }
+  .sheet .article { width: min(100% - 48px, var(--col-md)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sheet[open] { animation: sheet-in 0.5s var(--appear-ease); }
+  .sheet[open]::backdrop { animation: sheet-fade 0.35s ease; }
+  .sheet.is-closing { animation: sheet-out 0.22s ease-in forwards; }
+  .sheet.is-closing::backdrop { animation: sheet-fade 0.22s ease-in reverse forwards; }
+}
+@keyframes sheet-in { from { opacity: 0; transform: translateY(24px) scale(0.98); } }
+@keyframes sheet-out { to { opacity: 0; transform: translateY(12px) scale(0.985); } }
+@keyframes sheet-fade { from { opacity: 0; } }
+
 .article { width: min(100% - 32px, var(--col)); margin-inline: auto; padding: 32px 0 48px; }
 @media (max-width: 74.99rem) { .article { width: min(100% - 32px, var(--col-md)); } }
 
@@ -791,6 +835,8 @@ html:not(.js) .demo { display: none; }
 ::view-transition-group(wl-items) { z-index: 1; }
 ::view-transition-group(wl-shade) { animation-duration: 0.45s; animation-timing-function: var(--appear-ease); }
 ::view-transition-old(wl-items), ::view-transition-new(wl-items) { animation-duration: 0.45s; animation-timing-function: var(--appear-ease); }
+/* Inside the sheet nothing plays its own fade-in: the sheet's entrance is the animation */
+html.js .sheet :where(.article .cover, .article h1, .article .facts, .article .prose, .article .article-links, .work-list) { opacity: 1; animation: none; }
 /* Arriving from another project page: no replayed fade-ins, the cross-fade is the transition */
 html.js.nav-internal :where(
   .article .back, .article .cover, .article h1, .article .facts, .article .prose, .article .article-links, .article .more,

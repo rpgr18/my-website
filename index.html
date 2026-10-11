@@ -425,6 +425,19 @@
     <div class="quests-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
   </dialog>
 
+  <!-- Wide screens: a project opens here, over the blurred home page, instead of on its own page.
+       site.js fills it from work/*.html; the address becomes #work/NAME so it can be shared and
+       Back closes it. Narrower screens just follow the links to the project pages. -->
+  <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+    <div class="sheet-body">
+      <aside class="work-list"></aside>
+      <div class="sheet-main" tabindex="-1" autofocus>
+        <div class="article"><article></article></div>
+      </div>
+    </div>
+    <button class="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11m0-11-11 11" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button>
+  </dialog>
+
   <!-- Follows the pointer while it's over the photo, in place of a plain cursor -->
   <span class="peek" aria-hidden="true"><svg><use href="#i-camera"/></svg></span>
 

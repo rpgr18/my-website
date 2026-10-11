@@ -18,6 +18,8 @@
     try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
     // Arriving from another project page: skip the fade-ins (site.css), the page cross-fades instead
     if (location.pathname.includes('/work/') && document.referrer.startsWith(location.origin) && document.referrer.includes('/work/') && document.referrer !== location.href) document.documentElement.classList.add('nav-internal');
+    // Wide screens show projects as a sheet over the home page instead (site.js); ?page keeps this one
+    if (matchMedia('(min-width: 75rem)').matches && !location.search) location.replace('../#work/' + location.pathname.split('/').pop().replace(/\.html$/, ''));
   </script>
 </head>
 <body data-page="work">
