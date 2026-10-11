@@ -16,6 +16,8 @@
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
     try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+    // Arriving from another project page: skip the fade-ins (site.css), the page cross-fades instead
+    if (location.pathname.includes('/work/') && document.referrer.startsWith(location.origin) && document.referrer.includes('/work/') && document.referrer !== location.href) document.documentElement.classList.add('nav-internal');
   </script>
 </head>
 <body data-page="work">
@@ -43,7 +45,7 @@
   </svg>
 
   <!-- Nav: number keys 1–6 jump to each section -->
-  <nav class="nav" aria-label="Sections">
+  <nav class="nav" aria-label="Sections" style="--active: 3">
     <ul>
       <li><a class="nav-link" href="../index.html" data-key="1" aria-label="Home"><svg aria-hidden="true"><use href="#i-home"/></svg><span class="tip" aria-hidden="true">Home <kbd>1</kbd></span></a></li>
       <li><a class="nav-link" href="../index.html#pricer" data-key="2" aria-label="Option pricer"><svg aria-hidden="true"><use href="#i-chart"/></svg><span class="tip" aria-hidden="true">Pricer <kbd>2</kbd></span></a></li>
@@ -57,19 +59,15 @@
   </nav>
 
   <div class="page work-layout">
-    <aside class="work-list" aria-label="All work">
-      <p class="wl-title">Work</p>
-      <p class="wl-group">Now viewing</p>
+    <aside class="work-list" aria-label="All projects">
+      <p class="wl-title">Projects</p>
       <ul class="wl-items">
-          <li><a class="wl-item" href="marine-seismic.html" aria-current="page"><span>Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span></a></li>
-      </ul>
-      <p class="wl-group">Up next</p>
-      <ul class="wl-items">
-          <li><a class="wl-item" href="dsa-cli.html"><span>dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span></a></li>
-          <li><a class="wl-item" href="surfpy-api.html"><span>SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
-          <li><a class="wl-item" href="papertrade-sim.html"><span>Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span></a></li>
-          <li><a class="wl-item" href="options-pricing.html"><span>Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
-          <li><a class="wl-item" href="portfolio-optimizer.html"><span>Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
+          <li><a class="wl-item" href="portfolio-optimizer.html"><span>Portfolio Construction Workbench</span><span class="wl-sub">Aug 2026</span></a></li>
+          <li><a class="wl-item" href="options-pricing.html"><span>Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Aug 2026</span></a></li>
+          <li><a class="wl-item" href="dsa-cli.html"><span>dsa-cli</span><span class="wl-sub">Aug 2026</span></a></li>
+          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="marine-seismic.html" aria-current="page"><span>Marine Seismic Deep Learning</span><span class="wl-sub">Spring 2026</span></a></li>
+          <li><a class="wl-item" href="surfpy-api.html"><span>SurfPy API</span><span class="wl-sub">Nov 2024</span></a></li>
+          <li><a class="wl-item" href="papertrade-sim.html"><span>Paper-Trading Portfolio Simulator</span><span class="wl-sub">2024</span></a></li>
       </ul>
     </aside>
 
@@ -157,15 +155,15 @@
           <h2>References</h2>
           <h3>Data sources</h3>
           <ol class="refs">
-            <li>U.S. Geological Survey. <em>National Archive of Marine Seismic Surveys (NAMSS).</em> <a href="https://walrus.wr.usgs.gov/namss/">walrus.wr.usgs.gov/namss</a></li>
-            <li>Childs, J. (2011). <em>NAMSS inventory.</em> <a href="https://iocm.noaa.gov/iwg/jan_2011/Jan2011_OCM_Inventory_NAMSS_Childs.pdf">iocm.noaa.gov</a></li>
-            <li>SEG Open Data. <em>Netherlands Offshore F3 Block.</em> <a href="https://terranubis.com/datainfo/Netherlands-Offshore-F3-Block-Complete">terranubis.com</a></li>
+            <li>U.S. Geological Survey. <em>National Archive of Marine Seismic Surveys (NAMSS).</em> <a href="https://walrus.wr.usgs.gov/namss/" target="_blank" rel="noopener">walrus.wr.usgs.gov/namss</a></li>
+            <li>Childs, J. (2011). <em>NAMSS inventory.</em> <a href="https://iocm.noaa.gov/iwg/jan_2011/Jan2011_OCM_Inventory_NAMSS_Childs.pdf" target="_blank" rel="noopener">iocm.noaa.gov</a></li>
+            <li>SEG Open Data. <em>Netherlands Offshore F3 Block.</em> <a href="https://terranubis.com/datainfo/Netherlands-Offshore-F3-Block-Complete" target="_blank" rel="noopener">terranubis.com</a></li>
           </ol>
           <h3>Format and tooling</h3>
           <ol class="refs" start="4">
-            <li>SEG Wiki. <em>SEG-Y.</em> <a href="https://wiki.seg.org/wiki/SEG-Y">wiki.seg.org/wiki/SEG-Y</a></li>
-            <li>Data Analysis Center. <em>The splendors and miseries of SEG-Y: an introduction for software developers.</em> <a href="https://medium.com/data-analysis-center/the-splendors-and-miseries-of-seg-y-an-introduction-for-software-developers-ad3b3999c0ed">medium.com</a></li>
-            <li>Equinor. <em>segyio.</em> <a href="https://github.com/equinor/segyio">github.com/equinor/segyio</a></li>
+            <li>SEG Wiki. <em>SEG-Y.</em> <a href="https://wiki.seg.org/wiki/SEG-Y" target="_blank" rel="noopener">wiki.seg.org/wiki/SEG-Y</a></li>
+            <li>Data Analysis Center. <em>The splendors and miseries of SEG-Y: an introduction for software developers.</em> <a href="https://medium.com/data-analysis-center/the-splendors-and-miseries-of-seg-y-an-introduction-for-software-developers-ad3b3999c0ed" target="_blank" rel="noopener">medium.com</a></li>
+            <li>Equinor. <em>segyio.</em> <a href="https://github.com/equinor/segyio" target="_blank" rel="noopener">github.com/equinor/segyio</a></li>
           </ol>
           <h3>Related work</h3>
           <ol class="refs" start="7">
@@ -173,33 +171,22 @@
             <li>Lin, T.-Y., Dollár, P., Girshick, R., He, K., Hariharan, B. &amp; Belongie, S. (2017). Feature pyramid networks for object detection. <em>CVPR.</em></li>
             <li>Kirkpatrick, S., Gelatt, C. D. &amp; Vecchi, M. P. (1983). Optimization by simulated annealing. <em>Science.</em></li>
             <li>Muhammad, M. B. &amp; Yeasin, M. (2020). Eigen-CAM: class activation map using principal components. <em>IJCNN.</em></li>
-            <li>DASF: a scalable machine learning framework for large seismic data sets. <em>The Leading Edge</em>, 45(1), 44. <a href="https://pubs.geoscienceworld.org/seg/tle/article-abstract/45/1/44/724438/DASF-A-scalable-machine-learning-framework-for">pubs.geoscienceworld.org</a></li>
-            <li>Automatic detection of SEG-Y sampling format errors using machine learning. <em>SEG/EAB proceedings.</em> <a href="https://pubs.geoscienceworld.org/segeab/proceedings-abstract/SEGEAB.41/1/1961/717272">pubs.geoscienceworld.org</a></li>
-            <li>TGS. <em>Greenland multi-client seismic data</em> (industry reference). <a href="https://www.tgs.com/seismic/multi-client/europe/greenland">tgs.com</a></li>
+            <li>DASF: a scalable machine learning framework for large seismic data sets. <em>The Leading Edge</em>, 45(1), 44. <a href="https://pubs.geoscienceworld.org/seg/tle/article-abstract/45/1/44/724438/DASF-A-scalable-machine-learning-framework-for" target="_blank" rel="noopener">pubs.geoscienceworld.org</a></li>
+            <li>Automatic detection of SEG-Y sampling format errors using machine learning. <em>SEG/EAB proceedings.</em> <a href="https://pubs.geoscienceworld.org/segeab/proceedings-abstract/SEGEAB.41/1/1961/717272" target="_blank" rel="noopener">pubs.geoscienceworld.org</a></li>
+            <li>TGS. <em>Greenland multi-client seismic data</em> (industry reference). <a href="https://www.tgs.com/seismic/multi-client/europe/greenland" target="_blank" rel="noopener">tgs.com</a></li>
           </ol>
           </div>
           <div class="article-links">
-            <a class="btn btn-secondary" href="https://github.com/rpgr18/marine-seismic-deep-learning">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-secondary" href="https://github.com/rpgr18/marine-seismic-deep-learning" target="_blank" rel="noopener">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
-
-        <nav class="more" aria-label="More work">
-          <p class="wl-group">Up next</p>
-          <ul class="wl-items">
-          <li><a class="wl-item" href="dsa-cli.html"><span>dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span></a></li>
-          <li><a class="wl-item" href="surfpy-api.html"><span>SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
-          <li><a class="wl-item" href="papertrade-sim.html"><span>Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span></a></li>
-          <li><a class="wl-item" href="options-pricing.html"><span>Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
-          <li><a class="wl-item" href="portfolio-optimizer.html"><span>Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
-          </ul>
-        </nav>
       </main>
       <footer class="site-foot">
         <p>© 2026 Ryan Greene</p>
         <nav aria-label="Elsewhere">
-          <a href="https://github.com/rpgr18">GitHub</a>
+          <a href="https://github.com/rpgr18" target="_blank" rel="noopener">GitHub</a>
           <span aria-hidden="true">·</span>
-          <a href="https://www.linkedin.com/in/rpgr18/">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/rpgr18/" target="_blank" rel="noopener">LinkedIn</a>
         </nav>
       </footer>
     </div>

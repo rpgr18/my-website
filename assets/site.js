@@ -592,7 +592,9 @@ function blackScholes(S, K, T, sigma, r) {
   // The pill's highlight slides to the current section's index
   const navEl = document.querySelector('.nav');
   const setActive = (i) => navEl?.style.setProperty('--active', i);
+  navEl?.classList.add('is-instant');
   setActive(Math.max(0, links.findIndex((a) => a.hasAttribute('aria-current'))));
+  requestAnimationFrame(() => requestAnimationFrame(() => navEl?.classList.remove('is-instant')));
   if (document.body.dataset.page === 'home') {
     const sections = links.map((a) => (a.hash && a.hash !== '#top' ? document.querySelector(a.hash) : null));
     const markCurrent = () => {

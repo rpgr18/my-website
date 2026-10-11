@@ -16,6 +16,8 @@
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
     try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+    // Arriving from another project page: skip the fade-ins (site.css), the page cross-fades instead
+    if (location.pathname.includes('/work/') && document.referrer.startsWith(location.origin) && document.referrer.includes('/work/') && document.referrer !== location.href) document.documentElement.classList.add('nav-internal');
   </script>
 </head>
 <body id="top" data-page="home">
@@ -99,8 +101,8 @@
           </div>
 
           <div class="socials">
-            <a class="social" href="https://github.com/rpgr18" aria-label="GitHub"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
-            <a class="social" href="https://www.linkedin.com/in/rpgr18/" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+            <a class="social" href="https://github.com/rpgr18" aria-label="GitHub" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
+            <a class="social" href="https://www.linkedin.com/in/rpgr18/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
           </div>
 
           <p class="coords" id="coords">Manhattan, NY · 40.7069° N, 74.0113° W</p>
@@ -185,7 +187,7 @@
             <div class="xp-body">
               <div class="xp-top">
                 <div>
-                  <h3 class="xp-org"><a href="https://www.flowtraders.com">Flow Traders US LLC</a> <span class="tag tag--now">Current</span></h3>
+                  <h3 class="xp-org"><a href="https://www.flowtraders.com" target="_blank" rel="noopener">Flow Traders US LLC</a> <span class="tag tag--now">Current</span></h3>
                   <p class="xp-role">Trading Operations Engineer Intern</p>
                 </div>
                 <p class="xp-when"><span class="xp-date">Jul 2026 – Present</span><span class="xp-place">Manhattan, NY</span></p>
@@ -199,7 +201,7 @@
             <div class="xp-body">
               <div class="xp-top">
                 <div>
-                  <h3 class="xp-org"><a href="https://www.flexcar.com">Flexcar Inc.</a></h3>
+                  <h3 class="xp-org"><a href="https://www.flexcar.com" target="_blank" rel="noopener">Flexcar Inc.</a></h3>
                   <p class="xp-role">Software Engineer Intern</p>
                 </div>
                 <p class="xp-when"><span class="xp-date">Jan 2025 – Aug 2025</span><span class="xp-place">Boston, MA</span></p>
@@ -213,7 +215,7 @@
             <div class="xp-body">
               <div class="xp-top">
                 <div>
-                  <h3 class="xp-org"><a href="https://www.khoury.northeastern.edu">Khoury College of Computer Sciences</a></h3>
+                  <h3 class="xp-org"><a href="https://www.khoury.northeastern.edu" target="_blank" rel="noopener">Khoury College of Computer Sciences</a></h3>
                   <p class="xp-role">Teaching Assistant, Object-Oriented Design</p>
                 </div>
                 <p class="xp-when"><span class="xp-date">Aug 2024 – May 2026</span><span class="xp-place">Boston, MA</span></p>
@@ -227,7 +229,7 @@
             <div class="xp-body">
               <div class="xp-top">
                 <div>
-                  <h3 class="xp-org"><a href="https://www.gdeb.com">General Dynamics Corp.</a></h3>
+                  <h3 class="xp-org"><a href="https://www.gdeb.com" target="_blank" rel="noopener">General Dynamics Corp.</a></h3>
                   <p class="xp-role">Systems Engineering Intern</p>
                 </div>
                 <p class="xp-when"><span class="xp-date">May 2024 – Sep 2024</span><span class="xp-place">Groton, CT</span></p>
@@ -343,7 +345,7 @@
             <p class="card-stats">273 tests · CLI + GUI</p>
           </a>
         </div>
-        <a class="btn btn-secondary btn-block" href="https://github.com/rpgr18?tab=repositories">View all on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-secondary btn-block" href="https://github.com/rpgr18?tab=repositories" target="_blank" rel="noopener">View all on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </section>
 
       <!-- ===== Stack ===== -->
@@ -377,9 +379,9 @@
       <footer class="site-foot">
         <p>© 2026 Ryan Greene</p>
         <nav aria-label="Elsewhere">
-          <a href="https://github.com/rpgr18">GitHub</a>
+          <a href="https://github.com/rpgr18" target="_blank" rel="noopener">GitHub</a>
           <span aria-hidden="true">·</span>
-          <a href="https://www.linkedin.com/in/rpgr18/">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/rpgr18/" target="_blank" rel="noopener">LinkedIn</a>
         </nav>
       </footer>
       </div>

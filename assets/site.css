@@ -102,7 +102,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 [hidden] { display: none !important; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bg); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   background: var(--bg);
@@ -161,6 +161,7 @@ kbd {
   transform: translateX(calc(var(--active, 0) * (var(--item) + var(--gap))));
   transition: transform 0.5s var(--appear-ease);
 }
+.nav.is-instant ul::before { transition: none; }   /* placing the highlight on page load, without a slide */
 .nav-link { position: relative; display: grid; place-items: center; width: var(--item); height: var(--item); border-radius: 999px; color: var(--text-2); transition: color 0.25s var(--ease); }
 .nav-link svg { width: 20px; height: 20px; }
 .nav-link:hover { color: var(--strong); }
@@ -627,7 +628,12 @@ html:not(.js) .demo { display: none; }
 .wl-items { display: grid; gap: 4px; padding: 0; list-style: none; }
 .wl-item { display: grid; gap: 2px; padding: 12px; border-radius: var(--radius-lg); color: var(--text); text-decoration: none; transition: background-color 0.2s var(--ease); }
 .wl-item:hover { background: var(--card); color: var(--text); }
-.wl-item[aria-current] { background: var(--card-2); }
+/* The shade behind the current project. It's its own view-transition layer, so moving between
+   projects slides it from the old item to the new one (translucent, so text shows through mid-slide). */
+.wl-items { isolation: isolate; }
+.wl-items li { position: relative; }
+.wl-shade { position: absolute; inset: 0; z-index: -1; border-radius: var(--radius-lg); background: rgb(128 128 128 / 0.14); view-transition-name: wl-shade; }
+.wl-item[aria-current] > span:first-child { color: var(--strong); }
 .wl-sub { color: var(--muted); }
 
 @media (min-width: 75rem) {
@@ -636,7 +642,7 @@ html:not(.js) .demo { display: none; }
   .work-list .wl-title { font-size: var(--fs-sm); }
   .work-list .wl-group { font-size: var(--fs-xs); }
   .work-list .wl-item { padding: 9px 12px; font-size: var(--fs-sm); line-height: 1.4; }
-  .work-list .wl-sub { font-size: var(--fs-xs); }
+  .work-list .wl-sub { font: 400 var(--fs-xs)/1.4 var(--mono); letter-spacing: 0.02em; }
   .work-main .article { width: min(100% - 96px, var(--article)); padding-top: 48px; }
 }
 
@@ -693,9 +699,6 @@ html:not(.js) .demo { display: none; }
 .article-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .article-links .btn { flex: 0 1 auto; }
 
-.more { margin-top: 48px; }
-.more .wl-items { margin-inline: -12px; }
-@media (min-width: 75rem) { .more { display: none; } }
 
 /* =========================================================
    Appear animations (Ultra-style: fade in and rise 10px, staggered)
@@ -744,3 +747,22 @@ html:not(.js) .demo { display: none; }
   from { opacity: 0; translate: var(--from-x, 0px) var(--from-y, 10px); }
   to { opacity: 1; translate: 0 0; }
 }
+
+/* =========================================================
+   Moving between pages: a cross-fade instead of a hard reload (browsers with cross-document
+   view transitions; others just navigate). The project sidebar is its own layer, so it holds
+   still while the article fades from one project to the next. The pill is deliberately not:
+   its backdrop blur can't be captured in a snapshot and shows as a box mid-transition, and
+   since it's identical on every page it simply fades with the rest, which reads as no change.
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+.work-list { view-transition-name: work-list; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.28s; }
+::view-transition-group(wl-shade) { animation-duration: 0.45s; animation-timing-function: var(--appear-ease); }
+/* Arriving from another project page: no replayed fade-ins, the cross-fade is the transition */
+html.js.nav-internal :where(
+  .article .back, .article .cover, .article h1, .article .facts, .article .prose, .article .article-links, .article .more,
+  .work-list .wl-title, .work-list .wl-group, .work-list .wl-items > li
+) { opacity: 1; animation: none; }

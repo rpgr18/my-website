@@ -16,6 +16,8 @@
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
     try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+    // Arriving from another project page: skip the fade-ins (site.css), the page cross-fades instead
+    if (location.pathname.includes('/work/') && document.referrer.startsWith(location.origin) && document.referrer.includes('/work/') && document.referrer !== location.href) document.documentElement.classList.add('nav-internal');
   </script>
 </head>
 <body data-page="work">
@@ -43,7 +45,7 @@
   </svg>
 
   <!-- Nav: number keys 1–6 jump to each section -->
-  <nav class="nav" aria-label="Sections">
+  <nav class="nav" aria-label="Sections" style="--active: 3">
     <ul>
       <li><a class="nav-link" href="../index.html" data-key="1" aria-label="Home"><svg aria-hidden="true"><use href="#i-home"/></svg><span class="tip" aria-hidden="true">Home <kbd>1</kbd></span></a></li>
       <li><a class="nav-link" href="../index.html#pricer" data-key="2" aria-label="Option pricer"><svg aria-hidden="true"><use href="#i-chart"/></svg><span class="tip" aria-hidden="true">Pricer <kbd>2</kbd></span></a></li>
@@ -57,19 +59,15 @@
   </nav>
 
   <div class="page work-layout">
-    <aside class="work-list" aria-label="All work">
-      <p class="wl-title">Work</p>
-      <p class="wl-group">Now viewing</p>
+    <aside class="work-list" aria-label="All projects">
+      <p class="wl-title">Projects</p>
       <ul class="wl-items">
-          <li><a class="wl-item" href="dsa-cli.html" aria-current="page"><span>dsa-cli</span><span class="wl-sub">The NeetCode 150 in your terminal</span></a></li>
-      </ul>
-      <p class="wl-group">Up next</p>
-      <ul class="wl-items">
-          <li><a class="wl-item" href="surfpy-api.html"><span>SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
-          <li><a class="wl-item" href="papertrade-sim.html"><span>Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span></a></li>
-          <li><a class="wl-item" href="options-pricing.html"><span>Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
-          <li><a class="wl-item" href="portfolio-optimizer.html"><span>Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
-          <li><a class="wl-item" href="marine-seismic.html"><span>Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span></a></li>
+          <li><a class="wl-item" href="portfolio-optimizer.html"><span>Portfolio Construction Workbench</span><span class="wl-sub">Aug 2026</span></a></li>
+          <li><a class="wl-item" href="options-pricing.html"><span>Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Aug 2026</span></a></li>
+          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="dsa-cli.html" aria-current="page"><span>dsa-cli</span><span class="wl-sub">Aug 2026</span></a></li>
+          <li><a class="wl-item" href="marine-seismic.html"><span>Marine Seismic Deep Learning</span><span class="wl-sub">Spring 2026</span></a></li>
+          <li><a class="wl-item" href="surfpy-api.html"><span>SurfPy API</span><span class="wl-sub">Nov 2024</span></a></li>
+          <li><a class="wl-item" href="papertrade-sim.html"><span>Paper-Trading Portfolio Simulator</span><span class="wl-sub">2024</span></a></li>
       </ul>
     </aside>
 
@@ -123,28 +121,17 @@ dsa review           <span class="dim"># what spaced repetition says is due</spa
           <p>977 tests with pytest, plus <code>dsa selftest</code>, which runs every reference solution against its own test suite. CI runs both on Python 3.10 through 3.13 on every push.</p>
           </div>
           <div class="article-links">
-            <a class="btn btn-secondary" href="https://github.com/rpgr18/dsa-cli">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn-secondary" href="https://github.com/rpgr18/dsa-cli#install">Install <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-secondary" href="https://github.com/rpgr18/dsa-cli" target="_blank" rel="noopener">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-secondary" href="https://github.com/rpgr18/dsa-cli#install" target="_blank" rel="noopener">Install <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
-
-        <nav class="more" aria-label="More work">
-          <p class="wl-group">Up next</p>
-          <ul class="wl-items">
-          <li><a class="wl-item" href="surfpy-api.html"><span>SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span></a></li>
-          <li><a class="wl-item" href="papertrade-sim.html"><span>Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span></a></li>
-          <li><a class="wl-item" href="options-pricing.html"><span>Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span></a></li>
-          <li><a class="wl-item" href="portfolio-optimizer.html"><span>Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span></a></li>
-          <li><a class="wl-item" href="marine-seismic.html"><span>Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span></a></li>
-          </ul>
-        </nav>
       </main>
       <footer class="site-foot">
         <p>© 2026 Ryan Greene</p>
         <nav aria-label="Elsewhere">
-          <a href="https://github.com/rpgr18">GitHub</a>
+          <a href="https://github.com/rpgr18" target="_blank" rel="noopener">GitHub</a>
           <span aria-hidden="true">·</span>
-          <a href="https://www.linkedin.com/in/rpgr18/">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/rpgr18/" target="_blank" rel="noopener">LinkedIn</a>
         </nav>
       </footer>
     </div>
