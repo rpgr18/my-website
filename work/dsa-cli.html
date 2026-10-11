@@ -66,14 +66,23 @@
   <div class="page work-layout">
     <aside class="work-list" aria-labelledby="wl-heading">
       <h2 class="wl-title" id="wl-heading">My work</h2>
-      <ul class="wl-items">
-        <li><a class="wl-item" href="portfolio-optimizer.html">Portfolio Construction Workbench</a></li>
-        <li><a class="wl-item" href="options-pricing.html">Options Pricing &amp; Greeks Workbench</a></li>
-        <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="dsa-cli.html" aria-current="page">dsa-cli</a></li>
-        <li><a class="wl-item" href="marine-seismic.html">Marine Seismic Deep Learning</a></li>
-        <li><a class="wl-item" href="surfpy-api.html">SurfPy API</a></li>
-        <li><a class="wl-item" href="papertrade-sim.html">Paper-Trading Portfolio Simulator</a></li>
-      </ul>
+      <div class="wl-groups">
+        <h3 class="wl-group" id="wl-markets">Markets</h3>
+        <ul class="wl-items" aria-labelledby="wl-markets">
+          <li><a class="wl-item" href="portfolio-optimizer.html">Portfolio Construction Workbench</a></li>
+          <li><a class="wl-item" href="options-pricing.html">Options Pricing &amp; Greeks Workbench</a></li>
+          <li><a class="wl-item" href="papertrade-sim.html">Paper-Trading Portfolio Simulator</a></li>
+        </ul>
+        <h3 class="wl-group" id="wl-research">Research</h3>
+        <ul class="wl-items" aria-labelledby="wl-research">
+          <li><a class="wl-item" href="marine-seismic.html">Marine Seismic Deep Learning</a></li>
+        </ul>
+        <h3 class="wl-group" id="wl-tools">Tools</h3>
+        <ul class="wl-items" aria-labelledby="wl-tools">
+          <li><span class="wl-shade" aria-hidden="true"></span><a class="wl-item" href="dsa-cli.html" aria-current="page">dsa-cli</a></li>
+          <li><a class="wl-item" href="surfpy-api.html">SurfPy API</a></li>
+        </ul>
+      </div>
     </aside>
 
     <div class="work-main">
@@ -133,11 +142,11 @@ dsa review           <span class="dim"># what spaced repetition says is due</spa
         <nav class="more" aria-labelledby="more-heading">
           <h2 class="wl-title" id="more-heading">Up next</h2>
           <ul class="wl-items">
-            <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="surfpy-api.html"><span class="wl-name">SurfPy API</span><span class="wl-sub">Surf forecasts over REST</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
-            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="portfolio-optimizer.html"><span class="wl-name">Portfolio Construction Workbench</span><span class="wl-sub">Allocators scored against a known truth</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
             <li><a class="wl-item" href="options-pricing.html"><span class="wl-name">Options Pricing &amp; Greeks Workbench</span><span class="wl-sub">Seven pricing engines, measured</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+            <li><a class="wl-item" href="papertrade-sim.html"><span class="wl-name">Paper-Trading Portfolio Simulator</span><span class="wl-sub">Java portfolios on real prices</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
+            <li><a class="wl-item" href="marine-seismic.html"><span class="wl-name">Marine Seismic Deep Learning</span><span class="wl-sub">Fault and horizon detection from SEG-Y</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></a></li>
           </ul>
         </nav>
       </main>

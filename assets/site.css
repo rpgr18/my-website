@@ -562,6 +562,9 @@ html:not(.js) .demo { display: none; }
   font: 600 var(--fs)/1.2 var(--font); letter-spacing: -0.01em; color: var(--strong);
 }
 .wl-items { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; isolation: isolate; }
+/* Section headers inside the list (Markets, Research, Tools), small and quiet like a Mac sidebar's */
+.wl-group { margin: 14px 12px 6px; font: 600 var(--fs-xs)/1.2 var(--font); letter-spacing: 0.01em; color: var(--muted); }
+.wl-groups > .wl-group:first-child { margin-top: 8px; }
 .wl-items li { position: relative; }
 .wl-item {
   display: block; padding: 10px 12px; border-radius: calc(var(--r) - var(--pad));
@@ -575,6 +578,19 @@ html:not(.js) .demo { display: none; }
   background: var(--strong); box-shadow: 0 4px 12px -4px rgb(0 0 0 / 0.35); view-transition-name: wl-shade;
 }
 .wl-item[aria-current], .wl-item[aria-current]:hover { background: none; color: var(--on-strong); }
+
+/* GitHub stars: a small gold pill, the same shape as the availability pill */
+.stars {
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px 3px 8px;
+  border: 1px solid color-mix(in srgb, var(--amber) 32%, transparent); border-radius: 999px;
+  background: color-mix(in srgb, var(--amber) 8%, transparent);
+  font: 400 var(--fs-xs)/1.45 var(--mono); letter-spacing: 0.01em; color: var(--amber); text-decoration: none; white-space: nowrap;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.stars svg { width: 12px; height: 12px; flex: none; }
+a.stars:hover { color: var(--amber-hover); border-color: color-mix(in srgb, var(--amber) 55%, transparent); }
+.article h1 + .stars { display: flex; width: fit-content; margin-top: 12px; }
+.stars--sm { gap: 4px; padding: 1px 8px 1px 6px; }
 
 /* Up next: an inset grouped list, one row per project with its one-liner and a chevron */
 .more { margin-top: 48px; }
@@ -700,7 +716,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   .js :where(
     .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .socials, .hero .actions > *, .hero .coords, .side > .demo,
     .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .flow > .site-foot,
-    .article .back, .article .cover, .article h1, .article .facts, .article .prose, .article .article-links, .article .more,
+    .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
     .work-list
   ) { opacity: 0; }
 
@@ -708,7 +724,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   .js:not(.motion) :where(
     .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .socials, .hero .actions > *, .hero .coords, .side > .demo,
     .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .flow > .site-foot,
-    .article .back, .article .cover, .article h1, .article .facts, .article .prose, .article .article-links, .article .more,
+    .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
     .work-list
   ) { animation: appear 0.01s 2s both; }
 
@@ -725,7 +741,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   .hero .actions > .btn-primary { --from-x: -16px; --from-y: 0px; }
   .hero .actions > .btn-secondary { --from-x: 16px; --from-y: 0px; }
   .flow > .row, #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .flow > .site-foot { --delay: 0.6s; }
-  .article h1 { --delay: 0.1s; }
+  .article h1, .article .stars { --delay: 0.1s; }
   .article .facts { --delay: 0.2s; }
   .article .prose { --delay: 0.3s; }
   .article .article-links, .article .more { --delay: 0.4s; }
@@ -750,7 +766,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   @view-transition { navigation: auto; }
 }
 .work-list { view-transition-name: work-list; }
-.work-list .wl-items { view-transition-name: wl-items; }
+.work-list .wl-groups { view-transition-name: wl-items; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.28s; }
 /* Panel, then the sliding chip, then the titles on top (in the page they sit above the chip, but
    as layers they'd otherwise stack in paint order, chip last), so it slides under them like the
@@ -759,9 +775,9 @@ html:has(.sheet[open]) { overflow: hidden; }
 ::view-transition-group(wl-shade) { animation-duration: 0.45s; animation-timing-function: var(--appear-ease); }
 ::view-transition-old(wl-items), ::view-transition-new(wl-items) { animation-duration: 0.45s; animation-timing-function: var(--appear-ease); }
 /* Inside the sheet nothing plays its own fade-in: the sheet's entrance is the animation */
-html.js .sheet :where(.article .cover, .article h1, .article .facts, .article .prose, .article .article-links, .work-list) { opacity: 1; animation: none; }
+html.js .sheet :where(.article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .work-list) { opacity: 1; animation: none; }
 /* Arriving from another project page: no replayed fade-ins, the cross-fade is the transition */
 html.js.nav-internal :where(
-  .article .back, .article .cover, .article h1, .article .facts, .article .prose, .article .article-links, .article .more,
+  .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
   .work-list
 ) { opacity: 1; animation: none; }

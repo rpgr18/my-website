@@ -77,7 +77,7 @@ function blackScholes(S, K, T, sigma, r) {
     const appearing = document.querySelectorAll([
       '.hero .clocks', '.hero .avatar-wrap', '.hero-title > *', '.hero .avail', '.hero .status', '.hero .socials', '.hero .actions > *', '.hero .coords', '.side > .demo',
       '.flow > .row:not(#projects)', '#projects .row-label', '.cards > .card', '#projects .btn-block', '.flow > .contact', '.flow > .site-foot',
-      '.article .back', '.article .cover', '.article h1', '.article .facts', '.article .prose', '.article .article-links', '.article .more',
+      '.article .back', '.article .cover', '.article h1', '.article .stars', '.article .facts', '.article .prose', '.article .article-links', '.article .more',
       '.work-list',
     ].join(','));
     const loadedAt = performance.now();
@@ -643,8 +643,8 @@ function blackScholes(S, K, T, sigma, r) {
         apply();
         sheet.classList.remove('is-closing');
         sheet.showModal();
-      } else if (document.startViewTransition && !reduceMotion) {
-        document.startViewTransition(apply);
+      } else if (document.startViewTransition && !reduceMotion && document.visibilityState === 'visible') {
+        document.startViewTransition(apply).ready.catch(() => {});   // a skipped transition still swaps the content
       } else apply();
     };
     // Close with an animation; the history entry, if we pushed one, is popped first
