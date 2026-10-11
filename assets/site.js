@@ -589,6 +589,10 @@ function blackScholes(S, K, T, sigma, r) {
 
   // ---------- Nav: current section on the home page + number-key shortcuts everywhere ----------
   const links = [...document.querySelectorAll('a.nav-link')];   // the theme toggle is a button, not a section link
+  // The pill's highlight slides to the current section's index
+  const navEl = document.querySelector('.nav');
+  const setActive = (i) => navEl?.style.setProperty('--active', i);
+  setActive(Math.max(0, links.findIndex((a) => a.hasAttribute('aria-current'))));
   if (document.body.dataset.page === 'home') {
     const sections = links.map((a) => (a.hash && a.hash !== '#top' ? document.querySelector(a.hash) : null));
     const markCurrent = () => {
@@ -598,10 +602,12 @@ function blackScholes(S, K, T, sigma, r) {
         if (sec && !inStickySide(sec) && sec.getBoundingClientRect().top <= innerHeight * 0.4) current = i;
       });
       if (atBottom) current = links.length - 1;
+      if (scrollY < 40) current = 0;   // the top of the page is Home, even when Experience starts high up
       links.forEach((a, i) => {
         if (i === current) a.setAttribute('aria-current', 'true');
         else a.removeAttribute('aria-current');
       });
+      setActive(current);
     };
     addEventListener('scroll', markCurrent, { passive: true });
     markCurrent();
