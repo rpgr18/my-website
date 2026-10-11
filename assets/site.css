@@ -958,10 +958,7 @@ body {
 .hero .mkt-readout { margin-top: 6px; }
 
 .hero .avatar-wrap { margin-top: 10px; }
-/* The name in Acki Preschool (Anke-Art), as outlines rather than a font file: the font asks not to be
-   redistributed, so only these letters ship. The real text is there for screen readers. Slightly askew: a joke. */
-.hero h1 { line-height: 1; rotate: -2deg; }
-.name-art { display: block; height: 2.8rem; width: auto; margin-block: 4px 10px; fill: currentColor; }
+.hero h1 { font-size: 2rem; font-weight: 500; letter-spacing: -0.025em; }
 
 .hero .actions { gap: 8px; margin-top: 22px; }
 .hero .social {
