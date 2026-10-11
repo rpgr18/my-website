@@ -84,7 +84,7 @@
               <g class="ring" data-ring="apac" data-r="56"><circle class="ring-track" cx="72" cy="72" r="56"/><path class="ring-arc" pathLength="1"/></g>
               <line class="ring-now" x1="72" y1="21" x2="72" y2="2"/>
             </svg>
-            <button class="avatar-btn" type="button" aria-label="Side quests: photos from outside work" aria-haspopup="dialog"><img class="avatar" src="img/avatar.jpg" alt="" width="164" height="164"></button>
+            <button class="avatar-btn" type="button" aria-label="Some other things: photos from outside work" aria-haspopup="dialog"><img class="avatar" src="img/avatar.jpg" alt="" width="164" height="164"></button>
           </div>
           <div class="hero-title">
             <h1>Ryan Greene</h1>
@@ -385,59 +385,45 @@
     </main>
   </div>
 
-  <!-- Side quests: opened by clicking the photo. Placeholder tiles until real photos go in img/quests/.
-       To add one, replace a .quest-photo div with <img src="img/quests/NAME.jpg" alt="..." loading="lazy">. -->
-  <dialog class="quests" id="quests" aria-labelledby="quests-title">
-    <div class="quests-panel">
-      <button class="quests-close" type="button" aria-label="Close side quests">×</button>
-      <header class="quests-head">
-        <p class="quests-kicker">Side quests</p>
-        <h2 id="quests-title">Proof I occasionally go outside</h2>
-        <p class="quests-sub">What happens when the market closes and the code compiles. Ranked by enthusiasm, not skill.</p>
-      </header>
-      <ul class="quests-grid">
-        <li class="quest">
-          <figure>
-            <div class="quest-photo quest-photo--sailing" role="img" aria-label="Photo coming soon: Sailing"><span>Sailing</span></div>
-            <figcaption><strong>Sailing.</strong> Like trading, except the market is the wind and it’s always moving against you.</figcaption>
-          </figure>
-        </li>
-        <li class="quest">
-          <figure>
-            <div class="quest-photo quest-photo--surfing" role="img" aria-label="Photo coming soon: Surfing"><span>Surfing</span></div>
-            <figcaption><strong>Surfing.</strong> Mostly paddling. Occasionally standing. Always explaining why it was better yesterday.</figcaption>
-          </figure>
-        </li>
-        <li class="quest">
-          <figure>
-            <div class="quest-photo quest-photo--sydney" role="img" aria-label="Photo coming soon: Sydney"><span>Sydney</span></div>
-            <figcaption><strong>Sydney.</strong> A semester abroad, officially for the coursework.</figcaption>
-          </figure>
-        </li>
-        <li class="quest">
-          <figure>
-            <div class="quest-photo quest-photo--photography" role="img" aria-label="Photo coming soon: Photography"><span>Photography</span></div>
-            <figcaption><strong>Photography.</strong> Thousands of shots per trip, roughly three keepers per year.</figcaption>
-          </figure>
-        </li>
-        <li class="quest">
-          <figure>
-            <div class="quest-photo quest-photo--music" role="img" aria-label="Photo coming soon: Music"><span>Music</span></div>
-            <figcaption><strong>Music.</strong> My neighbours have a different word for it.</figcaption>
-          </figure>
-        </li>
-        <li class="quest">
-          <figure>
-            <div class="quest-photo quest-photo--travel" role="img" aria-label="Photo coming soon: Somewhere new"><span>Somewhere new</span></div>
-            <figcaption><strong>Somewhere new.</strong> Usually chosen by whichever flight was cheapest.</figcaption>
-          </figure>
-        </li>
-      </ul>
+  <!-- "Some other things": opened by clicking the photo. One photo per slide, filling the popup; swipe,
+       arrow keys or the side buttons move between them. Placeholders until real photos go in img/quests/:
+       replace a .quest-photo div with <img src="img/quests/NAME.jpg" alt="..." loading="lazy">. -->
+  <dialog class="quests" id="quests" aria-label="Some other things">
+    <div class="quests-track">
+      <figure class="quest" role="group" aria-roledescription="slide" aria-label="1 of 6">
+        <div class="quest-photo quest-photo--sailing" role="img" aria-label="Photo coming soon: Sailing"></div>
+        <figcaption><strong>Sailing.</strong> Like trading, except the market is the wind and it’s always moving against you.</figcaption>
+      </figure>
+      <figure class="quest" role="group" aria-roledescription="slide" aria-label="2 of 6">
+        <div class="quest-photo quest-photo--surfing" role="img" aria-label="Photo coming soon: Surfing"></div>
+        <figcaption><strong>Surfing.</strong> Mostly paddling. Occasionally standing. Always explaining why it was better yesterday.</figcaption>
+      </figure>
+      <figure class="quest" role="group" aria-roledescription="slide" aria-label="3 of 6">
+        <div class="quest-photo quest-photo--sydney" role="img" aria-label="Photo coming soon: Sydney"></div>
+        <figcaption><strong>Sydney.</strong> A semester abroad, officially for the coursework.</figcaption>
+      </figure>
+      <figure class="quest" role="group" aria-roledescription="slide" aria-label="4 of 6">
+        <div class="quest-photo quest-photo--photography" role="img" aria-label="Photo coming soon: Photography"></div>
+        <figcaption><strong>Photography.</strong> Thousands of shots per trip, roughly three keepers per year.</figcaption>
+      </figure>
+      <figure class="quest" role="group" aria-roledescription="slide" aria-label="5 of 6">
+        <div class="quest-photo quest-photo--music" role="img" aria-label="Photo coming soon: Music"></div>
+        <figcaption><strong>Music.</strong> My neighbours have a different word for it.</figcaption>
+      </figure>
+      <figure class="quest" role="group" aria-roledescription="slide" aria-label="6 of 6">
+        <div class="quest-photo quest-photo--travel" role="img" aria-label="Photo coming soon: Somewhere new"></div>
+        <figcaption><strong>Somewhere new.</strong> Usually chosen by whichever flight was cheapest.</figcaption>
+      </figure>
     </div>
+    <p class="quests-title" aria-hidden="true">Some other things…</p>
+    <button class="quests-close" type="button" aria-label="Close">×</button>
+    <button class="quests-nav quests-prev" type="button" aria-label="Previous photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <button class="quests-nav quests-next" type="button" aria-label="Next photo"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <div class="quests-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
   </dialog>
 
   <!-- Follows the pointer while it's over the photo, in place of a plain cursor -->
-  <span class="peek" aria-hidden="true"><svg><use href="#i-camera"/></svg>Side quests</span>
+  <span class="peek" aria-hidden="true"><svg><use href="#i-camera"/></svg></span>
 
   <script src="assets/site.js"></script>
 </body>
