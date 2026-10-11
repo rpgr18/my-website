@@ -120,15 +120,17 @@ button { font: inherit; color: inherit; }
 }
 .skip-link:focus { transform: none; }
 
-/* Tooltip shared by the nav and the social icons */
+/* Nav tooltip: high-contrast (dark on the white theme, light on the dark one) with a soft shadow */
 .tip {
-  position: absolute; z-index: 5;
-  display: flex; align-items: center; gap: 6px;
-  padding: 4px 6px; border: 1px solid var(--line-2); border-radius: var(--radius-sm);
-  background: var(--line); color: var(--text);
-  font-size: var(--fs-xs); line-height: 1; white-space: nowrap;
+  position: absolute; z-index: 30;
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px 6px 10px; border-radius: var(--radius);
+  background: var(--strong); color: var(--on-strong);
+  box-shadow: 0 6px 18px -6px rgb(0 0 0 / 0.35);
+  font-size: var(--fs-xs); font-weight: 500; line-height: 1; white-space: nowrap;
   opacity: 0; pointer-events: none; transition: opacity 0.15s, translate 0.15s;
 }
+.tip kbd { background: rgb(128 128 128 / 0.35); color: inherit; box-shadow: none; }
 kbd {
   display: grid; place-items: center; width: 16px; height: 16px;
   border-radius: 3px; background: var(--key); box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.2);
@@ -141,7 +143,7 @@ kbd {
 .nav-link { position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius); color: var(--text-2); }
 .nav-link svg { width: 24px; height: 24px; }
 .nav-link:hover, .nav-link[aria-current] { color: var(--strong); }
-.nav-link .tip { left: calc(100% + 12px); top: 50%; translate: 0 -50%; }
+.nav-link .tip { left: calc(100% + 24px); top: 50%; translate: 0 -50%; }
 button.nav-link { padding: 0; border: 0; background: none; cursor: pointer; }
 .theme-toggle .i-sun, :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
 :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
@@ -187,7 +189,9 @@ button.nav-link { padding: 0; border: 0; background: none; cursor: pointer; }
 }
 
 /* ---------- Hero ---------- */
-.hero { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+/* Grouped rather than evenly spaced: clocks, photo, then name + subtitle (tight), the status pill,
+   the two actions, the links, and the coordinates as a quiet footer. */
+.hero { display: flex; flex-direction: column; align-items: center; text-align: center; }
 
 /* Wide screens: the hero and pricer become a sticky sidebar and everything else scrolls beside it.
    When the sidebar is taller than the window, site.js sets --side-top negative so it sticks once its
@@ -200,7 +204,6 @@ button.nav-link { padding: 0; border: 0; background: none; cursor: pointer; }
   .side { position: sticky; top: var(--side-top, 0px); justify-content: center; gap: 40px; min-height: 100vh; min-height: 100dvh; padding-block: 48px; }
   .flow { padding: 56px 0 48px; }
   .row-label { position: static; margin: 0 0 14px; text-align: left; }
-  .hero .actions { width: 100%; }
   .hero .mkt { padding-inline: 7px; }
   .hero .btn { white-space: nowrap; }
   .hero-title > *, .hero .status { text-wrap: balance; }
@@ -245,7 +248,7 @@ button.nav-link { padding: 0; border: 0; background: none; cursor: pointer; }
 img.avatar { object-fit: cover; }
 
 /* Activity rings around the photo */
-.avatar-wrap { position: relative; display: grid; place-items: center; width: 216px; height: 216px; margin: -14px 0; }
+.avatar-wrap { position: relative; display: grid; place-items: center; width: 216px; height: 216px; margin: 2px 0 4px; }
 .rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .ring-track { fill: none; stroke: var(--ring-track); stroke-width: 3.5; }
 .ring-arc {
@@ -282,7 +285,8 @@ img.avatar { object-fit: cover; }
   .avail-sep { display: none; }
   .avail-now { display: block; }
 }
-.status { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; color: var(--text-2); text-wrap: balance; }
+.status { margin-top: 6px; font-size: 0.875rem; color: var(--text-2); text-wrap: balance; }
+.hero .avail { margin-top: 16px; }
 .pulse { position: relative; width: 16px; height: 16px; flex: none; }
 .pulse::before, .pulse::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--green); }
 .pulse::before { background: rgb(var(--green-rgb) / 0.35); }
@@ -291,21 +295,14 @@ img.avatar { object-fit: cover; }
 }
 @keyframes ping { from { transform: scale(1); opacity: 1; } to { transform: scale(2.6); opacity: 0; } }
 
-.socials { display: flex; gap: 28px; padding: 12px 0; }
+.socials { display: flex; gap: 22px; margin-top: 22px; }
 .social { position: relative; display: grid; place-items: center; width: 24px; height: 24px; color: var(--text-2); }
-.social svg { width: 22px; height: 22px; }
+.social svg { width: 20px; height: 20px; }
 .social:hover { color: var(--strong); }
-.social .tip { top: calc(100% + 8px); left: 50%; translate: -50% 0; }
-.social:hover .tip, .social:focus-visible .tip { opacity: 1; translate: -50% 4px; }
 
-.actions { display: flex; align-items: center; gap: 16px; width: 80%; max-width: 27rem; }
-.or { color: var(--muted); }
-.coords { min-height: 40px; display: grid; place-items: center; font: 400 var(--fs-sm)/1 var(--mono); letter-spacing: 0.6px; text-transform: uppercase; color: var(--muted); }
-@media (max-width: 50.6rem) {
-  .actions { flex-direction: column; gap: 8px; width: 100%; }
-  .actions .btn { width: 100%; }
-  .or { display: none; }
-}
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+.actions .btn { flex: none; padding-inline: 18px; }
+.coords { margin-top: 10px; min-height: 40px; display: grid; place-items: center; font: 400 var(--fs-sm)/1 var(--mono); letter-spacing: 0.6px; text-transform: uppercase; color: var(--muted); }
 
 /* ---------- Prose ---------- */
 .prose p + p { margin-top: 1.4em; }
@@ -626,13 +623,13 @@ html:not(.js) .demo { display: none; }
   /* Stagger, from the template's appear timings */
   .hero-title > h1 { --delay: 0.1s; }
   .hero .avail { --delay: 0.3s; }
-  .hero .status { --delay: 0.4s; }
-  .hero .coords { --delay: 0.5s; }
+  .hero .status { --delay: 0.2s; }
+  .hero .coords { --delay: 0.6s; }
   .side > .demo { --delay: 0.6s; }
-  .hero .socials, .hero .actions > * { --delay: 0.55s; }
+  .hero .actions > * { --delay: 0.4s; }
+  .hero .socials { --delay: 0.5s; }
   .hero .actions > .btn-primary { --from-x: -16px; --from-y: 0px; }
   .hero .actions > .btn-secondary { --from-x: 16px; --from-y: 0px; }
-  .hero .actions > .or { --from-y: 0px; }
   .flow > .row, #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .flow > .site-foot { --delay: 0.6s; }
   .article h1 { --delay: 0.1s; }
   .article .facts { --delay: 0.2s; }
