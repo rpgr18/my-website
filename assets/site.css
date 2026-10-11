@@ -113,6 +113,8 @@ body {
 a { color: inherit; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 4px; }
+/* The skip link's target (the whole page column) takes focus but shouldn't draw a ring around the page */
+#main:focus { outline: none; }
 [id] { scroll-margin-top: 24px; }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -781,3 +783,78 @@ html.js.nav-internal :where(
   .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
   .work-list
 ) { opacity: 1; animation: none; }
+
+/* =========================================================
+   Wide screens: the home page as two panes
+   The layout spans the window (up to 1360px) instead of sitting as a narrow block in the middle.
+   On the left, the intro and the pricer are panels in the same glass as the pill and the project
+   sheet; on the right, an editorial column: each section's label hangs in its own gutter and stays
+   pinned while you read that section, with hairlines between sections. Phones and tablets keep
+   the single column above.
+   ========================================================= */
+@media (min-width: 75rem) {
+  body {
+    background:
+      radial-gradient(52rem 40rem at -8% -12%, rgb(var(--green-rgb) / 0.07), transparent 62%),
+      radial-gradient(46rem 38rem at 108% 112%, rgb(99 102 241 / 0.06), transparent 62%),
+      var(--bg);
+    background-attachment: fixed;
+  }
+  .col {
+    grid-template-columns: clamp(28.5rem, 31vw, 30rem) minmax(0, 1fr); column-gap: clamp(48px, 5vw, 96px);
+    justify-content: stretch; width: min(100% - 64px, 1360px); padding: 0;
+  }
+
+  /* Left pane: two glass panels */
+  .side { justify-content: flex-start; gap: 16px; padding-block: 24px 104px; }
+  .hero, .side > .demo {
+    border: 1px solid var(--glass-line); border-radius: 28px;
+    background: linear-gradient(140deg, rgb(var(--green-rgb) / 0.07), rgb(99 102 241 / 0.05)), var(--glass);
+    box-shadow: 0 24px 60px -36px rgb(0 0 0 / 0.35), inset 0 1px 0 var(--glass-hi);
+  }
+  .hero { padding: 28px 16px 26px; }
+  .hero .mkt { padding-inline: 4px; }   /* the three clocks on one line inside the panel */
+  .hero h1 { font-size: 1.75rem; letter-spacing: -0.015em; }
+  .side > .demo { padding: 22px 22px 18px; }
+  .side > .demo .demo-intro { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-line); }
+  .side > .demo .panel { padding: 0; border: 0; background: none; }
+
+  /* Right pane: labels in a gutter, content beside them */
+  .flow { --label: clamp(6.5rem, 9vw, 8.5rem); --label-gap: clamp(24px, 3vw, 40px); gap: 0; padding: 48px 0 48px; }
+  .flow > .row {
+    display: grid; grid-template-columns: var(--label) minmax(0, 1fr); column-gap: var(--label-gap);
+    padding-block: 48px; border-top: 1px solid var(--line);
+  }
+  .flow > .row:first-child { padding-top: 0; border-top: 0; }
+  .flow > .row > * { grid-column: 2; }
+  .flow > .row > .row-label {
+    grid-column: 1; grid-row: 1 / span 2; align-self: start; position: sticky; top: 48px;
+    display: block; margin: 0; padding-top: 5px;
+    font: 500 var(--fs-xs)/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  }
+  .flow > .row > .row-label::after { content: none; }
+
+  /* About reads as a statement */
+  .flow > .row:first-child .prose p { font-size: clamp(1.25rem, 1.5vw, 1.375rem); line-height: 1.55; letter-spacing: -0.012em; color: var(--strong); text-wrap: pretty; }
+  .flow > .row:first-child > .row-label { padding-top: 9px; }
+
+  /* Projects: a little more air in the cards, and a lift on hover */
+  .cards { gap: 14px; }
+  .card { padding: 18px 20px 14px; border-radius: 16px; transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease), translate 0.3s var(--appear-ease), box-shadow 0.3s var(--appear-ease); }
+  .card:hover { translate: 0 -2px; box-shadow: 0 16px 32px -20px rgb(0 0 0 / 0.3); }
+
+  /* Contact closes the page as a glass card in the content column; the footer lines up under it */
+  .flow > .contact, .flow > .site-foot { margin-left: calc(var(--label) + var(--label-gap)); }
+  .flow > .contact {
+    align-items: flex-start; gap: 20px; margin-top: 8px; padding: 32px; text-align: left;
+    border: 1px solid var(--glass-line); border-radius: 28px;
+    background: linear-gradient(140deg, rgb(var(--green-rgb) / 0.07), rgb(99 102 241 / 0.05)), var(--glass);
+    box-shadow: 0 24px 60px -36px rgb(0 0 0 / 0.35), inset 0 1px 0 var(--glass-hi);
+  }
+  .contact-head { justify-items: start; gap: 8px; }
+  .contact-head svg { display: none; }
+  .contact h2 { font-size: var(--fs-xl); line-height: 1.3; letter-spacing: -0.01em; }
+  .contact-head p { max-width: none; margin-top: 0; }
+  .contact-foot { margin-top: -4px; }
+  .flow > .site-foot { display: flex; justify-content: space-between; align-items: center; padding: 24px 4px 32px; text-align: left; }
+}
