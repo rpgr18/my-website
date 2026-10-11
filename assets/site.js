@@ -343,12 +343,16 @@ function blackScholes(S, K, T, sigma, r) {
         }
       }
       if (rings) {
+        // Now: a gap cut through all three rings, and a bead just outside, at the current time on the 24-hour dial
         const a = dialAngle(now);
-        const [x0, y0] = polar(51, a);
-        const [x1, y1] = polar(70, a);
-        const hand = rings.querySelector('.ring-now');
-        hand.setAttribute('x1', x0.toFixed(2)); hand.setAttribute('y1', y0.toFixed(2));
-        hand.setAttribute('x2', x1.toFixed(2)); hand.setAttribute('y2', y1.toFixed(2));
+        const [x, y] = polar(70.5, a);
+        const bead = rings.querySelector('.ring-now');
+        bead.setAttribute('cx', x.toFixed(2)); bead.setAttribute('cy', y.toFixed(2));
+        const [gx0, gy0] = polar(51, a);
+        const [gx1, gy1] = polar(69.5, a);
+        const gap = rings.querySelector('.ring-gap');
+        gap?.setAttribute('x1', gx0.toFixed(2)); gap?.setAttribute('y1', gy0.toFixed(2));
+        gap?.setAttribute('x2', gx1.toFixed(2)); gap?.setAttribute('y2', gy1.toFixed(2));
       }
       if (!shownText) { shownText = describe(pinned.dataset.market); readout.textContent = shownText; }
     };

@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:ital,wght@0,400;0,500;1,400&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=59312bf8">
+  <link rel="stylesheet" href="assets/site.css?v=e1b38447">
   <script>
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
@@ -76,13 +76,16 @@
             <p class="mkt-readout" id="mkt-readout" aria-hidden="true">NYSE · 09:30–16:00 ET</p>
           </div>
           <!-- Activity rings: each market's trading session on a 24-hour Manhattan clock (midnight at the top).
-               Outer NYSE, middle Euronext, inner ASX; green while open; the white tick is now. Drawn by site.js. -->
+               Outer NYSE, middle Euronext, inner ASX; green while open; a gap cut through all three, with a bead just outside, is now. Drawn by site.js. -->
           <div class="avatar-wrap">
             <svg class="rings" viewBox="0 0 144 144" aria-hidden="true">
-              <g class="ring" data-ring="us" data-r="66"><circle class="ring-track" cx="72" cy="72" r="66"/><path class="ring-arc" pathLength="1"/></g>
-              <g class="ring" data-ring="emea" data-r="61"><circle class="ring-track" cx="72" cy="72" r="61"/><path class="ring-arc" pathLength="1"/></g>
-              <g class="ring" data-ring="apac" data-r="56"><circle class="ring-track" cx="72" cy="72" r="56"/><path class="ring-arc" pathLength="1"/></g>
-              <line class="ring-now" x1="72" y1="21" x2="72" y2="2"/>
+              <defs><mask id="ring-cut" maskUnits="userSpaceOnUse" x="-8" y="-8" width="160" height="160"><rect x="-8" y="-8" width="160" height="160" fill="#fff"/><line class="ring-gap" x1="72" y1="24" x2="72" y2="2" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></mask></defs>
+              <g mask="url(#ring-cut)">
+                <g class="ring" data-ring="us" data-r="66"><circle class="ring-track" cx="72" cy="72" r="66"/><path class="ring-arc" pathLength="1"/></g>
+                <g class="ring" data-ring="emea" data-r="60.5"><circle class="ring-track" cx="72" cy="72" r="60.5"/><path class="ring-arc" pathLength="1"/></g>
+                <g class="ring" data-ring="apac" data-r="55"><circle class="ring-track" cx="72" cy="72" r="55"/><path class="ring-arc" pathLength="1"/></g>
+              </g>
+              <circle class="ring-now" cx="72" cy="1.5" r="2.2"/>
             </svg>
             <img class="avatar" src="img/avatar.jpg" alt="" width="164" height="164">
           </div>
@@ -391,6 +394,6 @@
     <button class="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11m0-11-11 11" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button>
   </dialog>
 
-  <script src="assets/site.js?v=59312bf8"></script>
+  <script src="assets/site.js?v=e1b38447"></script>
 </body>
 </html>
