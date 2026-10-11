@@ -302,7 +302,7 @@ function blackScholes(S, K, T, sigma, r) {
     const states = {};
     let pinned = marketEls.find((b) => b.getAttribute('aria-pressed') === 'true') || marketEls[0];
     let shownText = '';
-    const RING_NOTE = 'Rings: NYSE, Euronext, ASX sessions on a 24h Manhattan clock';
+    const RING_NOTE = 'Rings: each market’s hours, 24h NY clock';
     const describe = (id) => `${MARKETS[id].exchange} · ${states[id].detail} ${states[id].zone}`;
     const setReadout = (text) => {
       if (text === shownText) return;

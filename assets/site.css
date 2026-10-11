@@ -255,11 +255,11 @@ body { padding-bottom: 96px; }
 .pin { width: 12px; height: 12px; margin-right: -2px; flex: none; }
 .mkt-dot { width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--dot); }
 .mkt.is-open .mkt-dot { background: var(--green); box-shadow: 0 0 0 3px rgb(var(--green-rgb) / 0.15); }
-.mkt-readout { min-height: 1.5em; font: 400 var(--fs-xs)/1.5 var(--mono); color: var(--muted); transition: opacity 0.15s; }
+.mkt-readout { max-width: 100%; height: 1.5em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 400 var(--fs-xs)/1.5 var(--mono); color: var(--muted); transition: opacity 0.15s; }   /* one line, always: swapping it never moves the card */
 .mkt-readout.is-swapping { opacity: 0; }
 
 .avatar {
-  display: grid; place-items: center; width: 164px; height: 164px; border-radius: 50%;
+  display: grid; place-items: center; width: 174px; height: 174px; border-radius: 50%;   /* reaches r=51 of the rings' 144 grid: the rings' own gap from the inner ring */
   border: 1px solid var(--line-2);
   background: var(--avatar-bg);
   font: 500 1.375rem/1 var(--font); letter-spacing: 0.02em; color: var(--text);
