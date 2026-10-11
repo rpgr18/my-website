@@ -77,7 +77,7 @@
       <main class="article" id="main" tabindex="-1">
         <a class="back" href="../index.html#projects"><svg aria-hidden="true"><use href="#i-arrow"/></svg>Projects</a>
         <article>
-          <img class="visual cover cover--ui" src="../img/portfolio-optimizer.webp" alt="The workbench’s Universe tab: dataset and estimator settings on the left, summary statistics, the cumulative growth of ten assets, and their correlation matrix" width="2000" height="1250">
+          <img class="visual cover cover--framed" src="../img/portfolio/cover.webp" alt="Cover for the Portfolio Construction Workbench: “Seven allocators, scored against the truth.” 7 allocators, 6 covariance estimators, KKT residuals around 1e-10 and 72 tests, beside the app’s chart of ten assets’ cumulative growth" width="2000" height="1045">
           <h1>Portfolio Construction Workbench</h1>
           <dl class="facts">
             <div><dt>Type</dt><dd>Solo project</dd></div>
@@ -116,6 +116,32 @@
 
           <h2>Limits</h2>
           <p>Constraints are box plus budget only, with no turnover or sector limits. Expected returns are a single vector, and the estimation study assumes a stationary true model, which is the most flattering assumption for every method in it.</p>
+
+          <h2>A tour of the app</h2>
+          <figure>
+            <img src="../img/portfolio/01-universe.webp" alt="The Universe tab: summary statistics, the cumulative growth of ten simulated assets, and their correlation matrix" width="1600" height="1000" loading="lazy">
+            <figcaption>Synthetic data with a known truth. Ten assets simulated from a three-factor model, so every estimator and allocator can be scored against the right answer instead of a backtest.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/portfolio/02-frontier.webp" alt="The Frontier tab: the efficient frontier and capital market line, with the named reference portfolios plotted on it" width="1600" height="1000" loading="lazy">
+            <figcaption>The efficient frontier, with 53 points each certified optimal: the worst KKT residual across the whole curve is 8.42e-11. A banner flags that this frontier is mostly noise.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/portfolio/03-allocators.webp" alt="The Allocators tab: a heat table of each allocator’s weights across ten assets, above a table of portfolio statistics" width="1600" height="1000" loading="lazy">
+            <figcaption>Seven allocators on identical inputs. The best-looking portfolio isn’t the best one: scored against the true parameters, the methods that lean hardest on noisy estimates fall down the ranking.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/portfolio/04-covariance-lab.webp" alt="The Covariance Lab tab: the eigenvalue spectrum against the Marchenko-Pastur law, beside the correlation matrix before and after denoising" width="1600" height="1000" loading="lazy">
+            <figcaption>Eigenvalues against the Marchenko-Pastur law. Only one sits above the noise edge; the rest get flattened to their average, which denoises the correlations without moving any asset’s variance.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/portfolio/05-black-litterman.webp" alt="The Black-Litterman tab: the view editor, and the equilibrium prior beside the posterior expected returns" width="1600" height="1000" loading="lazy">
+            <figcaption>Black-Litterman. With no views the posterior is the equilibrium prior and the optimizer hands back the market portfolio; add views with confidence sliders and returns and weights move with them.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/portfolio/06-backtest.webp" alt="The Backtest tab: walk-forward settings, and the out-of-sample equity curves of five allocators net of costs" width="1600" height="1000" loading="lazy">
+            <figcaption>A strict walk-forward backtest: three years out of sample, 36 rebalances, and costs charged on turnover, so the optimizers that chase noise pay for their trading.</figcaption>
+          </figure>
           </div>
           <div class="article-links">
             <a class="btn btn-secondary" href="https://github.com/rpgr18/portfolio-optimizer">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
