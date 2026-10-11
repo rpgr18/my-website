@@ -305,13 +305,12 @@ img.avatar { object-fit: cover; }
   font: 400 var(--fs-xs)/1.45 var(--mono); letter-spacing: 0.01em; color: var(--green-text);
 }
 .avail .pulse::after { box-shadow: 0 0 8px rgb(var(--green-rgb) / 0.8); }
-/* Narrow phones, and the half-width intro panel on tablets: the two halves on their own lines,
-   centred, instead of wrapping mid-phrase */
+/* Narrow phones, and the half-width intro panel on tablets: a two-line status chip (dot beside a
+   title and a softer subtitle) instead of wrapping mid-phrase */
 @media (max-width: 26rem), (min-width: 50.625rem) and (max-width: 74.99rem) {
-  .avail { align-items: flex-start; border-radius: 14px; padding-block: 7px; }
-  .avail .pulse { margin-top: 1px; }
+  .avail { align-items: center; gap: 10px; padding: 8px 18px 8px 12px; border-radius: 16px; text-align: left; }
   .avail-sep { display: none; }
-  .avail-now { display: block; }
+  .avail-now { display: block; color: color-mix(in srgb, var(--green-text) 72%, transparent); }
 }
 .status { margin-top: 6px; font-size: 0.875rem; color: var(--text-2); text-wrap: balance; }
 .hero .avail { margin-top: 16px; }
