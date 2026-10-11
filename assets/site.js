@@ -519,6 +519,97 @@ function blackScholes(S, K, T, sigma, r) {
     update();
   }
 
+  // ---------- dsa-cli demo ----------
+  // Real output from the tool (its README and Valid Anagram's own hints), replayed: each command clears
+  // the screen, types itself, then prints line by line. Answers at an interactive prompt are typed too.
+  const cli = $('cli-demo');
+  if (cli) {
+    const screen = cli.querySelector('.cli-screen');
+    const buttons = [...cli.querySelectorAll('[data-cmd]')];
+    const dim = (t) => `<span class="dim">${t}</span>`;
+    const ok = (t) => `<span class="pass">${t}</span>`;
+    const bad = (t) => `<span class="fail">${t}</span>`;
+    const row = (n, pass, input, expected) => `  ${n}  ${pass ? ok('PASS') : bad('FAIL')}    ${input.padEnd(24)}${expected}`;
+    const SESSIONS = {
+      run: ['dsa run valid-anagram', [
+        '', '  running 6 case(s) for Valid Anagram', '',
+        dim('  #  status  input                   expected'),
+        row(1, true, '["racecar", "carrace"]', '—'),
+        row(2, false, '["jar", "jam"]', 'false'),
+        row(3, true, '["", ""]', '—'),
+        row(4, true, '["a", "ab"]', '—'),
+        row(5, false, '["aacc", "ccac"]', 'false'),
+        row(6, true, '["anagram", "nagaram"]', '—'),
+        '', `  4/6 tests passed  ${dim('·  target O(n) time, O(1) space')}`,
+      ]],
+      hint: ['dsa hint valid-anagram', [
+        '',
+        { box: `<b>hints  1/3</b><span class="n">1.</span> Two strings of different lengths can never be anagrams — check that first.<br><br>${dim('2 more hint(s): dsa hint valid-anagram -n 2')}` },
+      ]],
+      submit: ['dsa submit valid-anagram', [
+        '', `  ${ok('accepted ✓')}`, '',
+        `  complexity self-check   ${dim('(blank to skip)')}`,
+        { prompt: '  your time complexity: ', answer: 'O(n log n)' },
+        { prompt: '  your space complexity: ', answer: 'O(1)' },
+        `  time   ${bad('✗')} O(n log n)   ${dim('optimal is O(n)')}`,
+        `  space  ${ok('✓')} O(1)`,
+        '', `  how did that feel?  ${dim('again · hard · good · easy')}`,
+        { prompt: '  grade [good]: ', answer: 'hard' },
+        dim('  scheduled for review in 1 day   (ease 2.35, reps 1)'),
+      ]],
+    };
+    let run = 0;   // bumped on every click, so a replay in progress stops when another starts
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const line = (html, cls = 'ln') => {
+      const el = document.createElement('div');
+      el.className = cls;
+      el.innerHTML = html;
+      screen.append(el);
+      return el;
+    };
+    const type = async (el, prefix, text, id, speed) => {
+      for (let i = 1; i <= text.length; i++) {
+        if (id !== run) return false;
+        el.innerHTML = `${prefix}${text.slice(0, i)}<span class="caret"></span>`;
+        await wait(speed);
+      }
+      el.innerHTML = prefix + text;
+      return true;
+    };
+    const play = async (name, animate) => {
+      const id = ++run;
+      const [command, out] = SESSIONS[name];
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cmd === name)));
+      screen.replaceChildren();
+      const prompt = `${dim('$')} `;
+      if (!animate) {
+        line(prompt + command);
+        for (const l of out) {
+          if (typeof l === 'string') line(l);
+          else if (l.box) line(l.box, 'ln cli-box');
+          else line(l.prompt + l.answer);
+        }
+        return;
+      }
+      if (!(await type(line(''), prompt, command, id, 34))) return;
+      await wait(260);
+      for (const l of out) {
+        if (id !== run) return;
+        if (typeof l === 'string') line(l);
+        else if (l.box) line(l.box, 'ln cli-box');
+        else {
+          const el = line(`${l.prompt}<span class="caret"></span>`);
+          await wait(420);
+          if (!(await type(el, l.prompt, l.answer, id, 70))) return;
+          await wait(180);
+        }
+        await wait(55);
+      }
+    };
+    buttons.forEach((b) => b.addEventListener('click', () => play(b.dataset.cmd, !reduceMotion)));
+    play('run', false);   // the page opens on a finished run
+  }
+
   // ---------- Sidebar (home, wide screens) ----------
   // The hero and pricer stick beside the flow. They're usually taller than the window, so the sidebar
   // sticks with its bottom edge in view (a negative top) rather than its top, keeping the pricer reachable.

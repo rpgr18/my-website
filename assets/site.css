@@ -760,6 +760,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   .hero .status { --delay: 0.2s; }
   .hero .coords { --delay: 0.6s; }
   .side > .demo { --delay: 0.6s; }
+  .side > .demo--cli { --delay: 0.7s; }
   .hero .actions > * { --delay: 0.4s; }
   .hero .actions > .social { --delay: 0.5s; }
   .hero .actions > .btn-primary { --from-x: -16px; --from-y: 0px; }
@@ -829,6 +830,27 @@ body {
 .side > .demo { padding: 20px 18px 16px; }
 .side > .demo .demo-intro { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-line); }
 .side > .demo .panel { padding: 0; border: 0; background: none; }
+/* dsa-cli demo: the pricer's layout, with a terminal where the chart would be */
+.seg button { padding: 3px 12px; border: 0; border-radius: var(--radius-sm); background: none; font: 400 var(--fs-sm) var(--mono); color: var(--text-2); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--seg-on); box-shadow: var(--seg-on-shadow); color: var(--strong); }
+.seg button:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
+.cli-term {
+  container-type: inline-size; margin-top: 14px; padding: 12px 14px 14px; border: 1px solid #2a2a2e; border-radius: 12px;
+  background: #111113; box-shadow: 0 16px 32px -20px rgb(0 0 0 / 0.5);
+  --green: #34d399; --red: #f87171; --amber: #f3cf6b;   /* a terminal stays dark in both themes */
+}
+.cli-term .dots { display: flex; gap: 6px; margin-bottom: 10px; }
+.cli-term .dots i { width: 8px; height: 8px; border-radius: 50%; background: #3a3a3e; }
+.cli-screen { height: calc(13 * 1.6em); overflow: hidden; font: 400 clamp(9.5px, 2.75cqi, 11.5px)/1.6 var(--mono); color: #d6d6d8; }
+.cli-screen .ln { white-space: pre; min-height: 1.6em; }
+.cli-screen .dim { color: #7c7c82; }
+.cli-screen .pass { color: var(--green); }
+.cli-screen .fail { color: var(--red); }
+.cli-screen .caret { display: inline-block; width: 0.6em; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; background: #d6d6d8; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.cli-screen .cli-box { margin: 2px 0 0 2ch; padding: 8px 12px 9px; border: 1px solid rgb(243 207 107 / 0.55); border-radius: 8px; white-space: normal; line-height: 1.55; }
+.cli-box b { display: block; margin: -16px 0 4px -4px; width: fit-content; padding: 0 4px; background: #111113; font-weight: 400; color: var(--amber); }
+.cli-box .n { color: var(--amber); }
 
 /* About reads as a statement */
 .flow > .row:first-child .prose p { font-size: clamp(1.1875rem, 1.5vw, 1.375rem); line-height: 1.55; letter-spacing: -0.012em; color: var(--strong); text-wrap: pretty; }
@@ -877,6 +899,7 @@ body {
   .col { width: min(100% - 64px, 46rem); }
   .site-foot--home { width: min(100% - 64px, 46rem); padding: 0 4px 32px calc(var(--label) + var(--label-gap) + 4px); }
   .side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+  .side > .demo--cli { grid-column: 1 / -1; }
   .side .hero .actions { margin-bottom: 24px; }
   .side .hero .coords { margin-top: auto; }   /* the footer strip stays at the bottom of the stretched card */
   .flow { padding-top: 16px; }
@@ -924,7 +947,10 @@ body {
 .hero .mkt-readout { margin-top: 6px; }
 
 .hero .avatar-wrap { margin-top: 10px; }
-.hero h1 { font-size: 2rem; font-weight: 500; letter-spacing: -0.025em; }
+/* The name in Acki Preschool (Anke-Art), as outlines rather than a font file: the font asks not to be
+   redistributed, so only these letters ship. The real text is there for screen readers. Slightly askew: a joke. */
+.hero h1 { line-height: 1; rotate: -2deg; }
+.name-art { display: block; height: 2.8rem; width: auto; margin-block: 4px 10px; fill: currentColor; }
 
 .hero .actions { gap: 8px; margin-top: 22px; }
 .hero .social {
