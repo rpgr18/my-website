@@ -738,7 +738,7 @@ html:has(.sheet[open]) { overflow: hidden; }
    ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
   .js :where(
-    .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .socials, .hero .actions > *, .hero .coords, .side > .demo,
+    .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .actions > *, .hero .coords, .side > .demo,
     .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .site-foot--home,
     .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
     .work-list
@@ -746,7 +746,7 @@ html:has(.sheet[open]) { overflow: hidden; }
 
   /* If site.js never runs, show everything after a moment rather than leaving it hidden */
   .js:not(.motion) :where(
-    .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .socials, .hero .actions > *, .hero .coords, .side > .demo,
+    .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .actions > *, .hero .coords, .side > .demo,
     .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .site-foot--home,
     .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
     .work-list
@@ -761,7 +761,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   .hero .coords { --delay: 0.6s; }
   .side > .demo { --delay: 0.6s; }
   .hero .actions > * { --delay: 0.4s; }
-  .hero .socials { --delay: 0.5s; }
+  .hero .actions > .social { --delay: 0.5s; }
   .hero .actions > .btn-primary { --from-x: -16px; --from-y: 0px; }
   .hero .actions > .btn-secondary { --from-x: 16px; --from-y: 0px; }
   .flow > .row, #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .site-foot--home { --delay: 0.6s; }
@@ -825,7 +825,7 @@ body {
   box-shadow: 0 24px 60px -36px rgb(0 0 0 / 0.35), inset 0 1px 0 var(--glass-hi);
 }
 .side { gap: 16px; }
-.hero { padding: 24px 16px 22px; }
+.hero { --pad-x: 16px; --pad-t: 24px; --pad-b: 22px; padding: var(--pad-t) var(--pad-x) var(--pad-b); }
 .side > .demo { padding: 20px 18px 16px; }
 .side > .demo .demo-intro { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-line); }
 .side > .demo .panel { padding: 0; border: 0; background: none; }
@@ -877,7 +877,8 @@ body {
   .col { width: min(100% - 64px, 46rem); }
   .site-foot--home { width: min(100% - 64px, 46rem); padding: 0 4px 32px calc(var(--label) + var(--label-gap) + 4px); }
   .side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
-  .hero { justify-content: center; }
+  .side .hero .actions { margin-bottom: 24px; }
+  .side .hero .coords { margin-top: auto; }   /* the footer strip stays at the bottom of the stretched card */
   .flow { padding-top: 16px; }
 }
 /* Phones: the email fits on one line beside its button */
@@ -896,10 +897,54 @@ body {
   /* The panels stop clear of the pill while scrolling (site.js reads --side-clear), and end level
      with the contact card: both panes finish 24px above the footer row */
   .side { --side-clear: 80px; justify-content: flex-start; padding-block: 24px; }
-  .hero { padding: 28px 16px 26px; }
-  .hero .mkt { padding-inline: 4px; }   /* the three clocks on one line inside the panel */
+  .hero { --pad-t: 28px; --pad-b: 26px; }
   .hero h1 { font-size: 1.75rem; letter-spacing: -0.015em; }
   .side > .demo { padding: 22px 22px 18px; }
   .flow { padding: 48px 0 24px; }
   .site-foot--home { width: min(100% - 64px, 1360px); margin-top: 32px; padding: 20px 4px 24px; border-top: 1px solid var(--line); }
+}
+
+/* =========================================================
+   The intro card
+   Three zones: the market clocks as a segmented control (like the pricer's Call/Put) at the top;
+   the photo on a soft glow and a faint dot grid, the name, status and actions in the middle; and
+   the coordinates as a footer strip. Narrow cards show the clocks as city codes.
+   ========================================================= */
+.hero { container: hero / inline-size; overflow: hidden; }
+.hero .markets { flex-wrap: nowrap; gap: 2px; padding: 3px; border-radius: 999px; background: rgb(128 128 128 / 0.09); box-shadow: inset 0 0 0 1px var(--glass-line); font-size: var(--fs-xs); }
+.hero .mkt { padding: 4px 10px; border: 0; }
+.hero .mkt:hover, .hero .mkt.is-shown { border-color: transparent; background: rgb(128 128 128 / 0.12); color: var(--text); }
+.hero .mkt[aria-pressed="true"] { background: var(--seg-on); box-shadow: var(--seg-on-shadow); color: var(--strong); }
+.hero .mkt.is-local .mkt-city { color: inherit; }
+.mkt-code { display: none; }
+@container hero (max-width: 26rem) {
+  .hero .mkt-city { display: none; }
+  .hero .mkt-code { display: inline; }
+}
+.hero .mkt-readout { margin-top: 6px; }
+
+.hero .avatar-wrap { isolation: isolate; margin-top: 8px; }
+.hero .avatar-wrap::before {
+  content: ""; position: absolute; inset: -36px -110px; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(closest-side, rgb(var(--green-rgb) / 0.13), rgb(99 102 241 / 0.06) 55%, transparent),
+    radial-gradient(circle, color-mix(in srgb, var(--text) 14%, transparent) 1px, transparent 1.6px) center / 14px 14px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent);
+  mask-image: radial-gradient(closest-side, #000 35%, transparent);
+}
+.hero h1 { font-size: 2rem; font-weight: 500; letter-spacing: -0.025em; }
+
+.hero .actions { gap: 8px; margin-top: 22px; }
+.hero .social {
+  width: 40px; height: 40px; border: 1px solid var(--glass-line); border-radius: 50%;
+  background: rgb(128 128 128 / 0.06); color: var(--text-2);
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease), scale 0.2s var(--ease);
+}
+.hero .social svg { width: 18px; height: 18px; }
+.hero .social:hover { background: rgb(128 128 128 / 0.13); color: var(--strong); }
+.hero .social:active { scale: 0.94; }
+
+.hero .coords {
+  align-self: stretch; min-height: 0; margin: 24px calc(-1 * var(--pad-x)) calc(-1 * var(--pad-b)); padding: 14px var(--pad-x);
+  border-top: 1px solid var(--glass-line); background: rgb(128 128 128 / 0.05); font-size: var(--fs-xs); letter-spacing: 0.08em;
 }

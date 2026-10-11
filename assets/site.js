@@ -75,7 +75,7 @@ function blackScholes(S, K, T, sigma, r) {
   if (!reduceMotion && 'IntersectionObserver' in window) {
     document.documentElement.classList.add('motion');
     const appearing = document.querySelectorAll([
-      '.hero .clocks', '.hero .avatar-wrap', '.hero-title > *', '.hero .avail', '.hero .status', '.hero .socials', '.hero .actions > *', '.hero .coords', '.side > .demo',
+      '.hero .clocks', '.hero .avatar-wrap', '.hero-title > *', '.hero .avail', '.hero .status', '.hero .actions > *', '.hero .coords', '.side > .demo',
       '.flow > .row:not(#projects)', '#projects .row-label', '.cards > .card', '#projects .btn-block', '.flow > .contact', '.site-foot--home',
       '.article .back', '.article .cover', '.article h1', '.article .stars', '.article .facts', '.article .prose', '.article .article-links', '.article .more',
       '.work-list',

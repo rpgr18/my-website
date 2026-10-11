@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:ital,wght@0,400;0,500;1,400&display=swap">
-  <link rel="stylesheet" href="assets/site.css?v=74d16a62">
+  <link rel="stylesheet" href="assets/site.css?v=59312bf8">
   <script>
     // Runs before first paint: mark JS as available and apply a saved dark theme without a flash of white
     document.documentElement.classList.add('js');
@@ -69,9 +69,9 @@
           <!-- Market clocks: one exchange per region; hover or tap a city for its session (rules in site.js) -->
           <div class="clocks">
             <ul class="markets" aria-label="Market hours">
-              <li><button class="mkt is-local" type="button" data-market="us" aria-pressed="true"><span class="mkt-dot" aria-hidden="true"></span><svg class="pin" aria-hidden="true"><use href="#i-pin"/></svg><span class="mkt-city">New York</span> <span class="mkt-time">--:--</span></button></li>
-              <li><button class="mkt" type="button" data-market="emea" aria-pressed="false"><span class="mkt-dot" aria-hidden="true"></span><span class="mkt-city">Amsterdam</span> <span class="mkt-time">--:--</span></button></li>
-              <li><button class="mkt" type="button" data-market="apac" aria-pressed="false"><span class="mkt-dot" aria-hidden="true"></span><span class="mkt-city">Sydney</span> <span class="mkt-time">--:--</span></button></li>
+              <li><button class="mkt is-local" type="button" data-market="us" aria-pressed="true"><span class="mkt-dot" aria-hidden="true"></span><svg class="pin" aria-hidden="true"><use href="#i-pin"/></svg><span class="mkt-city">New York</span><span class="mkt-code" aria-hidden="true">NYC</span> <span class="mkt-time">--:--</span></button></li>
+              <li><button class="mkt" type="button" data-market="emea" aria-pressed="false"><span class="mkt-dot" aria-hidden="true"></span><span class="mkt-city">Amsterdam</span><span class="mkt-code" aria-hidden="true">AMS</span> <span class="mkt-time">--:--</span></button></li>
+              <li><button class="mkt" type="button" data-market="apac" aria-pressed="false"><span class="mkt-dot" aria-hidden="true"></span><span class="mkt-city">Sydney</span><span class="mkt-code" aria-hidden="true">SYD</span> <span class="mkt-time">--:--</span></button></li>
             </ul>
             <p class="mkt-readout" id="mkt-readout" aria-hidden="true">NYSE · 09:30–16:00 ET</p>
           </div>
@@ -95,9 +95,6 @@
           <div class="actions">
             <a class="btn btn-primary" href="mailto:greene.ry@northeastern.edu">Contact me <svg aria-hidden="true"><use href="#i-mail"/></svg></a>
             <button class="btn btn-secondary" type="button" data-copy="greene.ry@northeastern.edu">Copy email <svg aria-hidden="true"><use href="#i-copy"/></svg></button>
-          </div>
-
-          <div class="socials">
             <a class="social" href="https://github.com/rpgr18" aria-label="GitHub" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
             <a class="social" href="https://www.linkedin.com/in/rpgr18/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
           </div>
@@ -394,7 +391,6 @@
     <button class="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11m0-11-11 11" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button>
   </dialog>
 
-
-  <script src="assets/site.js?v=74d16a62"></script>
+  <script src="assets/site.js?v=59312bf8"></script>
 </body>
 </html>
