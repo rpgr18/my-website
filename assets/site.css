@@ -583,6 +583,8 @@ html:not(.js) .demo { display: none; }
 }
 .wl-group::after { content: ""; flex: 1; height: 1px; background: var(--glass-line); }
 .wl-groups > .wl-group:first-child { margin-top: 10px; }
+/* In the sidebar the title needs no rule of its own: the first group's hairline does that job */
+.work-list .wl-title { margin: 0 0 6px; padding: 14px 12px 4px; border-bottom: 0; font-size: 1.0625rem; letter-spacing: -0.015em; }
 /* Each project: its name, and a few words under it */
 .work-list .wl-item { display: grid; gap: 1px; color: var(--text); }
 .work-list .wl-sub { font-size: var(--fs-xs); line-height: 1.4; color: var(--muted); transition: color 0.2s var(--ease); }
