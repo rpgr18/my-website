@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ryan Greene</title>
+  <meta name="description" content="Ryan Greene is a Northeastern computer science student and trading operations engineering intern at Flow Traders who builds software for markets.">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#232323">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23232323'/%3E%3Cpath d='M7 21l5-6 4 3 9-9' fill='none' stroke='%23ededed' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:ital,wght@0,400;0,500;1,400&display=swap">
+  <link rel="stylesheet" href="assets/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body id="top" data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icons, defined once per page -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.4 12 4l8 6.4V19a1 1 0 0 1-1 1h-4.25v-5.5h-5.5V20H5a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="7" height="7" rx="1.75"/><rect x="13" y="4" width="7" height="7" rx="1.75"/><rect x="4" y="13" width="7" height="7" rx="1.75"/><rect x="13" y="13" width="7" height="7" rx="1.75"/></g></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5h16"/><path d="m4.5 15.5 4.5-5 3.5 3 7-8"/></g></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3.5" y="7.5" width="17" height="12" rx="2.5"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 12.5h17"/></g></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="m12 4 8 4.5-8 4.5-8-4.5Z"/><path d="m4 12.5 8 4.5 8-4.5"/><path d="m4 16.5 8 4.5 8-4.5"/></g></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7.5 7.5 5.5 7.5-5.5"/></g></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></g></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.25" fill="currentColor"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m5 7 5 5-5 5M12.5 17H19" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-braces" viewBox="0 0 24 24"><path d="M8.5 4.5C6.5 4.5 6 5.5 6 7v2.5c0 1.1-.7 2-2 2.5 1.3.5 2 1.4 2 2.5V17c0 1.5.5 2.5 2.5 2.5M15.5 4.5c2 0 2.5 1 2.5 2.5v2.5c0 1.1.7 2 2 2.5-1.3.5-2 1.4-2 2.5V17c0 1.5-.5 2.5-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-candles" viewBox="0 0 24 24"><path d="M8 4v3M8 15v4M16 6v4M16 17v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="5.5" y="7" width="5" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13.5" y="10" width="5" height="7" rx="1" fill="currentColor"/></symbol>
+      <symbol id="i-pie" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.25" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9h-9Z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15Z"/></g></symbol>
+      <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 9c2.4-3 4.3-3 6.5 0s4.1 3 6.5 0 4.3-3 6.5 0M2.5 15.5c2.4-3 4.3-3 6.5 0s4.1 3 6.5 0 4.3-3 6.5 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Nav: number keys 1–6 jump to each section -->
+  <nav class="nav" aria-label="Sections">
+    <ul>
+      <li><a class="nav-link" href="#top" data-key="1" aria-label="Home"><svg aria-hidden="true"><use href="#i-home"/></svg><span class="tip" aria-hidden="true">Home <kbd>1</kbd></span></a></li>
+      <li><a class="nav-link" href="#pricer" data-key="2" aria-label="Option pricer"><svg aria-hidden="true"><use href="#i-chart"/></svg><span class="tip" aria-hidden="true">Pricer <kbd>2</kbd></span></a></li>
+      <li><a class="nav-link" href="#experience" data-key="3" aria-label="Experience"><svg aria-hidden="true"><use href="#i-briefcase"/></svg><span class="tip" aria-hidden="true">Experience <kbd>3</kbd></span></a></li>
+      <li><a class="nav-link" href="#projects" data-key="4" aria-label="Projects"><svg aria-hidden="true"><use href="#i-grid"/></svg><span class="tip" aria-hidden="true">Projects <kbd>4</kbd></span></a></li>
+      <li><a class="nav-link" href="#stack" data-key="5" aria-label="Stack"><svg aria-hidden="true"><use href="#i-layers"/></svg><span class="tip" aria-hidden="true">Stack <kbd>5</kbd></span></a></li>
+      <li><a class="nav-link" href="#contact" data-key="6" aria-label="Contact"><svg aria-hidden="true"><use href="#i-mail"/></svg><span class="tip" aria-hidden="true">Contact <kbd>6</kbd></span></a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <main class="col" id="main" tabindex="-1">
+
+      <!-- The hero and the pricer demo. On wide screens this is a sticky sidebar beside the flow. -->
+      <div class="side">
+        <!-- ===== Hero ===== -->
+        <header class="hero">
+          <!-- Market clocks: one exchange per region; hover or tap a city for its session (rules in site.js) -->
+          <div class="clocks">
+            <ul class="markets" aria-label="Market hours">
+              <li><button class="mkt is-local" type="button" data-market="us" aria-pressed="true"><span class="mkt-dot" aria-hidden="true"></span><svg class="pin" aria-hidden="true"><use href="#i-pin"/></svg><span class="mkt-city">New York</span> <span class="mkt-time">--:--</span></button></li>
+              <li><button class="mkt" type="button" data-market="emea" aria-pressed="false"><span class="mkt-dot" aria-hidden="true"></span><span class="mkt-city">Amsterdam</span> <span class="mkt-time">--:--</span></button></li>
+              <li><button class="mkt" type="button" data-market="apac" aria-pressed="false"><span class="mkt-dot" aria-hidden="true"></span><span class="mkt-city">Sydney</span> <span class="mkt-time">--:--</span></button></li>
+            </ul>
+            <p class="mkt-readout" id="mkt-readout" aria-hidden="true">NYSE · 09:30–16:00 ET</p>
+          </div>
+          <!-- Activity rings: each market's trading session on a 24-hour Manhattan clock (midnight at the top).
+               Outer NYSE, middle Euronext, inner ASX; green while open; the white tick is now. Drawn by site.js. -->
+          <div class="avatar-wrap">
+            <svg class="rings" viewBox="0 0 144 144" aria-hidden="true">
+              <g class="ring" data-ring="us" data-r="66"><circle class="ring-track" cx="72" cy="72" r="66"/><path class="ring-arc" pathLength="1"/></g>
+              <g class="ring" data-ring="emea" data-r="61"><circle class="ring-track" cx="72" cy="72" r="61"/><path class="ring-arc" pathLength="1"/></g>
+              <g class="ring" data-ring="apac" data-r="56"><circle class="ring-track" cx="72" cy="72" r="56"/><path class="ring-arc" pathLength="1"/></g>
+              <line class="ring-now" x1="72" y1="21" x2="72" y2="2"/>
+            </svg>
+            <img class="avatar" src="img/avatar.jpg" alt="Ryan Greene" width="120" height="120">
+          </div>
+          <div class="hero-title">
+            <h1>Ryan Greene</h1>
+            <p class="role">Trading Operations Engineer Intern</p>
+          </div>
+          <p class="avail"><span class="pulse" aria-hidden="true"></span><span>Open to opportunities<span class="avail-sep" aria-hidden="true"> · </span><span class="sr-only">. </span><span class="avail-now">Currently at Flow Traders</span></span></p>
+          <p class="status">CS &amp; Math at Northeastern, graduating Dec 2027</p>
+
+          <div class="socials">
+            <a class="social" href="https://github.com/rpgr18" aria-label="GitHub"><svg aria-hidden="true"><use href="#i-github"/></svg><span class="tip" aria-hidden="true">GitHub</span></a>
+            <a class="social" href="https://www.linkedin.com/in/rpgr18/" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg><span class="tip" aria-hidden="true">LinkedIn</span></a>
+            <a class="social" href="mailto:greene.ry@northeastern.edu" aria-label="Email"><svg aria-hidden="true"><use href="#i-mail"/></svg><span class="tip" aria-hidden="true">Email</span></a>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="mailto:greene.ry@northeastern.edu">Contact me <svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+            <span class="or">or</span>
+            <button class="btn btn-secondary" type="button" data-copy="greene.ry@northeastern.edu">Copy email <svg aria-hidden="true"><use href="#i-copy"/></svg></button>
+          </div>
+
+          <p class="coords" id="coords">Manhattan, NY · 40.7069° N, 74.0113° W</p>
+        </header>
+
+        <!-- ===== Pricer demo, right under the hero ===== -->
+        <section class="demo" id="pricer" aria-label="Option pricer">
+          <p class="demo-intro">Lately I’ve been most interested in markets and the systems that run them. Here’s a live piece of <a href="work/options-pricing.html">a recent project</a>: an options pricer you can play with.</p>
+          <div class="panel">
+            <div class="pricer-top">
+              <p class="kicker">Black-Scholes · European</p>
+              <fieldset class="seg">
+                <legend class="sr-only">Option type</legend>
+                <input type="radio" name="kind" id="kind-call" value="call" checked><label for="kind-call">Call</label>
+                <input type="radio" name="kind" id="kind-put" value="put"><label for="kind-put">Put</label>
+              </fieldset>
+            </div>
+            <div class="quote">
+              <p class="quote-label" id="quote-label">Call value</p>
+              <output class="price" id="q-price" aria-labelledby="quote-label">10.4506</output>
+              <span class="change" id="q-change">per share</span>
+            </div>
+
+            <svg class="curve" viewBox="0 0 320 120" role="img" aria-label="Option value today against spot price, with the payoff at expiry">
+              <defs>
+                <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ededed" stop-opacity="0.14"/>
+                  <stop offset="1" stop-color="#ededed" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <line class="axis" x1="0" y1="100" x2="320" y2="100"/>
+              <line class="strike" id="c-strike" x1="160" y1="6" x2="160" y2="100"/>
+              <path id="c-area" fill="url(#area-fill)"/>
+              <path class="payoff" id="c-payoff"/>
+              <path class="value" id="c-value"/>
+              <line class="spot" id="c-spot" x1="160" y1="60" x2="160" y2="100"/>
+              <circle class="dot" id="c-dot" cx="160" cy="60" r="4"/>
+              <text x="0" y="114">50</text>
+              <text x="320" y="114" text-anchor="end">150</text>
+              <text id="c-strike-label" x="160" y="114" text-anchor="middle">K</text>
+            </svg>
+            <p class="legend" aria-hidden="true"><span>Value today</span><span>Payoff at expiry</span></p>
+
+            <div class="sliders">
+              <div class="slider"><label for="s-spot">Spot</label><input type="range" id="s-spot" min="50" max="150" step="0.5" value="100"><output for="s-spot" id="v-spot">100.00</output></div>
+              <div class="slider"><label for="s-strike">Strike</label><input type="range" id="s-strike" min="50" max="150" step="1" value="100"><output for="s-strike" id="v-strike">100.00</output></div>
+              <div class="slider"><label for="s-days">Days</label><input type="range" id="s-days" min="1" max="730" step="1" value="365"><output for="s-days" id="v-days">365d</output></div>
+              <div class="slider"><label for="s-vol">Volatility</label><input type="range" id="s-vol" min="1" max="100" step="0.5" value="20"><output for="s-vol" id="v-vol">20.0%</output></div>
+              <div class="slider"><label for="s-rate">Rate</label><input type="range" id="s-rate" min="-2" max="10" step="0.25" value="5"><output for="s-rate" id="v-rate">5.00%</output></div>
+            </div>
+
+            <dl class="greeks">
+              <div><dt>Delta</dt><dd id="g-delta">0.6368</dd></div>
+              <div><dt>Gamma</dt><dd id="g-gamma">0.0188</dd></div>
+              <div><dt>Vega</dt><dd id="g-vega">0.3752</dd></div>
+              <div><dt>Theta/day</dt><dd id="g-theta">−0.0176</dd></div>
+              <div><dt>Rho</dt><dd id="g-rho">0.5323</dd></div>
+            </dl>
+            <p class="note">No dividends. Vega per vol point, rho per 1% rate. Same normal CDF (Hart, 1968) as the <a href="work/options-pricing.html">options workbench</a>. <span id="parity"></span></p>
+            <p class="sr-only" role="status" id="pricer-status"></p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Everything else. On wide screens this scrolls beside the sidebar. -->
+      <div class="flow">
+
+      <!-- ===== About ===== -->
+      <section class="row" aria-labelledby="l-about">
+        <h2 class="row-label" id="l-about">About</h2>
+        <div class="prose">
+          <p>Welcome! My name is Ryan and I am currently a fourth-year Computer Science and Mathematics student learning to build stuff @ Northeastern University. This site is a showcase of some of the things I’ve been working on.</p>
+        </div>
+      </section>
+
+      <!-- ===== Experience ===== -->
+      <section class="row" id="experience" aria-labelledby="l-experience">
+        <h2 class="row-label" id="l-experience">Experience</h2>
+        <ol class="xp-list">
+          <li class="xp is-now">
+            <div class="xp-rail" aria-hidden="true"><img class="logo" src="img/logos/flow-traders.png" alt="" width="40" height="40"></div>
+            <div class="xp-body">
+              <div class="xp-top">
+                <div>
+                  <h3 class="xp-org"><a href="https://www.flowtraders.com">Flow Traders US LLC</a> <span class="tag tag--now">Current</span></h3>
+                  <p class="xp-role">Trading Operations Engineer Intern</p>
+                </div>
+                <p class="xp-when"><span class="xp-date">Jul 2026 – Present</span><span class="xp-place">Manhattan, NY</span></p>
+              </div>
+              <p class="xp-sum">Building automation and monitoring for trading infrastructure across the US, Europe and Asia.</p>
+              <ul class="xp-tech" aria-label="Technologies"><li>Python</li><li>Linux</li><li>Airflow</li><li>Ansible</li><li>AWX</li><li>Prometheus</li><li>Mimir</li><li>Grafana</li><li>Zabbix</li><li>PagerDuty</li><li>Akeyless</li></ul>
+            </div>
+          </li>
+          <li class="xp">
+            <div class="xp-rail" aria-hidden="true"><img class="logo" src="img/logos/flexcar.png" alt="" width="40" height="40"></div>
+            <div class="xp-body">
+              <div class="xp-top">
+                <div>
+                  <h3 class="xp-org"><a href="https://www.flexcar.com">Flexcar Inc.</a></h3>
+                  <p class="xp-role">Software Engineer Intern</p>
+                </div>
+                <p class="xp-when"><span class="xp-date">Jan 2025 – Aug 2025</span><span class="xp-place">Boston, MA</span></p>
+              </div>
+              <p class="xp-sum">Built payments and backend features for a car-subscription app.</p>
+              <ul class="xp-tech" aria-label="Technologies"><li>Ruby on Rails</li><li>React</li><li>Stripe</li><li>Node.js</li></ul>
+            </div>
+          </li>
+          <li class="xp">
+            <div class="xp-rail" aria-hidden="true"><img class="logo" src="img/logos/khoury.png" alt="" width="40" height="40"></div>
+            <div class="xp-body">
+              <div class="xp-top">
+                <div>
+                  <h3 class="xp-org"><a href="https://www.khoury.northeastern.edu">Khoury College of Computer Sciences</a></h3>
+                  <p class="xp-role">Teaching Assistant, Object-Oriented Design</p>
+                </div>
+                <p class="xp-when"><span class="xp-date">Aug 2024 – May 2026</span><span class="xp-place">Boston, MA</span></p>
+              </div>
+              <p class="xp-sum">Ran labs and office hours for Northeastern’s object-oriented design course.</p>
+              <ul class="xp-tech" aria-label="Technologies"><li>Java</li><li>JUnit</li><li>Checkstyle</li></ul>
+            </div>
+          </li>
+          <li class="xp">
+            <div class="xp-rail" aria-hidden="true"><img class="logo" src="img/logos/general-dynamics.png" alt="" width="40" height="40"></div>
+            <div class="xp-body">
+              <div class="xp-top">
+                <div>
+                  <h3 class="xp-org"><a href="https://www.gdeb.com">General Dynamics Corp.</a></h3>
+                  <p class="xp-role">Systems Engineering Intern</p>
+                </div>
+                <p class="xp-when"><span class="xp-date">May 2024 – Sep 2024</span><span class="xp-place">Groton, CT</span></p>
+              </div>
+              <p class="xp-sum">Built data and auditing tools for defense systems engineering.</p>
+              <ul class="xp-tech" aria-label="Technologies"><li>Python</li><li>scikit-learn</li><li>MongoDB</li></ul>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ===== Education ===== -->
+      <section class="row" aria-labelledby="l-education">
+        <h2 class="row-label" id="l-education">Education</h2>
+        <ol class="xp-list">
+          <li class="xp">
+            <div class="xp-rail" aria-hidden="true"><img class="logo" src="img/logos/northeastern.png" alt="" width="40" height="40"></div>
+            <div class="xp-body">
+              <div class="xp-top">
+                <div>
+                  <h3 class="xp-org">Northeastern University</h3>
+                  <p class="xp-role">B.S. Computer Science, Minor in Mathematics</p>
+                </div>
+                <p class="xp-when"><span class="xp-date">Expected Dec 2027</span><span class="xp-place">Boston, MA</span></p>
+              </div>
+              <p class="xp-sum">GPA 3.74 · Dean’s List · Dean’s Scholarship</p>
+              <details class="xp-more">
+                <summary>details</summary>
+                <ul>
+                  <li><strong>Coursework:</strong> Computer Systems, Algorithms &amp; Data, Programming in C++, Object-Oriented Design, Computer Architecture, Software Engineering, Cybersecurity, Machine Learning &amp; Data Mining, Discrete Structures, Theory of Computation.</li>
+                  <li><strong>Activities:</strong> Sailing Team, NU Entrepreneurs Club, Computer Science Mentoring Organization.</li>
+                </ul>
+              </details>
+            </div>
+          </li>
+          <li class="xp">
+            <div class="xp-rail" aria-hidden="true"><img class="logo" src="img/logos/sydney.png" alt="" width="40" height="40"></div>
+            <div class="xp-body">
+              <div class="xp-top">
+                <div>
+                  <h3 class="xp-org">University of Sydney</h3>
+                  <p class="xp-role">Exchange semester</p>
+                </div>
+                <p class="xp-when"><span class="xp-date">Jul 2025 – Dec 2025</span><span class="xp-place">Sydney, Australia</span></p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ===== Projects ===== -->
+      <section class="row row--offset" id="projects" aria-labelledby="l-projects">
+        <h2 class="row-label" id="l-projects">Projects</h2>
+        <div class="cards">
+          <a class="card" href="work/options-pricing.html">
+            <div class="card-head">
+              <span class="tile" style="--c:#3b4fd1" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>
+              <span class="card-meta">Python · JS</span>
+              <svg class="card-go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </div>
+            <h3 class="card-title">Options Pricing &amp; Greeks Workbench</h3>
+            <p class="card-text">Seven pricing engines side by side, with Greeks in trading units and implied vol from real option chains.</p>
+            <p class="card-stats">7 engines · 15 Greeks · 54 tests</p>
+          </a>
+          <a class="card" href="work/portfolio-optimizer.html">
+            <div class="card-head">
+              <span class="tile" style="--c:#1d7a6b" aria-hidden="true"><svg><use href="#i-pie"/></svg></span>
+              <span class="card-meta">Python · JS</span>
+              <svg class="card-go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </div>
+            <h3 class="card-title">Portfolio Construction Workbench</h3>
+            <p class="card-text">Seven allocators and six covariance estimators on the same inputs, every answer checked by its KKT residual.</p>
+            <p class="card-stats">7 allocators · 72 tests</p>
+          </a>
+          <a class="card" href="work/marine-seismic.html">
+            <div class="card-head">
+              <span class="tile" style="--c:#8a5a2b" aria-hidden="true"><svg><use href="#i-wave"/></svg></span>
+              <span class="card-meta">PyTorch · Team</span>
+              <svg class="card-go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </div>
+            <h3 class="card-title">Marine Seismic Deep Learning</h3>
+            <p class="card-text">Fault and horizon detection for marine seismic surveys. My CNN traces the seafloor to within 5.6&nbsp;m on average.</p>
+            <p class="card-stats">5.6&nbsp;m MAE · 95.4% within ±15&nbsp;m</p>
+          </a>
+          <a class="card" href="work/dsa-cli.html">
+            <div class="card-head">
+              <span class="tile" style="--c:#9a5b25" aria-hidden="true"><svg><use href="#i-terminal"/></svg></span>
+              <span class="card-meta">Python · MIT</span>
+              <svg class="card-go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </div>
+            <h3 class="card-title">dsa-cli</h3>
+            <p class="card-text">The NeetCode 150 in your terminal, with graded Big-O and spaced repetition for the problems you found hard.</p>
+            <p class="card-stats">150 problems · 968 test cases</p>
+          </a>
+          <a class="card" href="work/surfpy-api.html">
+            <div class="card-head">
+              <span class="tile" style="--c:#1f6fa3" aria-hidden="true"><svg><use href="#i-braces"/></svg></span>
+              <span class="card-meta">Python · Flask</span>
+              <svg class="card-go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </div>
+            <h3 class="card-title">SurfPy API</h3>
+            <p class="card-text">A Flask REST API for surf: wave-model forecasts, the nearest NOAA buoys and tide predictions for any coordinate.</p>
+            <p class="card-stats">3 NOAA sources · 6 endpoints</p>
+          </a>
+          <a class="card" href="work/papertrade-sim.html">
+            <div class="card-head">
+              <span class="tile" style="--c:#7a4a9e" aria-hidden="true"><svg><use href="#i-candles"/></svg></span>
+              <span class="card-meta">Java · MIT</span>
+              <svg class="card-go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </div>
+            <h3 class="card-title">Paper-Trading Portfolio Simulator</h3>
+            <p class="card-text">Build portfolios on real daily prices, then value, rebalance and plot them from a text menu or a Swing GUI.</p>
+            <p class="card-stats">273 tests · CLI + GUI</p>
+          </a>
+        </div>
+        <a class="btn btn-secondary btn-block" href="https://github.com/rpgr18?tab=repositories">View all on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </section>
+
+      <!-- ===== Stack ===== -->
+      <section class="row row--offset" id="stack" aria-labelledby="l-stack">
+        <h2 class="row-label" id="l-stack">Stack</h2>
+        <dl class="list">
+          <div class="list-row skill-row"><dt>Languages</dt><dd>Python, SQL, C/C++, Java, JavaScript, Ruby</dd></div>
+          <div class="list-row skill-row"><dt>Monitoring &amp; on-call</dt><dd>Prometheus, Mimir, Grafana/PromQL, Zabbix, PagerDuty, Jira</dd></div>
+          <div class="list-row skill-row"><dt>Automation &amp; CI/CD</dt><dd>Airflow, Ansible/AWX, Terraform, ArgoCD, Bamboo, GitHub Actions, Akeyless</dd></div>
+          <div class="list-row skill-row"><dt>Systems</dt><dd>Linux (systemd, cron, SSH), Docker, Kubernetes, TCP/IP, multicast, GCP</dd></div>
+          <div class="list-row skill-row"><dt>Data</dt><dd>Kafka, MariaDB, MongoDB, Redis, AWS S3/Redshift</dd></div>
+          <div class="list-row skill-row"><dt>Quant &amp; ML</dt><dd>NumPy, PyTorch, scikit-learn, option pricing, portfolio optimization</dd></div>
+          <div class="list-row skill-row"><dt>Web</dt><dd>React, Ruby on Rails, Flask, Stripe</dd></div>
+        </dl>
+      </section>
+
+      <!-- ===== Contact ===== -->
+      <section class="contact" id="contact" aria-labelledby="l-contact">
+        <div class="contact-head">
+          <svg aria-hidden="true"><use href="#i-mail"/></svg>
+          <h2 id="l-contact">Get in touch</h2>
+          <p>Email is the fastest way to reach me. Happy to talk trading tech, fintech, or anything on this page.</p>
+        </div>
+        <div class="field">
+          <span class="field-value">greene.ry@northeastern.edu</span>
+          <button class="btn btn-secondary" type="button" data-copy="greene.ry@northeastern.edu">Copy <svg aria-hidden="true"><use href="#i-copy"/></svg></button>
+        </div>
+        <p class="contact-foot">or <a href="mailto:greene.ry@northeastern.edu">open your mail app</a></p>
+      </section>
+
+      <footer class="site-foot">
+        <p>© 2026 Ryan Greene</p>
+        <nav aria-label="Elsewhere">
+          <a href="https://github.com/rpgr18">GitHub</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/rpgr18/">LinkedIn</a>
+        </nav>
+      </footer>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
