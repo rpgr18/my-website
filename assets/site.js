@@ -69,50 +69,6 @@ function blackScholes(S, K, T, sigma, r) {
   document.querySelectorAll('.theme-toggle').forEach((b) => b.addEventListener('click', toggleTheme));
   syncTheme();
 
-  // ---------- Photo: opens "Some other things", a photo carousel, with a camera tag on hover ----------
-  // A native <dialog>, so Esc, focus trapping and focus return come for free. Slides scroll-snap, so
-  // swiping works on touch; the side buttons and arrow keys step through them. Clicking outside closes it.
-  const photoBtn = document.querySelector('.avatar-btn');
-  const quests = $('quests');
-  if (photoBtn && quests && typeof quests.showModal === 'function') {
-    const track = quests.querySelector('.quests-track');
-    const slides = [...quests.querySelectorAll('.quest')];
-    const dots = [...quests.querySelectorAll('.quests-dots i')];
-    const prev = quests.querySelector('.quests-prev');
-    const next = quests.querySelector('.quests-next');
-    const current = () => Math.round(track.scrollLeft / track.clientWidth);
-    const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * track.clientWidth });
-    const sync = () => {
-      const i = current();
-      dots.forEach((d, j) => d.classList.toggle('is-on', j === i));
-      prev.disabled = i === 0;
-      next.disabled = i === slides.length - 1;
-    };
-    track.addEventListener('scroll', sync, { passive: true });
-    prev.addEventListener('click', () => go(current() - 1));
-    next.addEventListener('click', () => go(current() + 1));
-    quests.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
-    });
-    photoBtn.addEventListener('click', () => {
-      document.querySelector('.peek')?.classList.remove('is-on');
-      quests.showModal();
-      track.scrollTo({ left: 0, behavior: 'instant' });   // always open on the first photo
-      sync();
-    });
-    quests.addEventListener('click', (e) => {
-      if (e.target === quests || e.target.closest('.quests-close')) quests.close();
-    });
-  }
-  const peek = document.querySelector('.peek');
-  if (photoBtn && peek && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const place = (e) => { peek.style.transform = `translate(${e.clientX + 14}px, ${e.clientY + 16}px)`; };
-    photoBtn.addEventListener('pointerenter', (e) => { place(e); peek.classList.add('is-on'); });
-    photoBtn.addEventListener('pointermove', place);
-    photoBtn.addEventListener('pointerleave', () => peek.classList.remove('is-on'));
-  }
-
   // ---------- Appear animations ----------
   // site.css hides these until .is-in is added. Things visible at load use the CSS stagger;
   // anything revealed later by scrolling plays straight away, staggered within its batch.
