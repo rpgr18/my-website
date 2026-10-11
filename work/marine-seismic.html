@@ -77,36 +77,106 @@
       <main class="article" id="main" tabindex="-1">
         <a class="back" href="../index.html#projects"><svg aria-hidden="true"><use href="#i-arrow"/></svg>Projects</a>
         <article>
-          <img class="visual cover" src="../img/marine-seismic.webp" alt="A seismic section with the detector’s fault boxes, each labelled with its confidence score" width="1600" height="882">
+          <img class="visual cover cover--framed" src="../img/seismic/cover.webp" alt="Cover for Marine Seismic Deep Learning: “Faults and horizons, traced by AI.” Fault F1 0.60, about 100× faster than classical, 5.6 m horizon error and 95.4% within ±15 m, beside a seismic section with CNN-detected faults boxed" width="2000" height="1045">
           <h1>Marine Seismic Deep Learning</h1>
           <dl class="facts">
-            <div><dt>Type</dt><dd>Team project, 3 people</dd></div>
-            <div><dt>Team</dt><dd>João Luiz Godoy, Lenny Lukach, Ryan Greene</dd></div>
-            <div><dt>My part</dt><dd>Horizon detection</dd></div>
-            <div><dt>Stack</dt><dd>Python · PyTorch · TorchVision · segyio · SciPy</dd></div>
-            <div><dt>Outcome</dt><dd>The seafloor horizon traced with a 5.6 m mean absolute error, 95.4% of predictions within ±15 m of expert picks.</dd></div>
+            <div><dt>Type</dt><dd>Team research project, CS 4100 Artificial Intelligence, Northeastern</dd></div>
+            <div><dt>Contributors</dt><dd>João Luiz Godoy, Lenny Lukach, Ryan Greene</dd></div>
+            <div><dt>Timeline</dt><dd>Spring 2026</dd></div>
+            <div><dt>Stack</dt><dd>Python · PyTorch · TorchVision · segyio · ObsPy · SciPy</dd></div>
+            <div><dt>Outcome</dt><dd>Faults detected at F1 0.60, about 100× faster than the classical pipeline; the seafloor horizon traced to a 5.6 m mean absolute error, 95.4% within ±15 m.</dd></div>
           </dl>
           <div class="prose">
-          <p>A marine seismic survey images the rock under the seafloor by recording how acoustic pulses reflect off layer boundaries. Interpreting it means tracing horizons (layer boundaries) and faults (where layers break), and it’s usually done by hand by trained geophysicists. Our team built an end-to-end system that automates both.</p>
+          <p>An end-to-end deep-learning system for interpreting marine seismic surveys, automating two of the most time-consuming tasks in offshore geophysics: fault detection and horizon tracing.</p>
 
-          <h2>Horizon detection (my part)</h2>
-          <p>I built the horizon tool from scratch in PyTorch: a custom 2D CNN trained on the Netherlands F3 Block, a 3D volume of more than 600,000 traces with expert-picked seafloor horizons. It uses asymmetric pooling, compressing depth while keeping trace width, to match how a geophysicist scans a section by eye. It reaches a 5.6 m mean absolute error, with 95.4% of predictions within ±15 m of the expert picks. I also wrote its label generation, result visualization and a noise-robustness study.</p>
+          <h2>Background</h2>
+          <p>A marine seismic survey images the geology beneath the ocean floor. A vessel emits controlled acoustic signals that travel through the water and the rock below; where material properties such as density and elasticity change, part of the signal reflects back and is recorded by towed sensors. Surveys are collected in 2D (a single plane), 3D (a full volume) or 4D (3D repeated over time).</p>
+          <p>The data drives offshore exploration, CO₂ sequestration planning and geohazard assessment, and it is large: hundreds of thousands of traces per line, stored as SEG-Y. Interpreting it means identifying horizons (layer boundaries) and faults (fractures where layers break and shift), work usually done by hand by trained geophysicists. It’s slow, expensive and subjective.</p>
 
-          <h2>Fault detection (the team’s pipeline)</h2>
-          <p>The fault side is a three-stage pipeline. A classical detector fuses four fault-sensitive attributes into a probability map and traces faults with simulated annealing. Its output becomes COCO bounding boxes across dozens of survey lines, which removes manual labeling. A Faster R-CNN with a ResNet-50 and FPN backbone is trained on those labels and replicates the classical detector about 100× faster: 40 seconds for 203 images, against one to two hours per image. EigenCAM heatmaps show which regions it attends to.</p>
+          <h2>Fault detection</h2>
+          <p>Faults are found on 2D NAMSS survey lines by a three-stage pipeline that pairs a classical detector with a deep-learning surrogate.</p>
+          <ul>
+            <li><strong>Classical detector.</strong> Four fault-sensitive attributes are extracted from each section, NCC coherence (weighted 35%), horizontal gradient (25%), structure-tensor eigenvalues (25%) and dip variance (15%), then fused into a probability map. Simulated annealing traces fault paths through it.</li>
+            <li><strong>Automated labeling.</strong> The classical detector runs across dozens of NAMSS lines, and its fault paths become COCO-format bounding boxes: 168 training images with 1,668 fault annotations, and no manual labeling.</li>
+            <li><strong>CNN surrogate.</strong> A Faster R-CNN with a ResNet-50 and Feature Pyramid Network backbone and custom anchor ratios for fault geometry, trained on those labels for 90 epochs (about nine hours on a rented RTX 5090). It reproduces the classical output about 100× faster, 40 seconds for 203 images against one to two hours per image, at an F1 of 0.60 (56.6% precision, 62.5% recall).</li>
+            <li><strong>Explainability.</strong> EigenCAM heatmaps over the trained detector show which regions it attends to, confirming it relies on geologically meaningful features rather than memorized patterns.</li>
+          </ul>
+
+          <h2>Horizon detection</h2>
+          <p>A custom 2D CNN, written from scratch in PyTorch, traces the seafloor horizon through the Netherlands F3 Block, a 3D volume of more than 600,000 traces with expert-picked horizons. Asymmetric pooling compresses depth while preserving trace width, matching how a geophysicist scans a section by eye. It reaches a 5.6 m mean absolute error, with 95.4% of predictions within ±15 m of the expert picks, and a noise-robustness study measures how that error grows as noise is added.</p>
+
+          <h2>Results</h2>
           <div class="table-wrap" tabindex="0" role="region" aria-label="Results by task">
             <table class="data-table">
-              <thead><tr><th>Task</th><th>Method</th><th>Result</th></tr></thead>
+              <thead><tr><th>Task</th><th>Method</th><th>Key result</th></tr></thead>
               <tbody>
-                <tr><td>Faults, classical</td><td>Attribute fusion + simulated annealing</td><td>Automated across dozens of lines</td></tr>
-                <tr><td>Faults, CNN</td><td>Faster R-CNN, ResNet-50 + FPN</td><td>F1 0.60, ~100× faster</td></tr>
-                <tr class="hl"><td>Horizons</td><td>Custom 2D CNN</td><td>5.6 m MAE, 95.4% within ±15 m</td></tr>
+                <tr><td>Faults, classical</td><td>Multi-attribute fusion + simulated annealing</td><td>Automated across dozens of survey lines</td></tr>
+                <tr><td>Faults, CNN surrogate</td><td>Faster R-CNN, ResNet-50 + FPN</td><td>F1 0.60, recall 62.5%, ~100× faster</td></tr>
+                <tr><td>Horizons</td><td>Custom 2D CNN, from scratch</td><td>5.6 m MAE, 95.4% within ±15 m</td></tr>
               </tbody>
             </table>
           </div>
 
+          <h2>A tour of the project</h2>
+          <figure>
+            <img src="../img/seismic/01-survey-lines.webp" alt="A grid of twenty 2D seismic survey lines from the NAMSS archive" width="1600" height="855" loading="lazy">
+            <figcaption>The data: 20 2D survey lines from the USGS National Archive of Marine Seismic Surveys, used to build the fault-detection training set.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/seismic/02-classical-detection.webp" alt="Classical fault detection on a survey line with complex terrain: the seismic section with detected fault markers, the fused fault probability map, and the fault score along the line" width="1600" height="1076" loading="lazy">
+            <figcaption>Stage 1, the classical detector, on a line with complex terrain: four attributes fused into a probability map, with simulated annealing tracing the fault path. Cyan markers are detected faults; one line takes one to two hours.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/seismic/03-cnn-predictions.webp" alt="A seismic section with ten CNN-detected faults boxed and labelled with confidence scores" width="1600" height="917" loading="lazy">
+            <figcaption>Stage 3, the CNN surrogate, trained only on auto-generated labels: ten faults found in this section in about 0.2 seconds, with confidence scores from 0.61 to 0.83.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/seismic/04-eigencam.webp" alt="An EigenCAM heatmap over a seismic section, hot along the disrupted reflectors and cool in the water column" width="1570" height="928" loading="lazy">
+            <figcaption>EigenCAM attention over the trained detector: it focuses on disrupted reflectors and structural discontinuities, the same features a geophysicist looks for, and ignores the water column.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/seismic/05-horizon-tracking.webp" alt="Two views of an F3 cross-section with the expert-picked seafloor horizon and the CNN’s prediction overlaid" width="1600" height="974" loading="lazy">
+            <figcaption>Horizon detection on the F3 volume: expert picks in green and the CNN’s prediction in cyan, tracking almost exactly along the section.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/seismic/06-depth-maps.webp" alt="Three maps of the F3 survey: known seafloor depth, the CNN’s predicted depth, and the prediction error" width="1600" height="468" loading="lazy">
+            <figcaption>Seafloor depth across the F3 survey: the expert-picked map, the CNN’s predicted map, and the error between them.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/seismic/07-depth-accuracy.webp" alt="A density scatter of predicted against known seafloor depth, tightly along the diagonal" width="1177" height="1185" loading="lazy">
+            <figcaption>Predicted against known seafloor depth: 5.6 m average error, with 95.4% of predictions within ±15 m.</figcaption>
+          </figure>
+          <figure>
+            <img src="../img/seismic/08-noise-robustness.webp" alt="A bar chart of average horizon error at four noise levels: 5.5 m clean, 22.8 m low, 66.7 m medium and 71.3 m high" width="1485" height="737" loading="lazy">
+            <figcaption>Noise robustness: 5.5 m average error on clean data, rising to 22.8 m at low noise and about 70 m at medium and high noise.</figcaption>
+          </figure>
+
           <h2>Data</h2>
-          <p>Faults come from 2D lines in the USGS National Archive of Marine Seismic Surveys; horizons from the Netherlands F3 Block, an open 3D survey from SEG. Both are stored as SEG-Y, read with segyio and ObsPy.</p>
+          <p>Fault detection uses 2D lines from the USGS National Archive of Marine Seismic Surveys (NAMSS); horizon detection uses the Netherlands F3 Block, an open 3D survey from SEG with expert-picked horizons. A SEG-Y file is a collection of traces, each a 1D amplitude array with metadata such as sampling rate and coordinates. The 2D lines are read with ObsPy and the F3 volume with segyio’s memory-mapped access.</p>
+
+          <h2>References</h2>
+          <h3>Data sources</h3>
+          <ol class="refs">
+            <li>U.S. Geological Survey. <em>National Archive of Marine Seismic Surveys (NAMSS).</em> <a href="https://walrus.wr.usgs.gov/namss/">walrus.wr.usgs.gov/namss</a></li>
+            <li>Childs, J. (2011). <em>NAMSS inventory.</em> <a href="https://iocm.noaa.gov/iwg/jan_2011/Jan2011_OCM_Inventory_NAMSS_Childs.pdf">iocm.noaa.gov</a></li>
+            <li>SEG Open Data. <em>Netherlands Offshore F3 Block.</em> <a href="https://terranubis.com/datainfo/Netherlands-Offshore-F3-Block-Complete">terranubis.com</a></li>
+          </ol>
+          <h3>Format and tooling</h3>
+          <ol class="refs" start="4">
+            <li>SEG Wiki. <em>SEG-Y.</em> <a href="https://wiki.seg.org/wiki/SEG-Y">wiki.seg.org/wiki/SEG-Y</a></li>
+            <li>Data Analysis Center. <em>The splendors and miseries of SEG-Y: an introduction for software developers.</em> <a href="https://medium.com/data-analysis-center/the-splendors-and-miseries-of-seg-y-an-introduction-for-software-developers-ad3b3999c0ed">medium.com</a></li>
+            <li>Equinor. <em>segyio.</em> <a href="https://github.com/equinor/segyio">github.com/equinor/segyio</a></li>
+          </ol>
+          <h3>Related work</h3>
+          <ol class="refs" start="7">
+            <li>Ren, S., He, K., Girshick, R. &amp; Sun, J. (2015). Faster R-CNN: towards real-time object detection with region proposal networks. <em>NeurIPS.</em></li>
+            <li>Lin, T.-Y., Dollár, P., Girshick, R., He, K., Hariharan, B. &amp; Belongie, S. (2017). Feature pyramid networks for object detection. <em>CVPR.</em></li>
+            <li>Kirkpatrick, S., Gelatt, C. D. &amp; Vecchi, M. P. (1983). Optimization by simulated annealing. <em>Science.</em></li>
+            <li>Muhammad, M. B. &amp; Yeasin, M. (2020). Eigen-CAM: class activation map using principal components. <em>IJCNN.</em></li>
+            <li>DASF: a scalable machine learning framework for large seismic data sets. <em>The Leading Edge</em>, 45(1), 44. <a href="https://pubs.geoscienceworld.org/seg/tle/article-abstract/45/1/44/724438/DASF-A-scalable-machine-learning-framework-for">pubs.geoscienceworld.org</a></li>
+            <li>Automatic detection of SEG-Y sampling format errors using machine learning. <em>SEG/EAB proceedings.</em> <a href="https://pubs.geoscienceworld.org/segeab/proceedings-abstract/SEGEAB.41/1/1961/717272">pubs.geoscienceworld.org</a></li>
+            <li>TGS. <em>Greenland multi-client seismic data</em> (industry reference). <a href="https://www.tgs.com/seismic/multi-client/europe/greenland">tgs.com</a></li>
+          </ol>
           </div>
           <div class="article-links">
             <a class="btn btn-secondary" href="https://github.com/rpgr18/marine-seismic-deep-learning">Code on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
