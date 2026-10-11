@@ -326,6 +326,14 @@ function blackScholes(S, K, T, sigma, r) {
       focusRing(null);
     };
 
+    // Now: the pricer chart's green dot, on the selected market's ring at the current time
+    const placeNow = () => {
+      const dot = rings?.querySelector('.ring-now');
+      const ring = rings?.querySelector(`[data-ring="${pinned.dataset.market}"]`);
+      if (!dot || !ring) return;
+      const [x, y] = polar(Number(ring.dataset.r), dialAngle(new Date()));
+      dot.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px)`;
+    };
     const tick = () => {
       const now = new Date();
       for (const btn of marketEls) {
@@ -342,18 +350,7 @@ function blackScholes(S, K, T, sigma, r) {
           ring.classList.toggle('is-open', st.isOpen);
         }
       }
-      if (rings) {
-        // Now: a gap cut through all three rings, and a bead just outside, at the current time on the 24-hour dial
-        const a = dialAngle(now);
-        const [x, y] = polar(70.5, a);
-        const bead = rings.querySelector('.ring-now');
-        bead.setAttribute('cx', x.toFixed(2)); bead.setAttribute('cy', y.toFixed(2));
-        const [gx0, gy0] = polar(51, a);
-        const [gx1, gy1] = polar(69.5, a);
-        const gap = rings.querySelector('.ring-gap');
-        gap?.setAttribute('x1', gx0.toFixed(2)); gap?.setAttribute('y1', gy0.toFixed(2));
-        gap?.setAttribute('x2', gx1.toFixed(2)); gap?.setAttribute('y2', gy1.toFixed(2));
-      }
+      placeNow();
       if (!shownText) { shownText = describe(pinned.dataset.market); readout.textContent = shownText; }
     };
     tick();
@@ -366,6 +363,7 @@ function blackScholes(S, K, T, sigma, r) {
       btn.addEventListener('click', () => {
         pinned = btn;
         marketEls.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        placeNow();
         show(btn);
       });
     }
