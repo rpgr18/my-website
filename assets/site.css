@@ -247,6 +247,66 @@ button.nav-link { padding: 0; border: 0; background: none; cursor: pointer; }
 }
 img.avatar { object-fit: cover; }
 
+/* The photo pops: it lifts on hover and opens larger on click */
+.avatar-btn { position: relative; z-index: 1; display: block; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; }
+.avatar-btn:focus-visible { outline-offset: 6px; border-radius: 50%; }
+.avatar { transition: transform 0.45s var(--appear-ease), box-shadow 0.45s var(--appear-ease); }
+.rings { transition: transform 0.6s var(--appear-ease); }
+@media (hover: hover) {
+  .avatar-btn:hover .avatar { transform: scale(1.07); box-shadow: 0 18px 38px -14px rgb(0 0 0 / 0.45); }
+  .avatar-wrap:has(.avatar-btn:hover) .rings { transform: scale(1.035); }
+}
+.avatar-btn:focus-visible .avatar { transform: scale(1.07); }
+.avatar-btn:active .avatar { transform: scale(1.02); transition-duration: 0.12s; }
+
+/* Side quests: the page the photo opens */
+.quests { width: min(92vw, 880px); max-width: none; max-height: min(88vh, 900px); margin: auto; padding: 0; border: 0; background: none; color: var(--text); overflow: visible; }
+.quests::backdrop { background: rgb(0 0 0 / 0.5); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.quests-panel {
+  position: relative; max-height: inherit; overflow: auto; overscroll-behavior: contain;
+  padding: clamp(22px, 4vw, 40px); border: 1px solid var(--line); border-radius: 18px; background: var(--bg);
+  box-shadow: 0 40px 100px -30px rgb(0 0 0 / 0.55);
+}
+.quests-close {
+  position: sticky; top: 0; float: right; z-index: 2; display: grid; place-items: center; width: 34px; height: 34px; margin: -6px -6px 0 12px;
+  border: 1px solid var(--line); border-radius: 50%; background: var(--card); color: var(--text); font: 400 20px/1 var(--font); cursor: pointer;
+}
+.quests-close:hover { background: var(--card-2); }
+.quests-kicker { font: 500 var(--fs-xs)/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-text); }
+.quests-head h2 { margin-top: 10px; font: 500 clamp(1.5rem, 3.4vw, 2rem)/1.15 var(--font); letter-spacing: -0.01em; color: var(--strong); }
+.quests-sub { max-width: 34rem; margin-top: 10px; color: var(--text-2); }
+.quests-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 22px 18px; margin: 28px 0 0; padding: 0; list-style: none; }
+.quest figure { margin: 0; }
+.quest img, .quest-photo { display: block; width: 100%; aspect-ratio: 4 / 5; border-radius: 12px; object-fit: cover; background: var(--card-2); }
+.quest-photo { display: grid; place-items: end start; padding: 12px; border: 1px dashed var(--line-2); font: 500 var(--fs-xs)/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.quest-photo--sailing { background: linear-gradient(160deg, #cfe3f5, #7fa8cf); }
+.quest-photo--surfing { background: linear-gradient(160deg, #d6efe9, #6fb3a6); }
+.quest-photo--sydney { background: linear-gradient(160deg, #fbe2c8, #e59a63); }
+.quest-photo--photography { background: linear-gradient(160deg, #e8e8e8, #9a9a9a); }
+.quest-photo--music { background: linear-gradient(160deg, #e6dcf5, #9a82c9); }
+.quest-photo--travel { background: linear-gradient(160deg, #f5ecc8, #c9ad5f); }
+.quest-photo span { padding: 4px 7px; border-radius: 6px; background: rgb(255 255 255 / 0.7); color: #3a3a3a; }
+.quest figcaption { margin-top: 10px; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-2); }
+.quest figcaption strong { font-weight: 500; color: var(--strong); }
+@media (prefers-reduced-motion: no-preference) {
+  .quests[open] .quests-panel { animation: quests-in 0.45s var(--appear-ease); }
+  .quests[open]::backdrop { animation: quests-fade 0.3s ease; }
+  .quests[open] .quest { animation: appear 0.6s var(--appear-ease) both; animation-delay: calc(0.12s + var(--i, 0) * 0.06s); }
+}
+@keyframes quests-in { from { opacity: 0; transform: translateY(16px) scale(0.97); } }
+@keyframes quests-fade { from { opacity: 0; } }
+
+/* The pointer tag over the photo (mouse only); site.js moves it */
+.peek {
+  position: fixed; left: 0; top: 0; z-index: 40; display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px 6px 8px; border-radius: 999px; background: var(--strong); color: var(--on-strong);
+  box-shadow: 0 8px 20px -8px rgb(0 0 0 / 0.45); font: 500 var(--fs-xs)/1 var(--mono); letter-spacing: 0.02em; white-space: nowrap;
+  opacity: 0; scale: 0.6; pointer-events: none; transition: opacity 0.18s var(--ease), scale 0.25s var(--appear-ease);
+}
+.peek svg { width: 15px; height: 15px; }
+.peek.is-on { opacity: 1; scale: 1; }
+@media (hover: hover) and (pointer: fine) { .avatar-btn { cursor: none; } }
+
 /* Activity rings around the photo */
 .avatar-wrap { position: relative; display: grid; place-items: center; width: 246px; height: 246px; margin: 0 0 2px; }
 .rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }

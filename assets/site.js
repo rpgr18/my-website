@@ -69,6 +69,26 @@ function blackScholes(S, K, T, sigma, r) {
   document.querySelectorAll('.theme-toggle').forEach((b) => b.addEventListener('click', toggleTheme));
   syncTheme();
 
+  // ---------- Photo: opens "Side quests", with a pointer tag on hover ----------
+  // A native <dialog>, so Esc, focus trapping and focus return come for free. Clicking the backdrop
+  // or the close button shuts it. The tag follows the mouse over the photo instead of a plain cursor.
+  const photoBtn = document.querySelector('.avatar-btn');
+  const quests = $('quests');
+  if (photoBtn && quests && typeof quests.showModal === 'function') {
+    quests.querySelectorAll('.quest').forEach((q, i) => q.style.setProperty('--i', i));
+    photoBtn.addEventListener('click', () => { peek?.classList.remove('is-on'); quests.showModal(); });
+    quests.addEventListener('click', (e) => {
+      if (e.target === quests || e.target.closest('.quests-close')) quests.close();
+    });
+  }
+  const peek = document.querySelector('.peek');
+  if (photoBtn && peek && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const place = (e) => { peek.style.transform = `translate(${e.clientX + 14}px, ${e.clientY + 16}px)`; };
+    photoBtn.addEventListener('pointerenter', (e) => { place(e); peek.classList.add('is-on'); });
+    photoBtn.addEventListener('pointermove', place);
+    photoBtn.addEventListener('pointerleave', () => peek.classList.remove('is-on'));
+  }
+
   // ---------- Appear animations ----------
   // site.css hides these until .is-in is added. Things visible at load use the CSS stagger;
   // anything revealed later by scrolling plays straight away, staggered within its batch.
