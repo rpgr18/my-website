@@ -50,6 +50,25 @@ function blackScholes(S, K, T, sigma, r) {
   const minus = (s) => s.replace('-', '−');
   const fmt = (x) => minus((Math.abs(x) < 5e-5 ? 0 : x).toFixed(4));
 
+  // ---------- Theme: white by default, dark on request, remembered per visitor ----------
+  // The inline script in <head> applies a saved choice before first paint; this keeps the toggle,
+  // its label and the browser's theme colour in step.
+  const root = document.documentElement;
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  const syncTheme = () => {
+    const dark = root.dataset.theme === 'dark';
+    themeMeta?.setAttribute('content', dark ? '#232323' : '#ffffff');
+    document.querySelectorAll('.theme-toggle').forEach((b) => b.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme'));
+  };
+  const toggleTheme = () => {
+    if (root.dataset.theme === 'dark') delete root.dataset.theme;
+    else root.dataset.theme = 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme || 'light'); } catch {}
+    syncTheme();
+  };
+  document.querySelectorAll('.theme-toggle').forEach((b) => b.addEventListener('click', toggleTheme));
+  syncTheme();
+
   // ---------- Appear animations ----------
   // site.css hides these until .is-in is added. Things visible at load use the CSS stagger;
   // anything revealed later by scrolling plays straight away, staggered within its batch.
@@ -525,7 +544,7 @@ function blackScholes(S, K, T, sigma, r) {
   };
 
   // ---------- Nav: current section on the home page + number-key shortcuts everywhere ----------
-  const links = [...document.querySelectorAll('.nav-link')];
+  const links = [...document.querySelectorAll('a.nav-link')];   // the theme toggle is a button, not a section link
   if (document.body.dataset.page === 'home') {
     const sections = links.map((a) => (a.hash && a.hash !== '#top' ? document.querySelector(a.hash) : null));
     const markCurrent = () => {
@@ -552,6 +571,7 @@ function blackScholes(S, K, T, sigma, r) {
   addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
     if (e.target instanceof Element && e.target.closest('input, textarea, select, [contenteditable]')) return;
+    if (e.key === 't' || e.key === 'T') { e.preventDefault(); toggleTheme(); return; }
     const link = links.find((a) => a.dataset.key === e.key);
     if (!link) return;
     e.preventDefault();
