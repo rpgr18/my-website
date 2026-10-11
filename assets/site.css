@@ -63,39 +63,40 @@
 /* Dark theme: the toggle in the nav sets data-theme="dark" on <html> */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #232323;
-  --card: #282828;
-  --card-2: #2e2e2e;
-  --field: #1f1f1f;
-  --line: #343434;
-  --line-2: #3e3e3e;
-  --key: #505050;
-  --text: #ededed;
-  --text-2: #a0a0a0;      /* 6.1:1 on bg */
-  --muted: #8c8c8c;       /* 4.6:1 on bg */
+  /* Near-black, a touch cool, with surfaces stepping up in small increments */
+  --bg: #0d0d0f;
+  --card: #151517;
+  --card-2: #1b1b1e;
+  --field: #101012;
+  --line: #232327;
+  --line-2: #2e2e33;
+  --key: #46464c;
+  --text: #ededef;
+  --text-2: #a1a1a6;      /* 7.9:1 on bg */
+  --muted: #86868c;       /* 5.6:1 on bg */
   --strong: #ffffff;
-  --on-strong: #161616;
+  --on-strong: #0d0d0f;
   --green: #34d399;
   --green-rgb: 52 211 153;
   --green-text: #86e8bf;
   --red: #f87171;
   --amber: #f3cf6b;
   --amber-hover: #f8dd92;
-  --btn-primary-hover: #e4e4e4;
-  --btn-secondary-line: #2e2e2e;
-  --btn-secondary-hover: #303030;
-  --seg-on: #3a3a3a;
+  --btn-primary-hover: #e4e4e6;
+  --btn-secondary-line: #26262b;
+  --btn-secondary-hover: #1f1f23;
+  --seg-on: #2c2c31;
   --seg-on-shadow: none;
-  --dot: #5a5a5a;
-  --ring-track: #2c2c2c;
-  --ring-arc: #6e6e6e;
-  --thumb-ring: rgb(0 0 0 / 0.25);
-  --code: #d6d6d6;
-  --code-dim: #7c7c7c;
-  --avatar-bg: radial-gradient(circle at 30% 25%, #4a4a4a, #2b2b2b 70%);
-  --glass: rgb(38 38 38 / 0.55);
-  --glass-line: rgb(255 255 255 / 0.1);
-  --glass-hi: rgb(255 255 255 / 0.06);
+  --dot: #4a4a50;
+  --ring-track: #2f2f35;
+  --ring-arc: #8e8e95;
+  --thumb-ring: rgb(0 0 0 / 0.35);
+  --code: #d6d6d8;
+  --code-dim: #77777d;
+  --avatar-bg: radial-gradient(circle at 30% 25%, #3a3a3f, #1c1c1f 70%);
+  --glass: rgb(26 26 29 / 0.6);
+  --glass-line: rgb(255 255 255 / 0.09);
+  --glass-hi: rgb(255 255 255 / 0.05);
 }
 
 /* ---------- Base ---------- */
@@ -298,8 +299,9 @@ img.avatar { object-fit: cover; }
   font: 400 var(--fs-xs)/1.45 var(--mono); letter-spacing: 0.01em; color: var(--green-text);
 }
 .avail .pulse::after { box-shadow: 0 0 8px rgb(var(--green-rgb) / 0.8); }
-/* Narrow phones: the two halves on their own lines, centred, instead of wrapping mid-phrase */
-@media (max-width: 26rem) {
+/* Narrow phones, and the half-width intro panel on tablets: the two halves on their own lines,
+   centred, instead of wrapping mid-phrase */
+@media (max-width: 26rem), (min-width: 50.625rem) and (max-width: 74.99rem) {
   .avail { align-items: flex-start; border-radius: 14px; padding-block: 7px; }
   .avail .pulse { margin-top: 1px; }
   .avail-sep { display: none; }
@@ -717,7 +719,7 @@ html:has(.sheet[open]) { overflow: hidden; }
 @media (prefers-reduced-motion: no-preference) {
   .js :where(
     .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .socials, .hero .actions > *, .hero .coords, .side > .demo,
-    .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .flow > .site-foot,
+    .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .site-foot--home,
     .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
     .work-list
   ) { opacity: 0; }
@@ -725,7 +727,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   /* If site.js never runs, show everything after a moment rather than leaving it hidden */
   .js:not(.motion) :where(
     .hero .clocks, .hero .avatar-wrap, .hero-title > *, .hero .avail, .hero .status, .hero .socials, .hero .actions > *, .hero .coords, .side > .demo,
-    .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .flow > .site-foot,
+    .flow > .row:not(#projects), #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .site-foot--home,
     .article .back, .article .cover, .article h1, .article .stars, .article .facts, .article .prose, .article .article-links, .article .more,
     .work-list
   ) { animation: appear 0.01s 2s both; }
@@ -742,7 +744,7 @@ html:has(.sheet[open]) { overflow: hidden; }
   .hero .socials { --delay: 0.5s; }
   .hero .actions > .btn-primary { --from-x: -16px; --from-y: 0px; }
   .hero .actions > .btn-secondary { --from-x: 16px; --from-y: 0px; }
-  .flow > .row, #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .flow > .site-foot { --delay: 0.6s; }
+  .flow > .row, #projects .row-label, .cards > .card, #projects .btn-block, .flow > .contact, .site-foot--home { --delay: 0.6s; }
   .article h1, .article .stars { --delay: 0.1s; }
   .article .facts { --delay: 0.2s; }
   .article .prose { --delay: 0.3s; }
@@ -785,42 +787,56 @@ html.js.nav-internal :where(
 ) { opacity: 1; animation: none; }
 
 /* =========================================================
-   Wide screens: the home page as two panes
-   The layout spans the window (up to 1360px) instead of sitting as a narrow block in the middle.
-   On the left, the intro and the pricer are panels in the same glass as the pill and the project
-   sheet; on the right, an editorial column: each section's label hangs in its own gutter and stays
-   pinned while you read that section, with hairlines between sections. Phones and tablets keep
-   the single column above.
+   Home page: glass panels and editorial sections
+   The intro, the pricer and "Get in touch" are panels in the same glass as the pill and the project
+   sheet, on a faintly tinted page, at every size. From tablets up, each section's label hangs in
+   its own gutter and stays pinned while you read that section, with hairlines between sections;
+   phones keep the label above. Wide screens put the panels in a sticky left pane (two panes).
    ========================================================= */
-@media (min-width: 75rem) {
-  body {
-    background:
-      radial-gradient(52rem 40rem at -8% -12%, rgb(var(--green-rgb) / 0.07), transparent 62%),
-      radial-gradient(46rem 38rem at 108% 112%, rgb(99 102 241 / 0.06), transparent 62%),
-      var(--bg);
-    background-attachment: fixed;
-  }
-  .col {
-    grid-template-columns: clamp(28.5rem, 31vw, 30rem) minmax(0, 1fr); column-gap: clamp(48px, 5vw, 96px);
-    justify-content: stretch; width: min(100% - 64px, 1360px); padding: 0;
-  }
+body {
+  background:
+    radial-gradient(52rem 40rem at -8% -12%, rgb(var(--green-rgb) / 0.07), transparent 62%),
+    radial-gradient(46rem 38rem at 108% 112%, rgb(99 102 241 / 0.06), transparent 62%),
+    var(--bg);
+}
+.hero, .side > .demo, .flow > .contact {
+  border: 1px solid var(--glass-line); border-radius: 28px;
+  background: linear-gradient(140deg, rgb(var(--green-rgb) / 0.07), rgb(99 102 241 / 0.05)), var(--glass);
+  box-shadow: 0 24px 60px -36px rgb(0 0 0 / 0.35), inset 0 1px 0 var(--glass-hi);
+}
+.side { gap: 16px; }
+.hero { padding: 24px 16px 22px; }
+.side > .demo { padding: 20px 18px 16px; }
+.side > .demo .demo-intro { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-line); }
+.side > .demo .panel { padding: 0; border: 0; background: none; }
 
-  /* Left pane: two glass panels */
-  .side { justify-content: flex-start; gap: 16px; padding-block: 24px 104px; }
-  .hero, .side > .demo {
-    border: 1px solid var(--glass-line); border-radius: 28px;
-    background: linear-gradient(140deg, rgb(var(--green-rgb) / 0.07), rgb(99 102 241 / 0.05)), var(--glass);
-    box-shadow: 0 24px 60px -36px rgb(0 0 0 / 0.35), inset 0 1px 0 var(--glass-hi);
-  }
-  .hero { padding: 28px 16px 26px; }
-  .hero .mkt { padding-inline: 4px; }   /* the three clocks on one line inside the panel */
-  .hero h1 { font-size: 1.75rem; letter-spacing: -0.015em; }
-  .side > .demo { padding: 22px 22px 18px; }
-  .side > .demo .demo-intro { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-line); }
-  .side > .demo .panel { padding: 0; border: 0; background: none; }
+/* About reads as a statement */
+.flow > .row:first-child .prose p { font-size: clamp(1.1875rem, 1.5vw, 1.375rem); line-height: 1.55; letter-spacing: -0.012em; color: var(--strong); text-wrap: pretty; }
 
-  /* Right pane: labels in a gutter, content beside them */
-  .flow { --label: clamp(6.5rem, 9vw, 8.5rem); --label-gap: clamp(24px, 3vw, 40px); gap: 0; padding: 48px 0 48px; }
+/* Projects: a little more air in the cards, and a lift on hover */
+.card { padding: 18px 20px 14px; border-radius: 16px; transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease), translate 0.3s var(--appear-ease), box-shadow 0.3s var(--appear-ease); }
+@media (hover: hover) { .card:hover { translate: 0 -2px; box-shadow: 0 16px 32px -20px rgb(0 0 0 / 0.3); } }
+
+/* Contact closes the page as a glass card; the footer is one line under it */
+.flow > .contact { align-items: flex-start; gap: 20px; padding: 28px 22px; text-align: left; }
+.contact-head { justify-items: start; gap: 8px; }
+.contact-head svg { display: none; }
+.contact h2 { font-size: var(--fs-xl); line-height: 1.3; letter-spacing: -0.01em; }
+.contact-head p { max-width: none; margin-top: 0; }
+.contact-foot { margin-top: -4px; }
+.site-foot--home {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  width: min(100% - 32px, var(--col-md)); margin-inline: auto; padding: 0 4px 24px; text-align: left;
+}
+.site-foot--home nav { gap: 12px; }
+
+/* Phones and tablets: the panels start near the top */
+@media (max-width: 74.99rem) { .col { padding-top: 16px; } }
+
+/* Tablets and up: labels in a gutter, content beside them */
+@media (min-width: 50.625rem) {
+  :root { --label: clamp(6.5rem, 9vw, 8.5rem); --label-gap: clamp(24px, 3vw, 40px); }
+  .flow { gap: 0; }
   .flow > .row {
     display: grid; grid-template-columns: var(--label) minmax(0, 1fr); column-gap: var(--label-gap);
     padding-block: 48px; border-top: 1px solid var(--line);
@@ -829,32 +845,41 @@ html.js.nav-internal :where(
   .flow > .row > * { grid-column: 2; }
   .flow > .row > .row-label {
     grid-column: 1; grid-row: 1 / span 2; align-self: start; position: sticky; top: 48px;
-    display: block; margin: 0; padding-top: 5px;
+    display: block; margin: 0; padding-top: 5px; text-align: left; white-space: normal;
     font: 500 var(--fs-xs)/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
   }
   .flow > .row > .row-label::after { content: none; }
-
-  /* About reads as a statement */
-  .flow > .row:first-child .prose p { font-size: clamp(1.25rem, 1.5vw, 1.375rem); line-height: 1.55; letter-spacing: -0.012em; color: var(--strong); text-wrap: pretty; }
   .flow > .row:first-child > .row-label { padding-top: 9px; }
+  .flow > .contact { margin: 8px 0 0 calc(var(--label) + var(--label-gap)); padding: 32px; }
+}
+/* Tablets: one wider column, the two panels side by side above the sections */
+@media (min-width: 50.625rem) and (max-width: 74.99rem) {
+  .col { width: min(100% - 64px, 46rem); }
+  .site-foot--home { width: min(100% - 64px, 46rem); padding: 0 4px 32px calc(var(--label) + var(--label-gap) + 4px); }
+  .side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+  .hero { justify-content: center; }
+  .flow { padding-top: 16px; }
+}
+/* Phones: the email fits on one line beside its button */
+@media (max-width: 50.6rem) {
+  .flow > .contact { padding: 24px 16px; }
+  .field-value { padding-inline: 12px 4px; font-size: 0.875rem; }
+}
 
-  /* Projects: a little more air in the cards, and a lift on hover */
-  .cards { gap: 14px; }
-  .card { padding: 18px 20px 14px; border-radius: 16px; transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease), translate 0.3s var(--appear-ease), box-shadow 0.3s var(--appear-ease); }
-  .card:hover { translate: 0 -2px; box-shadow: 0 16px 32px -20px rgb(0 0 0 / 0.3); }
-
-  /* Contact closes the page as a glass card in the content column; the footer lines up under it */
-  .flow > .contact, .flow > .site-foot { margin-left: calc(var(--label) + var(--label-gap)); }
-  .flow > .contact {
-    align-items: flex-start; gap: 20px; margin-top: 8px; padding: 32px; text-align: left;
-    border: 1px solid var(--glass-line); border-radius: 28px;
-    background: linear-gradient(140deg, rgb(var(--green-rgb) / 0.07), rgb(99 102 241 / 0.05)), var(--glass);
-    box-shadow: 0 24px 60px -36px rgb(0 0 0 / 0.35), inset 0 1px 0 var(--glass-hi);
+/* Wide screens: two panes, the panels sticky on the left */
+@media (min-width: 75rem) {
+  body { background-attachment: fixed; }
+  .col {
+    grid-template-columns: clamp(28.5rem, 31vw, 30rem) minmax(0, 1fr); column-gap: clamp(48px, 5vw, 96px);
+    justify-content: stretch; width: min(100% - 64px, 1360px); padding: 0;
   }
-  .contact-head { justify-items: start; gap: 8px; }
-  .contact-head svg { display: none; }
-  .contact h2 { font-size: var(--fs-xl); line-height: 1.3; letter-spacing: -0.01em; }
-  .contact-head p { max-width: none; margin-top: 0; }
-  .contact-foot { margin-top: -4px; }
-  .flow > .site-foot { display: flex; justify-content: space-between; align-items: center; padding: 24px 4px 32px; text-align: left; }
+  /* The panels stop clear of the pill while scrolling (site.js reads --side-clear), and end level
+     with the contact card: both panes finish 24px above the footer row */
+  .side { --side-clear: 80px; justify-content: flex-start; padding-block: 24px; }
+  .hero { padding: 28px 16px 26px; }
+  .hero .mkt { padding-inline: 4px; }   /* the three clocks on one line inside the panel */
+  .hero h1 { font-size: 1.75rem; letter-spacing: -0.015em; }
+  .side > .demo { padding: 22px 22px 18px; }
+  .flow { padding: 48px 0 24px; }
+  .site-foot--home { width: min(100% - 64px, 1360px); margin-top: 32px; padding: 20px 4px 24px; border-top: 1px solid var(--line); }
 }

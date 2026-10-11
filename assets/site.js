@@ -57,7 +57,7 @@ function blackScholes(S, K, T, sigma, r) {
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   const syncTheme = () => {
     const dark = root.dataset.theme === 'dark';
-    themeMeta?.setAttribute('content', dark ? '#232323' : '#ffffff');
+    themeMeta?.setAttribute('content', dark ? '#0d0d0f' : '#ffffff');
     document.querySelectorAll('.theme-toggle').forEach((b) => b.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme'));
   };
   const toggleTheme = () => {
@@ -76,7 +76,7 @@ function blackScholes(S, K, T, sigma, r) {
     document.documentElement.classList.add('motion');
     const appearing = document.querySelectorAll([
       '.hero .clocks', '.hero .avatar-wrap', '.hero-title > *', '.hero .avail', '.hero .status', '.hero .socials', '.hero .actions > *', '.hero .coords', '.side > .demo',
-      '.flow > .row:not(#projects)', '#projects .row-label', '.cards > .card', '#projects .btn-block', '.flow > .contact', '.flow > .site-foot',
+      '.flow > .row:not(#projects)', '#projects .row-label', '.cards > .card', '#projects .btn-block', '.flow > .contact', '.site-foot--home',
       '.article .back', '.article .cover', '.article h1', '.article .stars', '.article .facts', '.article .prose', '.article .article-links', '.article .more',
       '.work-list',
     ].join(','));
@@ -521,7 +521,9 @@ function blackScholes(S, K, T, sigma, r) {
   const side = document.querySelector('.side');
   const sideIsSticky = () => !!side && getComputedStyle(side).position === 'sticky';
   if (side) {
-    const place = () => side.style.setProperty('--side-top', `${Math.min(0, innerHeight - side.offsetHeight)}px`);
+    // --side-clear (site.css) keeps the bottom clear of the floating nav pill
+    const clear = () => parseFloat(getComputedStyle(side).getPropertyValue('--side-clear')) || 0;
+    const place = () => side.style.setProperty('--side-top', `${Math.min(0, innerHeight - side.offsetHeight - clear())}px`);
     if ('ResizeObserver' in window) new ResizeObserver(place).observe(side);
     addEventListener('resize', place);
     place();
@@ -532,7 +534,7 @@ function blackScholes(S, K, T, sigma, r) {
   // it means scrolling just far enough for the sidebar's bottom to come into view.
   const goTo = (target, behavior) => {
     if (target && inStickySide(target)) {
-      const need = side.offsetHeight - innerHeight;
+      const need = side.offsetHeight - innerHeight + (parseFloat(getComputedStyle(side).getPropertyValue('--side-clear')) || 0);
       if (need > 0 && scrollY < need) scrollTo({ top: need, behavior });
       return;
     }

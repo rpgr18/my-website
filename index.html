@@ -169,7 +169,7 @@
         </section>
       </div>
 
-      <!-- Everything else. On wide screens this scrolls beside the sidebar. -->
+      <!-- Everything else. On wide screens this scrolls beside the sidebar; the footer runs under both. -->
       <div class="flow">
 
       <!-- ===== About ===== -->
@@ -378,17 +378,18 @@
         </div>
         <p class="contact-foot">or <a href="mailto:greene.ry@northeastern.edu">open your mail app</a></p>
       </section>
-
-      <footer class="site-foot">
-        <p>© 2026 Ryan Greene</p>
-        <nav aria-label="Elsewhere">
-          <a href="https://github.com/rpgr18" target="_blank" rel="noopener">GitHub</a>
-          <span aria-hidden="true">·</span>
-          <a href="https://www.linkedin.com/in/rpgr18/" target="_blank" rel="noopener">LinkedIn</a>
-        </nav>
-      </footer>
       </div>
     </main>
+
+    <!-- Under both panes; outside the main column so the sticky sidebar ends level with the contact card -->
+    <footer class="site-foot site-foot--home">
+      <p>© 2026 Ryan Greene</p>
+      <nav aria-label="Elsewhere">
+        <a href="https://github.com/rpgr18" target="_blank" rel="noopener">GitHub</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/rpgr18/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </footer>
   </div>
 
   <!-- Wide screens: a project opens here, over the blurred home page, instead of on its own page.
