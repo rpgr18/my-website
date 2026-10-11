@@ -122,11 +122,8 @@ function blackScholes(S, K, T, sigma, r) {
       '.hero .clocks', '.hero .avatar-wrap', '.hero-title > *', '.hero .avail', '.hero .status', '.hero .socials', '.hero .actions > *', '.hero .coords', '.side > .demo',
       '.flow > .row:not(#projects)', '#projects .row-label', '.cards > .card', '#projects .btn-block', '.flow > .contact', '.flow > .site-foot',
       '.article .back', '.article .cover', '.article h1', '.article .facts', '.article .prose', '.article .article-links', '.article .more',
-      '.work-list .wl-title', '.work-list .wl-group', '.work-list .wl-items > li',
+      '.work-list',
     ].join(','));
-    document.querySelectorAll('.work-list > *, .work-list .wl-items > li').forEach((node, i) => {
-      node.style.setProperty('--delay', `${(i * 0.05).toFixed(2)}s`);
-    });
     const loadedAt = performance.now();
     const onScreen = (node) => {
       const r = node.getBoundingClientRect();
