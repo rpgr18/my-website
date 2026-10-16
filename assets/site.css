@@ -348,10 +348,6 @@ img.avatar { object-fit: cover; }
 .card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .card-head .card-go { margin-left: auto; }
 @media (min-width: 32rem) { .card--wide { grid-column: 1 / -1; } }   /* the newest project spans the row */
-.card-new {
-  padding: 2px 7px; border: 1px solid rgb(var(--green-rgb) / 0.3); border-radius: 999px; background: rgb(var(--green-rgb) / 0.08);
-  font: 500 0.6875rem/1.3 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--green-text);
-}
 .card-head { min-height: 22px; }   /* the same with or without a stars badge, so titles line up across a row */
 .card-meta { font: 400 var(--fs-xs) var(--mono); color: var(--muted); }
 .card-go { width: 14px; height: 14px; flex: none; color: var(--muted); rotate: -45deg; transition: color 0.2s var(--ease), translate 0.2s var(--ease); }
